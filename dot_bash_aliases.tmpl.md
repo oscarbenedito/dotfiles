@@ -4,9 +4,9 @@ Alias to update the system, diferent for Debian or Arch.
 ``` file dot_bash_aliases.tmpl
 alias upgrade="
 {{- if eq .chezmoi.osRelease.id "debian" -}}
-	sudo apt-get update && sudo apt-get upgrade
+  sudo apt-get update && sudo apt-get upgrade
 {{- else -}}
-	sudo pacman -Syyu
+  sudo pacman -Syyu
 {{- end }}"
 ```
 
@@ -15,27 +15,27 @@ If backup is enabled in the `chezmoi` data, create backup alias, excluding the f
 ``` file dot_bash_aliases.tmpl
 {{- if .backup }}
 alias backup="rsync -gloptruzvP --delete --exclude={
-	{{- range $i, $dir := .backup.backup_exclude }}
-		{{- if $i -}}
-			,
-		{{- end -}}
-		"{{ $dir }}"
-	{{- end -}}
+  {{- range $i, $dir := .backup.backup_exclude }}
+    {{- if $i -}}
+      ,
+    {{- end -}}
+    "{{ $dir }}"
+  {{- end -}}
 } {{ .chezmoi.homedir }}/ /media/oscar/OSCAR/.{{ .backup.backup_dir }}/"
 ```
 
-And secondly the smaller backup, with extra excluded directories:
+And secondly the smaller backup, with extra excluded directories. I back it up on a USB drive so I encrypted with VeraCrypt (as I carry my USB around, I wouldn't want my personal data to be in plain text in case I lost it). This alias assumes that you have mounted the VeraCrypt device on the 10th slot.
 ``` file dot_bash_aliases.tmpl
 alias backup_vc_10="rsync -gloptruzvP --delete --exclude={
-	{{- range $i, $dir := .backup.backup_exclude }}
-		{{- if $i -}}
-			,
-		{{- end -}}
-		"{{ $dir }}"
-	{{- end -}}
-	{{ range $dir := .backup.small_backup_exclude -}}
-		,"{{ $dir }}"
-	{{- end -}}
+  {{- range $i, $dir := .backup.backup_exclude }}
+    {{- if $i -}}
+      ,
+    {{- end -}}
+    "{{ $dir }}"
+  {{- end -}}
+  {{ range $dir := .backup.small_backup_exclude -}}
+    ,"{{ $dir }}"
+  {{- end -}}
 } {{ .chezmoi.homedir }}/ /media/veracrypt10/{{ .backup.backup_dir }}/"
 {{- end }}
 ```
