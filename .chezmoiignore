@@ -1,5 +1,6 @@
 markion.py
 *.md
+.scripts/*.md
 {{ if not .website -}}
 .scripts
 {{- end }}
