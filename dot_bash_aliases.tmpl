@@ -1,0 +1,28 @@
+alias upgrade="sudo {{ if eq .chezmoi.osRelease.id "debian" }}apt-get update && sudo apt-get upgrade{{ else }}pacman -Syyu{{ end }}"
+
+{{- if .backup }}
+alias backup="rsync -gloptruzvP --delete --exclude={
+	{{- range $i, $dir := .backup.backup_exclude }}
+		{{- if $i -}}
+			,
+		{{- end -}}
+		"{{ $dir }}"
+	{{- end -}}
+} {{ .chezmoi.homedir }}/ /media/oscar/OSCAR/.{{ .backup.backup_dir }}/"
+alias backup_vc_10="rsync -gloptruzvP --delete --exclude={
+	{{- range $i, $dir := .backup.backup_exclude }}
+		{{- if $i -}}
+			,
+		{{- end -}}
+		"{{ $dir }}"
+	{{- end -}}
+	{{ range $dir := .backup.small_backup_exclude -}}
+		,"{{ $dir }}"
+	{{- end -}}
+} {{ .chezmoi.homedir }}/ /media/veracrypt10/{{ .backup.backup_dir }}/"
+{{- end }}
+
+{{- if .website }}
+alias website="~/.scripts/tmux-website.sh"
+alias deploy_website="~/.scripts/deploy-website.sh"
+{{- end }}

@@ -1,0 +1,5 @@
+markion.py
+*.md
+{{ if not .website -}}
+.scripts
+{{- end }}

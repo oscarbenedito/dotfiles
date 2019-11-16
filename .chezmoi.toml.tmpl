@@ -1,0 +1,17 @@
+{{ $pgpkey := promptString "Is there a PGP key set up" -}}
+{{ $website := promptString "Is the website repository under ~/Git/obenedito.org" -}}
+{{ $backups := promptString "Set up backups" -}}
+[data]
+  pgpkey = {{ $pgpkey }}
+  website = {{ $website }}
+{{- if backups }}
+{{- $backup_exclude := promptString "backup_exclude" }}
+{{- $small_backup_exclude := promptString "small_backup_exclude" }}
+{{- $backup_dir := promptString "backup_dir" }}
+  [data.backup]
+    backup_exclude = {{ $backup_exclude }}
+    small_backup_exclude = {{ $small_backup_exclude}}
+    backup_dir = "{{ $backup_dir }}"
+{{- else }}
+  backup = false
+{{- end }}
