@@ -1,4 +1,11 @@
 # File `.bash_aliases`
+Alias to run Markion everytime we use chezmoi, before actually running chezmoi.
+``` file dot_bash_aliases.tmpl
+chezmoi() {
+  sh $HOME/.local/share/chezmoi/run_markion.sh
+  /bin/chezmoi $*
+}
+```
 
 Alias to update the system, diferent for Debian or Arch.
 ``` file dot_bash_aliases.tmpl
