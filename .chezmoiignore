@@ -1,5 +1,6 @@
 COPYING
 CC0-1.0
+markion.sh
 markion.py
 *.md
 .scripts/*.md
