@@ -2,7 +2,7 @@
 This directory hosts some of my dotfiles. It is currently a work in progress.
 
 ## Setup
-I use [chezmoi](https://github.com/twpayne/chezmoi) to manage varying configs across different machines. I also use [Markion](https://gitlab.com/oscarbenedito/markion) to be able to write my programs as Markdown files and then extract the appropriate code. Thanks to chezmoi's script support I can run Markion and update the dotfiles, my problem is that currently scripts are run *after* the dotfiles are changed so two calls to `chezmoi apply` are needed as of right now.
+I use [chezmoi](https://github.com/twpayne/chezmoi) to manage varying configs across different machines. I also use [Markion](https://gitlab.com/oscarbenedito/markion) to be able to write my programs as Markdown files and then extract the appropriate code. Currently, I have the `chezmoi` alias redefined to run [this script](https://gitlab.com/oscarbenedito/dotfiles/blob/master/markion.sh) that updates the files using Markion before any call to chezmoi (I am aware of chezmoi's script support but currently scripts are run *after* the dotfiles are changed so two calls to `chezmoi apply` would be needed).
 
 ## License
 This program is licensed under the GPL v3. See [COPYING](https://gitlab.com/oscarbenedito/dotfiles/blob/master/COPYING) for the complete license.
