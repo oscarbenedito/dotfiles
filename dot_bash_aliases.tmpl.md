@@ -7,6 +7,11 @@ chezmoi() {
 }
 ```
 
+Changing the `clear` command.
+``` file dot_bash_aliases.tmpl
+alias clear="printf '\033c'"
+```
+
 Alias to update the system, diferent for Debian or Arch.
 ``` file dot_bash_aliases.tmpl
 alias upgrade="
@@ -21,30 +26,57 @@ alias upgrade="
 If backup is enabled in the `chezmoi` data, create backup alias, excluding the files specified in the `chezmoi` data. First is the complete backup alias:
 ``` file dot_bash_aliases.tmpl
 {{- if .backup }}
-alias backup="rsync -gloptruzvP --delete --exclude={
+alias backup_all="rsync -gloptruzvP --delete --no-group --exclude={
   {{- range $i, $dir := .backup.backup_exclude }}
     {{- if $i -}}
       ,
     {{- end -}}
     "{{ $dir }}"
   {{- end -}}
-} {{ .chezmoi.homedir }}/ /media/oscar/OSCAR/.{{ .backup.backup_dir }}/"
+} {{ .chezmoi.homedir }}/ /media/$USER/OSCAR/.{{ .backup.backup_dir }}/"
 ```
 
-And secondly the smaller backup, with extra excluded directories. I back it up on a USB drive so I encrypted with VeraCrypt (as I carry my USB around, I wouldn't want my personal data to be in plain text in case I lost it). This alias assumes that you have mounted the VeraCrypt device on the 10th slot.
-``` file dot_bash_aliases.tmpl
-alias backup_vc_10="rsync -gloptruzvP --delete --exclude={
-  {{- range $i, $dir := .backup.backup_exclude }}
-    {{- if $i -}}
-      ,
-    {{- end -}}
-    "{{ $dir }}"
+And secondly the smaller backup, with extra excluded directories. I back it up on a USB drive so I encrypted with VeraCrypt (as I carry my USB around, I wouldn't want my personal data to be in plain text in case I lost it). It will back it up to two VeraCrypt volumes (as the backup takes up more than 4GiB and the USB where I do it is formated with a FAT filesystem). First of all, we mount the VeraCrypt volumes:
+``` block mount-backup-vc
+veracrypt --mount /media/$USER/Oscar/Varis/copia-gris.hc --slot="10"
+veracrypt --mount /media/$USER/Oscar/Varis/copia-gris-git.hc --slot="11"
+```
+Then we back up all the data:
+``` block rsync-small-backup
+rsync -gloptruzvP --delete --exclude={"/Git",
+{{- range $i, $dir := .backup.backup_exclude }}
+  {{- if $i -}}
+    ,
   {{- end -}}
-  {{ range $dir := .backup.small_backup_exclude -}}
-    ,"{{ $dir }}"
-  {{- end -}}
-} {{ .chezmoi.homedir }}/ /media/veracrypt10/{{ .backup.backup_dir }}/"
+  "{{ $dir }}"
+{{- end -}}
+{{ range $dir := .backup.small_backup_exclude -}}
+  ,"{{ $dir }}"
+{{- end -}}
+} {{ .chezmoi.homedir }}/ /media/veracrypt10/{{ .backup.backup_dir }}/
 {{- end }}
+rsync -gloptruzvP --delete {{ .chezmoi.homedir }}/Git/ /media/veracrypt11/{{ .backup.backup_dir }}/
+```
+
+And finally we unmount the volumes.
+``` block unmount-backup-vc
+veracrypt --dismount /media/$USER/Oscar/Varis/copia-gris.hc
+veracrypt --dismount /media/$USER/Oscar/Varis/copia-gris-git.hc
+```
+
+So the alias will be:
+``` file dot_bash_aliases.tmpl
+backup_vc_10_11() {
+  [[ include mount-backup-vc ]]
+  [[ include rsync-small-backup ]]
+  [[ include unmount-backup-vc ]]
+}
+```
+
+### USB Backups
+The following alias is used when backing up my USB drive.
+``` file dot_bash_aliases.tmpl
+alias backup_usb="rsync -gloptruzvP --delete --exclude={"/Varis/copia-gris.hc","/Varis/copia-gris-git.hc"} /media/$USER/Oscar/ {{ .chezmoi.homedir }}/USB/"
 ```
 
 ## Website

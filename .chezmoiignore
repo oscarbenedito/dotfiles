@@ -4,6 +4,7 @@ markion.sh
 markion.py
 *.md
 .scripts/*.md
+.*/*/*.md
 {{ if not .website -}}
 .scripts
 {{- end }}
