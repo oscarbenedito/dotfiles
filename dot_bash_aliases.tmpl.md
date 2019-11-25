@@ -3,7 +3,7 @@ Alias to run Markion everytime we use chezmoi, before actually running chezmoi.
 ``` file dot_bash_aliases.tmpl
 chezmoi() {
   sh $HOME/.local/share/chezmoi/markion.sh
-  /bin/chezmoi $*
+  {{ .chezmoi_location }} $*
 }
 ```
 
@@ -24,8 +24,7 @@ alias upgrade="
 
 ## Backups
 If backup is enabled in the `chezmoi` data, create backup alias, excluding the files specified in the `chezmoi` data. First is the complete backup alias:
-``` file dot_bash_aliases.tmpl
-{{- if .backup }}
+``` block backup_all
 alias backup_all="rsync -gloptruzvP --delete --no-group --exclude={
   {{- range $i, $dir := .backup.backup_exclude }}
     {{- if $i -}}
@@ -54,7 +53,6 @@ rsync -gloptruzvP --delete --exclude={"/Git",
   ,"{{ $dir }}"
 {{- end -}}
 } {{ .chezmoi.homedir }}/ /media/veracrypt10/{{ .backup.backup_dir }}/
-{{- end }}
 rsync -gloptruzvP --delete {{ .chezmoi.homedir }}/Git/ /media/veracrypt11/{{ .backup.backup_dir }}/
 ```
 
@@ -65,7 +63,7 @@ veracrypt --dismount /media/$USER/Oscar/Varis/copia-gris-git.hc
 ```
 
 So the alias will be:
-``` file dot_bash_aliases.tmpl
+``` block backup_vc_10_11
 backup_vc_10_11() {
   [[ include mount-backup-vc ]]
   [[ include rsync-small-backup ]]
@@ -75,8 +73,18 @@ backup_vc_10_11() {
 
 ### USB Backups
 The following alias is used when backing up my USB drive.
-``` file dot_bash_aliases.tmpl
+``` block backup_usb
 alias backup_usb="rsync -gloptruzvP --delete --exclude={"/Varis/copia-gris.hc","/Varis/copia-gris-git.hc"} /media/$USER/Oscar/ {{ .chezmoi.homedir }}/USB/"
+```
+
+### Writing the backups
+Finally, we include the aliases to the file.
+``` file dot_bash_aliases.tmpl
+{{- if .backup }}
+[[ include backup_all ]]
+[[ include backup_vc_10_11 ]]
+[[ include backup_usb ]]
+{{- end }}
 ```
 
 ## Website

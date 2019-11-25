@@ -1,3 +1,5 @@
+*.swp
+
 dot_vimrc
 dot_bash_aliases.tmpl
 dot_gitconfig.tmpl
