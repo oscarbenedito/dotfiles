@@ -14,12 +14,21 @@ alias clear="printf '\033c'"
 
 Alias to update the system, diferent for Debian or Arch.
 ``` file dot_bash_aliases.tmpl
+{{ if ne .chezmoi.hostname "fme-desktop" -}}
 alias upgrade="
 {{- if eq .chezmoi.osRelease.id "debian" -}}
   sudo apt-get update && sudo apt-get upgrade
 {{- else -}}
   sudo pacman -Syyu
 {{- end }}"
+{{- end }}
+```
+
+Alias to run VSCode on computer where I can't install programs
+``` file dot_bash_aliases.tmpl
+{{- if eq .chezmoi.hostname "fme-desktop" -}}
+alias vscode="$HOME/KOLMOGOROV/VSCode-linux-x64/bin/code"
+{{- end }}
 ```
 
 ## Backups
