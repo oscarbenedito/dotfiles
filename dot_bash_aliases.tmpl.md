@@ -2,8 +2,12 @@
 Alias to run Markion everytime we use chezmoi, before actually running chezmoi.
 ``` file dot_bash_aliases.tmpl
 chezmoi() {
-  sh $HOME/.local/share/chezmoi/markion.sh
-  {{ .chezmoi_location }} $*
+  if [ $1 = "atom" ]; then
+    atom /home/$USER/.local/share/chezmoi
+  else
+    sh $HOME/.local/share/chezmoi/markion.sh
+    {{ .chezmoi_location }} $*
+  fi
 }
 ```
 
@@ -34,7 +38,7 @@ alias vscode="$HOME/KOLMOGOROV/VSCode-linux-x64/bin/code"
 ## Backups
 If backup is enabled in the `chezmoi` data, create backup alias, excluding the files specified in the `chezmoi` data. First is the complete backup alias:
 ``` block backup_all
-alias backup_all="rsync -gloptruzvP --delete --no-group --exclude={
+alias backup_all="rsync -loptruzvP --delete --exclude={
   {{- range $i, $dir := .backup.backup_exclude }}
     {{- if $i -}}
       ,

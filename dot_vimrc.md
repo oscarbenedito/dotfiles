@@ -47,6 +47,12 @@ Setting the folding method to marker (you should use `{{{` and `}}}` to delimit 
 set foldmethod=marker
 ```
 
+Enable line wrapping by work.
+```vim file dot_vimrc
+set wrap
+set linebreak
+```
+
 Set modeline to be able to change defaults in a per file basis.
 ```vim file dot_vimrc
 set modeline
