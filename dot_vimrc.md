@@ -58,6 +58,56 @@ Set modeline to be able to change defaults in a per file basis.
 set modeline
 ```
 
+Set a line in column 81 and cut lines after column 80.
+```vim file dot_vimrc
+set colorcolumn=81
+set tw=80
+```
+
+Set the colorscheme.
+```vim file dot_vimrc
+colorscheme wombat257
+```
+
+## Status line
+
+First of all, a function to get the git branch we are editing (if we are).
+```vim file dot_vimrc
+function! GitBranch()
+  let l:branchname = system("cd ".expand('%:p:h')." && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+```
+
+We define `gitbranch` to the value of such function every time a file is opened.
+```vim file dot_vimrc
+let gitbranch={}
+autocmd BufRead,BufNewFile,FileReadPre * let gitbranch[expand('%:p')]=GitBranch()
+```
+
+And then we define our status line, note that text between `#` are defining the color.
+```vim file dot_vimrc
+set statusline=
+set statusline+=%#PmenuSel#
+set statusline+=%{gitbranch[expand('%:p')]}
+set statusline+=%#LineNr#
+set statusline+=\ %F
+set statusline+=%m\  
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set statusline+=\  
+```
+
+And we finally activate the status line.
+```vim file dot_vimrc
+set laststatus=2
+```
+
 ## Other useful commands
 Shortcut to execute the make command.
 ```vim file dot_vimrc
