@@ -66,7 +66,7 @@ set tw=80
 
 Set the colorscheme.
 ```vim file dot_vimrc
-colorscheme wombat257
+colorscheme onedark
 ```
 
 ## Status line
@@ -90,7 +90,7 @@ And then we define our status line, note that text between `#` are defining the 
 set statusline=
 set statusline+=%#PmenuSel#
 set statusline+=%{gitbranch[expand('%:p')]}
-set statusline+=%#LineNr#
+set statusline+=%#PmenuSbar#
 set statusline+=\ %F
 set statusline+=%m\  
 set statusline+=%=
