@@ -103,7 +103,7 @@ endif
 First of all, a function to get the git branch we are editing (if we are).
 ```vim file dot_vimrc
 function! GitBranch()
-  let l:branchname = system("cd ".expand('%:p:h')." && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  let l:branchname = system("cd '".expand('%:p:h')."' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 ```
