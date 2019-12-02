@@ -69,6 +69,35 @@ Set the colorscheme.
 colorscheme onedark
 ```
 
+Deactivate vim's Background Color Erase (BCE) option
+```vim file dot_vimrc
+set t_ut=""
+```
+
+## Color scheme configuration
+Use 24-bit (true-color) mode in Vim/Neovim when outside tmux. If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information).
+
+```vim file dot_vimrc
+if (empty($TMUX))
+```
+
+For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+
+```vim file dot_vimrc
+  if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+```
+
+For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >. Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >.
+
+```vim file dot_vimrc
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+```
+
 ## Status line
 
 First of all, a function to get the git branch we are editing (if we are).
