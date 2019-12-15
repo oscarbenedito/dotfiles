@@ -90,6 +90,12 @@ The following alias is used when backing up my USB drive.
 alias backup_usb="rsync -gloptruzvP --delete --exclude={"/Varis/copia-gris.hc","/Varis/copia-gris-git.hc"} /media/$USER/Oscar/ {{ .chezmoi.homedir }}/USB/"
 ```
 
+### Git Backups
+Backing up all the git repositories.
+``` block backup_git
+alias backup_git="cd {{ .chezmoi.homedir }}/Git/backup && ./git-backup.py"
+```
+
 ### Writing the backups
 Finally, we include the aliases to the file.
 ``` file dot_bash_aliases.tmpl
@@ -97,6 +103,7 @@ Finally, we include the aliases to the file.
 [[ include backup_all ]]
 [[ include backup_vc_10_11 ]]
 [[ include backup_usb ]]
+[[ include backup_git ]]
 {{- end }}
 ```
 
