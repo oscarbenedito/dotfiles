@@ -74,6 +74,24 @@ Deactivate vim's Background Color Erase (BCE) option
 set t_ut=""
 ```
 
+## Splits configuration
+
+New file positions changed.
+```vim file dot_vimrc
+set splitbelow
+set splitright
+```
+
+Moving around shortcuts.
+```vim file dot_vimrc
+imap <C-o> <Plug>IMAP_JumpForward
+nmap <C-o> <Plug>IMAP_JumpForward
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+```
+
 ## Color scheme configuration
 Use 24-bit (true-color) mode in Vim/Neovim when outside tmux. If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information).
 
