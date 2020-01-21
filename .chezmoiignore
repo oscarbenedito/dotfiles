@@ -5,6 +5,10 @@ markion.py
 *.md
 .scripts/*.md
 .*/*/*.md
+.scripts/deploy-website.sh
 {{ if not .website -}}
-.scripts
+.scripts/tmux-website.sh
+{{- end }}
+{{ if not (eq .computer "white") -}}
+.config/i3
 {{- end }}

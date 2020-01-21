@@ -1,19 +1,14 @@
-{{ $pgpkey := promptString "Is there a PGP key set up" -}}
-{{ $website := promptString "Is the website repository under ~/Git/obenedito.org" -}}
-{{ $backups := promptString "Set up backups" -}}
-{{ $loc := promptString "Chezmoi executable location" -}}
+{{ $computer := promptString "Which computer do you want to set up" -}}
 [data]
-  pgpkey = {{ $pgpkey }}
-  website = {{ $website }}
-  chezmoi_location = "{{ $loc }}"
-{{- if eq $backups "true" }}
-{{- $backup_exclude := promptString "backup_exclude" }}
-{{- $small_backup_exclude := promptString "small_backup_exclude" }}
-{{- $backup_dir := promptString "backup_dir" }}
+  computer = "{{ $computer }}"
+  pgpkey = {{ eq $computer "gray" }}
+  website = {{ eq $computer "gray" }}
+  chezmoi_location = "{{ if eq $computer "gray" }}/bin/chezmoi{{ end }}"
+{{- if eq $computer "gray" }}
   [data.backup]
-    backup_exclude = {{ $backup_exclude }}
-    small_backup_exclude = {{ $small_backup_exclude}}
-    backup_dir = "{{ $backup_dir }}"
+    backup_exclude = ["/.*"]
+    small_backup_exclude = ["/USB", "/Git/backup"]
+    backup_dir = "BACKUP_GRAY"
 {{- else }}
   backup = false
 {{- end }}

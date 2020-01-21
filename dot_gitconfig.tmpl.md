@@ -15,7 +15,7 @@ signingkey = 827E5A8E3AE8A499
 {{- end }}
 ```
 
-If a PGP is used, we'll add the following line to sign commits by default.
+If a PGP key is used, we'll add the following line to sign commits by default.
 ```toml file dot_gitconfig.tmpl
 {{- if .pgpkey }}
 [commit]

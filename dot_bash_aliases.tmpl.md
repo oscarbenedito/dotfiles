@@ -18,7 +18,7 @@ alias clear="printf '\033c'"
 
 Alias to update the system, diferent for Debian or Arch.
 ``` file dot_bash_aliases.tmpl
-{{ if ne .chezmoi.hostname "fme-desktop" -}}
+{{ if ne .computer "cfis" -}}
 alias upgrade="
 {{- if eq .chezmoi.osRelease.id "debian" -}}
   sudo apt-get update && sudo apt-get upgrade
@@ -30,7 +30,7 @@ alias upgrade="
 
 Alias to run VSCode on computer where I can't install programs
 ``` file dot_bash_aliases.tmpl
-{{- if eq .chezmoi.hostname "fme-desktop" -}}
+{{- if eq .computer "cfis" -}}
 alias vscode="$HOME/KOLMOGOROV/VSCode-linux-x64/bin/code"
 {{- end }}
 ```
@@ -38,14 +38,14 @@ alias vscode="$HOME/KOLMOGOROV/VSCode-linux-x64/bin/code"
 ## Backups
 If backup is enabled in the `chezmoi` data, create backup alias, excluding the files specified in the `chezmoi` data. First is the complete backup alias:
 ``` block backup_all
-alias backup_all="rsync -loptruzvP --delete --exclude={
+alias backup_all="rsync -loptruzvP --delete --exclude={{ if gt (len .backup.backup_exclude) 1 -}} { {{- end }}
   {{- range $i, $dir := .backup.backup_exclude }}
     {{- if $i -}}
       ,
     {{- end -}}
     "{{ $dir }}"
   {{- end -}}
-} {{ .chezmoi.homedir }}/ /media/$USER/OSCAR/.{{ .backup.backup_dir }}/"
+{{ if gt (len .backup.backup_exclude) 1 -}} } {{- end }} {{ .chezmoi.homedir }}/ /media/$USER/OSCAR/.{{ .backup.backup_dir }}/"
 ```
 
 And secondly the smaller backup, with extra excluded directories. I back it up on a USB drive so I encrypted with VeraCrypt (as I carry my USB around, I wouldn't want my personal data to be in plain text in case I lost it). It will back it up to two VeraCrypt volumes (as the backup takes up more than 4GiB and the USB where I do it is formated with a FAT filesystem). First of all, we mount the VeraCrypt volumes:
@@ -112,8 +112,12 @@ If website is enabled in the `chezmoi` configuration, we create aliases to the s
 ``` file dot_bash_aliases.tmpl
 {{- if .website }}
 alias website="~/.scripts/tmux-website.sh"
-alias deploy_website="~/.scripts/deploy-website.sh"
 {{- end }}
+```
+
+I used to have the following alias for deploying the website. It is not needed anymore
+```
+alias deploy_website="~/.scripts/deploy-website.sh"
 ```
 
 ## License
