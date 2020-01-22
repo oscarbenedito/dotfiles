@@ -1,10 +1,9 @@
-{{ $computer := promptString "Which computer do you want to set up" -}}
+{{ $c := .chezmoi.hostname -}}
 [data]
-  computer = "{{ $computer }}"
-  pgpkey = {{ eq $computer "gray" }}
-  website = {{ eq $computer "gray" }}
-  chezmoi_location = "{{ if eq $computer "gray" }}/bin/chezmoi{{ end }}"
-{{- if eq $computer "gray" }}
+  pgpkey = {{ eq $c "gray" }}
+  website = {{ eq $c "gray" }}
+  chezmoi_location = "{{ if eq $c "gray" }}/bin/chezmoi{{ end }}"
+{{- if eq $c "gray" }}
   [data.backup]
     backup_exclude = ["/.*"]
     small_backup_exclude = ["/USB", "/Git/backup"]

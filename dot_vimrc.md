@@ -1,5 +1,17 @@
 # File `.vimrc`
 
+## Plug-ins
+
+We'll install plug-ins with `vim-plug`. Installed plug-ins:
+
+ - `goyo.vim`: Creates a very minimalist editor. Nice for writing text.
+
+```vim file dot_vimrc
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/goyo.vim'
+call plug#end()
+```
+
 ## Latex-Suite
 First of all we include the code required by `vim-latexsuite`. The following code is required and it makes vim invoke Latex-Suite when you open a tex file.
 ```vim file dot_vimrc
