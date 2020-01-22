@@ -1,0 +1,33 @@
+# Load colors and set up prompt
+autoload -U colors && colors
+PS1="%B%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%M %{$fg[yellow]%}%~%b%{$fg[red]%}$%{$reset_color%} "
+
+# Set up history and history file
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+# Set up navigation menu when pressing tab multiple times
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+#_comp_options+=(globdots)
+
+# Set up vim style keys
+bindkey -v
+export KEYTIMEOUT=1
+
+# Also set vim keys to navigate the menus when double pressing tab
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+# Process the alias file
+if [ -f "$HOME/.aliases" ]; then
+  source "$HOME/.aliases"
+fi
+
+# Include the highlighting plug-in
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null
