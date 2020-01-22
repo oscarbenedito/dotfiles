@@ -1,7 +1,1 @@
 *.swp
-
-dot_vimrc
-dot_bash_aliases.tmpl
-dot_gitconfig.tmpl
-dot_scripts/executable_tmux-website.sh
-dot_scripts/executable_deploy-website.sh.tmpl

@@ -1,11 +1,4 @@
 COPYING
-CC0-1.0
-markion.sh
-markion.py
-*.md
-.scripts/*.md
-.*/*/*.md
+README.md
 .scripts/deploy-website.sh
-{{ if not .website -}}
-.scripts/tmux-website.sh
-{{- end }}
+{{ if not .website }}.scripts/tmux-website.sh{{ end }}

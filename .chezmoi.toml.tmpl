@@ -2,7 +2,6 @@
 [data]
   pgpkey = {{ eq $c "gray" }}
   website = {{ eq $c "gray" }}
-  chezmoi_location = "{{ if or (eq $c "gray") (eq $c "white") }}/usr/bin/chezmoi{{ end }}{{ if eq $c "fme-desktop" }}/$HOME/.local/bin/chezmoi{{ end }}"
 {{- if eq $c "gray" }}
   [data.backup]
     backup_exclude = ["/.*"]
