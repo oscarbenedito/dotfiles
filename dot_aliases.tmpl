@@ -1,5 +1,16 @@
 alias clear="printf '\033c'"
+
+# Colors
 alias ls="ls --color=auto"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+alias diff="diff --color=auto"
+
+# Chezmoi
+alias c="chezmoi"
+alias ce="chezmoi edit"
+
 {{ if ne .chezmoi.hostname "fme-desktop" -}}
 alias upgrade="
 {{- if eq .chezmoi.osRelease.id "debian" -}}

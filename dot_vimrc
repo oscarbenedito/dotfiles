@@ -31,10 +31,12 @@ set linebreak
 set splitbelow
 set splitright
 
-imap <C-o> <Plug>IMAP_JumpForward     " switch C-j to C-o on latex-suite
+" switch C-j to C-o on latex-suite
+imap <C-o> <Plug>IMAP_JumpForward
 nmap <C-o> <Plug>IMAP_JumpForward
 
-map <C-h> <C-w>h              " set up vim-like commands to switch panels
+" set up vim-like commands to switch panels
+map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
