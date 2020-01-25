@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim'      " minimalist design, nice for writing text
+Plug 'preservim/nerdtree'     " file tree
 call plug#end()
 
 " commands for latex-suite
@@ -13,6 +14,9 @@ let g:Tex_AutoFolding=0
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufRead,BufNewFile *.cls set filetype=tex
 autocmd BufRead,BufNewFile *.sty set filetype=tex
+
+" nerd tree shortcut
+map <C-n> :NERDTreeToggle<CR>
 
 " indentation
 set expandtab
@@ -41,6 +45,9 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" key bindings
+nnoremap U <C-r>
+
 " set up colorscheme
 colorscheme onedark
 set t_ut=""                   " deactivates vim BCE option (messes up colors)
@@ -55,19 +62,19 @@ if (empty($TMUX))             " 24-bit true-color configuration
 endif
 
 " set up status line
-function! GitBranch()
-  let l:branchname = system("cd '".expand('%:p:h')."' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
+" function! GitBranch()
+"   let l:branchname = system("cd '".expand('%:p:h')."' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+"   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+" endfunction
 
-let gitbranch={}
-autocmd BufRead,BufNewFile,FileReadPre * let gitbranch[expand('%:p')]=GitBranch()
+" let gitbranch={}
+" autocmd BufRead,BufNewFile,FileReadPre * let gitbranch[expand('%:p')]=GitBranch()
 
 set statusline=
-set statusline+=%#PmenuSel#
-set statusline+=%{gitbranch[expand('%:p')]}
+" set statusline+=%#PmenuSel#
+" set statusline+=%{gitbranch[expand('%:p')]}
 set statusline+=%#PmenuSbar#
-set statusline+=\ %F
+set statusline+=%F
 set statusline+=%m\  
 set statusline+=%=
 set statusline+=%#CursorColumn#

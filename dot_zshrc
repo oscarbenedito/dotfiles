@@ -17,9 +17,13 @@ zmodload zsh/complist
 compinit
 #_comp_options+=(globdots)
 
+# Auto complete case insensitive
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 # Set up vim style keys
 bindkey -v
 export KEYTIMEOUT=1
+bindkey "^?" backward-delete-char
 
 # Also set vim keys to navigate the menus when double pressing tab
 bindkey -M menuselect 'h' vi-backward-char
