@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim'      " minimalist design, nice for writing text
-Plug 'preservim/nerdtree'     " file tree
 call plug#end()
 
 " commands for latex-suite

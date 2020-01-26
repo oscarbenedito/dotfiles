@@ -1,24 +1,51 @@
 alias clear="printf '\033c'"
 
 # Colors
-alias ls="ls --color=auto"
+alias ls="ls -h --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias diff="diff --color=auto"
 
+# Options aliases
+alias cp="cp --interactive"
+alias mv="mv --interactive"
+alias mkdir="mkdir --parents --verbose"
+
+# Shortcuts
+alias v="vim"
+
+{{ if ne .chezmoi.hostname "fme-desktop" -}}
+# Zsh aliases
+alias -g l="|less"
+alias -g e="|entr"
+alias -g null="> /dev/null 2>&1"
+{{- end }}
+
 # Chezmoi
 alias c="chezmoi"
 alias ce="chezmoi edit"
 
+# Git
+alias g="git"
+alias gs="git status"
+alias gc="git commit -m"
+alias gd="git diff"
+alias ga="git add"
+alias gpl="git pull"
+alias gps="git push"
+alias gsh="git stash"
+
 {{ if ne .chezmoi.hostname "fme-desktop" -}}
-alias upgrade="
 {{- if eq .chezmoi.osRelease.id "debian" -}}
-  sudo apt-get update && sudo apt-get upgrade
+alias upgrade="sudo apt-get update && sudo apt-get upgrade"
+alias ag="sudo apt-get"
 {{- else -}}
-  sudo pacman -Syyu
-{{- end }}"
+alias upgrade="sudo pacman -Syyu"
+alias p="sudo pacman"
 {{- end }}
+{{- end }}
+
 {{- if eq .chezmoi.hostname "fme-desktop" }}
 alias vscode="$HOME/KOLMOGOROV/VSCode-linux-x64/bin/code"
 {{- end }}
