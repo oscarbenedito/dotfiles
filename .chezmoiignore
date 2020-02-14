@@ -2,3 +2,4 @@ COPYING
 README.md
 .scripts/deploy-website.sh
 {{ if not .website }}.scripts/tmux-website.sh{{ end }}
+{{ if not (eq .chezmoi.hostname "white") }}.config/kitty{{ end }}
