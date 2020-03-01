@@ -10,6 +10,10 @@ HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 
+# Environment variables
+export VISUAL=vim
+export EDITOR=vim
+
 # Set up navigation menu when pressing tab multiple times
 autoload -U compinit
 zstyle ':completion:*' menu select
