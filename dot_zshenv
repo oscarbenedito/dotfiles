@@ -1,0 +1,19 @@
+# Local bin to path
+[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+
+# XDG dirs
+XDG_DATA_HOME="$HOME/.local/share"
+XDG_CONFIG_HOME="$HOME/.config"
+XDG_CACHE_HOME="$HOME/.cache"
+
+# Environment variables
+export VISUAL="vim"
+export EDITOR="vim"
+
+# Programs default folders
+export GOPATH="$HOME/.config/go"
+export R_LIBS_USER="$HOME/.config/R"
+export WGETRC="$HOME/.config/wget/wgetrc"
+export LESSHISTFILE="-"
+export ATOM_HOME="$HOME/.config/atom"
+export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"

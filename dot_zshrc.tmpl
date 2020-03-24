@@ -5,24 +5,16 @@ PS1="%B%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%M %{$fg[yellow]%}%~%b%{$fg
 # Set up history and history file
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=~/.cache/zsh/history
 
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
-
-# Environment variables
-export VISUAL=vim
-export EDITOR=vim
-
-# Programs default folders
-export GOPATH=$HOME/.config/go
-export R_LIBS_USER=$HOME/.config/R/
 
 # Set up navigation menu when pressing tab multiple times
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
+compinit -d ~/.cache/zsh/zcompdump
 #_comp_options+=(globdots)
 
 # Auto complete case insensitive
@@ -40,8 +32,8 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Process the alias file
-if [ -f "$HOME/.aliases" ]; then
-  source "$HOME/.aliases"
+if [ -f "$HOME/.config/aliases" ]; then
+  source "$HOME/.config/aliases"
 fi
 
 # Include the highlighting plug-in

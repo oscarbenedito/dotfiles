@@ -89,9 +89,6 @@ backup_vc_10_11() {
 # Backup the contents of the USB
 alias backup_usb="rsync -gloptruzvP --delete --exclude={'/Varis/copia-gris.hc','/Varis/copia-gris-git.hc','/.Trash-1000','/.Trashes','/.Spotlight-V100'} /media/$USER/Oscar/ /home/oscar/USB/"
 {{- end }}
-{{- if .website }}
-alias website="~/.scripts/tmux-website.sh"
-{{- end }}
 {{- if eq .chezmoi.hostname "fme-desktop" }}
 setxkbmap -option "caps:swapescape"     # Switch caps and escape
 {{- end }}

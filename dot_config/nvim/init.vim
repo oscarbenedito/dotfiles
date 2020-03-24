@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 Plug 'junegunn/goyo.vim'      " minimalist design, nice for writing text
 call plug#end()
 
