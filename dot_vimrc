@@ -17,6 +17,9 @@ autocmd BufRead,BufNewFile *.sty set filetype=tex
 " nerd tree shortcut
 map <C-n> :NERDTreeToggle<CR>
 
+" copying to clipboard
+set clipboard=unnamedplus
+
 " indentation
 set expandtab
 set shiftwidth=2
@@ -91,4 +94,4 @@ set foldmethod=marker         " using {{{ and }}} to delimit folding areas
 set modeline
 set colorcolumn=81            " color line 81 differently
 set textwidth=80              " break lines longer than 80 characters
-:command Make :w | :!make     " make shortcut
+map <F2> <Esc>:w<CR>:!make<CR>
