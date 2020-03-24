@@ -32,9 +32,7 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Process the alias file
-if [ -f "$HOME/.config/aliases" ]; then
-  source "$HOME/.config/aliases"
-fi
+[ -f "$HOME/.config/aliases" ] && source "$HOME/.config/aliases"
 
 # Include the highlighting plug-in
 {{- if eq .chezmoi.osRelease.id "debian" }}
