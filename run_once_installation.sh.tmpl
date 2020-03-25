@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+{{ if eq .chezmoi.osRelease.id "debian" }}
+sudo apt-get install zsh zsh-syntax-highlighting neovim python3-pip curl wget
+{{ else }}
+sudo pacman -S zsh zsh-syntax-highlighting neovim curl wget
+{{ end }}
+[ -z "$XDG_CACHE_HOME" ] && XDG_CACHE_HOME="$HOME/.cache"
+mkdir -p $XDG_CACHE_HOME/zsh
+
+chsh -s /bin/zsh

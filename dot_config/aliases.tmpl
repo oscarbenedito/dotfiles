@@ -13,7 +13,8 @@ alias mv="mv --interactive"
 alias mkdir="mkdir --parents"
 
 # Shortcuts
-alias v="vim"
+alias v="nvim"
+alias vim="nvim"
 
 {{- if ne .chezmoi.hostname "fme-desktop" }}
 
@@ -42,10 +43,10 @@ alias gsh="git stash"
 
 {{ if ne .chezmoi.hostname "fme-desktop" -}}
 {{- if eq .chezmoi.osRelease.id "debian" -}}
-alias upgrade="sudo apt-get update && sudo apt-get upgrade"
+alias upgrade="sudo apt-get update && sudo apt-get -y upgrade"
 alias ag="sudo apt-get"
 {{- else -}}
-alias upgrade="sudo pacman -Syyu"
+alias upgrade="sudo pacman -Syyu --noconfirm"
 alias p="sudo pacman"
 {{- end }}
 {{- end }}
