@@ -1,6 +1,7 @@
 call plug#begin()
 Plug 'junegunn/goyo.vim'      " minimalist design, nice for writing text
 Plug 'vim-latex/vim-latex'
+Plug 'sheerun/vim-polyglot'   " languages syntax
 call plug#end()
 
 " commands for latex-suite
