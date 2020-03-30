@@ -10,13 +10,14 @@ printf "\n"
 
 alias keepassxc="$XDG_DATA_HOME/keepassxc/KeePassXC-2.5.3-x86_64.AppImage"
 
+printf "\nObtaining encryption passwords..."
 PW1="$(echo "$PW" | keepassxc cli show "$KDBX" \
-  "Encriptat local/USB-copia-gris" -sq -a "Password")" || exit
+  "Encriptat local/USB-copia-gris" -q -a "Password")" || exit
 PW2="$(echo "$PW" | keepassxc cli show "$KDBX" \
-  "Encriptat local/USB-copia-gris-git" -sq -a "Password")" || exit
-
+  "Encriptat local/USB-copia-gris-git" -q -a "Password")" || exit
 unset PW
 
+printf "\nMounting VeraCrypt volumes..."
 veracrypt --mount "/media/$USER/Oscar/Varis/copia-gris.hc" --slot 10 \
   --password "$PW1"
 unset PW1
@@ -25,8 +26,15 @@ veracrypt --mount "/media/$USER/Oscar/Varis/copia-gris-git.hc" --slot 11 \
   --password "$PW2"
 unset PW2
 
+printf "\n\nSynchronizing files...\n"
 rsync -gloptruzvP --delete --exclude "/Git" --exclude "/.*" --exclude "/Documents/Backups" --exclude "/Git/backup" "$HOME/" "/media/veracrypt10/BACKUP_GRAY/"
-rsync -gloptruzvP --delete "$HOME/Git/" "/media/veracrypt11/BACKUP_GRAY/"
+echo "\nBacking up git repositories"
+cd "/media/veracrypt11/BACKUP_GRAY"    # !!! TODO fix this
+python3 "git-backup.py"
+cd "$HOME"
 
+printf "\nDismounting VeraCrypt volumes..."
 veracrypt --dismount "/media/$USER/Oscar/Varis/copia-gris.hc"
 veracrypt --dismount "/media/$USER/Oscar/Varis/copia-gris-git.hc"
+
+printf "\nDone!\n"
