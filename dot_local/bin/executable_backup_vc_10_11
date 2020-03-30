@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+KDBX="$HOME/Documents/Contrasenyes/Passwords.kdbx"
+
+stty -echo
+printf "KeePassXC database password: "
+read PW
+stty echo
+printf "\n"
+
+alias keepassxc="$XDG_DATA_HOME/keepassxc/KeePassXC-2.5.3-x86_64.AppImage"
+
+PW1="$(echo "$PW" | keepassxc cli show "$KDBX" \
+  "Encriptat local/USB-copia-gris" -sq -a "Password")" || exit
+PW2="$(echo "$PW" | keepassxc cli show "$KDBX" \
+  "Encriptat local/USB-copia-gris-git" -sq -a "Password")" || exit
+
+unset PW
+
+veracrypt --mount "/media/$USER/Oscar/Varis/copia-gris.hc" --slot 10 \
+  --password "$PW1"
+unset PW1
+
+veracrypt --mount "/media/$USER/Oscar/Varis/copia-gris-git.hc" --slot 11 \
+  --password "$PW2"
+unset PW2
+
+rsync -gloptruzvP --delete --exclude "/Git" --exclude "/.*" --exclude "/Documents/Backups" --exclude "/Git/backup" "$HOME/" "/media/veracrypt10/BACKUP_GRAY/"
+rsync -gloptruzvP --delete "$HOME/Git/" "/media/veracrypt11/BACKUP_GRAY/"
+
+veracrypt --dismount "/media/$USER/Oscar/Varis/copia-gris.hc"
+veracrypt --dismount "/media/$USER/Oscar/Varis/copia-gris-git.hc"

@@ -58,38 +58,13 @@ alias vscode="$HOME/KOLMOGOROV/VSCode-linux-x64/bin/code"
 {{- if .backup }}
 
 # Backup to external HD
-alias backup_all="rsync -loptruzvP --delete --exclude={{ if gt (len .backup.backup_exclude) 1 -}} { {{- end }}
-  {{- range $i, $dir := .backup.backup_exclude }}
-    {{- if $i -}}
-      ,
-    {{- end -}}
-    '{{ $dir }}'
-  {{- end -}}
-{{ if gt (len .backup.backup_exclude) 1 -}} } {{- end }} $HOME/ /media/$USER/OSCAR/.{{ .backup.backup_dir }}/"
-
-# Encrypted backup to USB
-backup_vc_10_11() {
-  veracrypt --mount /media/$USER/Oscar/Varis/copia-gris.hc --slot="10"
-  veracrypt --mount /media/$USER/Oscar/Varis/copia-gris-git.hc --slot="11"
-  rsync -gloptruzvP --delete --exclude={"/Git",
-  {{- range $i, $dir := .backup.backup_exclude }}
-    {{- if $i -}}
-      ,
-    {{- end -}}
-    "{{ $dir }}"
-  {{- end -}}
-  {{ range $dir := .backup.small_backup_exclude -}}
-    ,"{{ $dir }}"
-  {{- end -}}
-  } $HOME/ /media/veracrypt10/{{ .backup.backup_dir }}/
-  rsync -gloptruzvP --delete $HOME/Git/ /media/veracrypt11/{{ .backup.backup_dir }}/
-  veracrypt --dismount /media/$USER/Oscar/Varis/copia-gris.hc
-  veracrypt --dismount /media/$USER/Oscar/Varis/copia-gris-git.hc
-}
+alias backup_all='rsync -loptruzvP --delete {{ range $i, $dir := .backup.backup_exclude }}--exclude "{{ $dir }}" {{ end }} "$HOME/" "/media/$USER/OSCAR/.{{ .backup.backup_dir }}/"'
 
 # Backup the contents of the USB
-alias backup_usb="rsync -gloptruzvP --delete --exclude={'/Varis/copia-gris.hc','/Varis/copia-gris-git.hc','/.Trash-1000','/.Trashes','/.Spotlight-V100'} /media/$USER/Oscar/ /home/oscar/USB/"
+alias backup_usb='rsync -gloptruzvP --delete --exclude "/Varis/copia-gris.hc" --exclude "/Varis/copia-gris-git.hc" --exclude "/.Trash-1000" --exclude "/.Trashes" --exclude "/.Spotlight-V100" "/media/$USER/Oscar/" "$HOME/Documents/Backups/USB/"'
 {{- end }}
+
 {{- if eq .chezmoi.hostname "fme-desktop" }}
+
 setxkbmap -option "caps:swapescape"     # Switch caps and escape
 {{- end }}
