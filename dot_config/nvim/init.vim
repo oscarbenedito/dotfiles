@@ -19,7 +19,10 @@ autocmd BufRead,BufNewFile *.cls set filetype=tex
 autocmd BufRead,BufNewFile *.sty set filetype=tex
 
 " nerd tree shortcut
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
+
+" find in subdirectories
+set path+=**
 
 " copying to clipboard
 set clipboard=unnamedplus
@@ -99,3 +102,9 @@ set modeline
 set colorcolumn=81            " color line 81 differently
 set textwidth=80              " break lines longer than 80 characters
 map <F2> <Esc>:w<CR>:!make<CR>
+
+" templates
+nnoremap ,sh :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.sh<CR>:w<CR>:e<CR>j
+nnoremap ,texs :-1read $XDG_CONFIG_HOME/nvim/templates/summary.tex<CR>
+nnoremap ,texg :-1read $XDG_CONFIG_HOME/nvim/templates/tex.gitignore<CR>
+nnoremap ,texm :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
