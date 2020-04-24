@@ -1,3 +1,4 @@
+# vim: filetype=zsh
 # Load colors and set up prompt
 autoload -U colors && colors
 PS1="%B%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%M %{$fg[yellow]%}%~%b%{$fg[red]%}$%{$reset_color%} "
@@ -32,7 +33,8 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Process the alias file
-[ -f "$HOME/.config/aliases" ] && source "$HOME/.config/aliases"
+[ -f "$XDG_CONFIG_HOME/zsh/aliases" ] && source "$XDG_CONFIG_HOME/zsh/aliases"
+[ -f "$XDG_CONFIG_HOME/zsh/aliases-auto" ] && source "$XDG_CONFIG_HOME/zsh/aliases-auto"
 
 # Include the highlighting plug-in
 {{- if eq .chezmoi.osRelease.id "debian" }}
