@@ -1,0 +1,20 @@
+separator_block_width=30
+markup=pango
+
+[disk]
+command=$HOME/.config/i3blocks/bin/disk
+interval=30
+
+[volume]
+command=$HOME/.config/i3blocks/bin/volume-pulseaudio
+interval=once
+signal=10
+
+[battery]
+command=$HOME/.config/i3blocks/bin/battery2
+markup=pango
+interval=30
+
+[datetime]
+command=date +"%a %d %b %H:%M"
+interval=5

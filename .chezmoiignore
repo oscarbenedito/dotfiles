@@ -1,8 +1,10 @@
 COPYING
 README.md
+meta
 {{ if not .website }}.local/bin/website{{ end }}
 {{ if not (eq .chezmoi.hostname "white") }}
 .config/kitty
+{{ else }}
 .config/i3
 {{ end }}
 {{ if not .backup }}

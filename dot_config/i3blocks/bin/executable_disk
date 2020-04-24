@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+#echo -n "<span font='FontAwesome'> </span> "; df -h -l --output='used' "$HOME" | grep -E -o '[0-9]+G'
+echo -n "<span font='FontAwesome'> </span> "; df -h -l --output='avail' "$HOME" | grep -E -o '[0-9]+G'
