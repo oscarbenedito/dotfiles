@@ -1,0 +1,4 @@
+# shortcuts for directories
+dc $HOME/Documents
+dg $HOME/Git
+dw $HOME/Downloads
