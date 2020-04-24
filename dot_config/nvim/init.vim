@@ -118,18 +118,7 @@ endif
 
 " status line {{{
 
-" set up status line
-" function! GitBranch()
-"   let l:branchname = system("cd '".expand('%:p:h')."' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-"   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-" endfunction
-
-" let gitbranch={}
-" autocmd BufRead,BufNewFile,FileReadPre * let gitbranch[expand('%:p')]=GitBranch()
-
 set statusline=
-" set statusline+=%#PmenuSel#
-" set statusline+=%{gitbranch[expand('%:p')]}
 set statusline+=%#PmenuSbar#
 set statusline+=%F
 set statusline+=%m\  
