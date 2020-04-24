@@ -142,3 +142,5 @@ nnoremap <Leader>texg :-1read $XDG_CONFIG_HOME/nvim/templates/tex.gitignore<CR>
 nnoremap <Leader>texm :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
 
 " /templates }}}
+
+runtime shortcuts.vim

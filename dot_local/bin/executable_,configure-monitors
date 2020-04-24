@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+if [ -n "$(xrandr --query | grep "DP2 connected")" ]; then
+  xrandr --output eDP1 --off --output DP2 --auto
+  echo "! Xft.dpi: 192" > $HOME/.Xresources
+else
+  xrandr --output eDP1 --auto --output DP2 --off
+  echo "Xft.dpi: 192" > $HOME/.Xresources
+fi

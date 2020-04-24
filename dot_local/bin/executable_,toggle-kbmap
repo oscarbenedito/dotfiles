@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+if (setxkbmap -query | grep -q 'layout:\s\+us'); then
+  setxkbmap es
+  notify-send "Keyboard map: es"
+else
+  setxkbmap us
+  notify-send "Keyboard map: us"
+fi
