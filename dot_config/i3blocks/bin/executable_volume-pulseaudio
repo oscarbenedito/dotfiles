@@ -170,7 +170,7 @@ sed 's/.*= "\(.*\)".*/\1/')
           print_format "$MUTED_FORMAT"
           print_format "$MUTED_FORMAT"
         fi
-        echo "$COLOR"
+#        echo "$COLOR"
     fi
 }
 

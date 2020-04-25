@@ -204,6 +204,17 @@ bar {
   status_command i3blocks
   position top
   tray_output none
+
+  colors {
+    background #000000
+    statusline #eeeeee
+    separator #666666
+    #                  border  backgr. text
+    focused_workspace  #4c7899 #285577 #eeeeee
+    active_workspace   #9da1a8 #797e89 #eeeeee
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace   #6fa24c #51852c #eeeeee
+  }
 }
 
 # wallpaper
