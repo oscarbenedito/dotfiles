@@ -213,18 +213,21 @@ exec --no-startup-id "xwallpaper --zoom $wp"
 
 # /theme }}}
 
-# XF86 shortcuts {{{
+# volume and brightness {{{
 
 # volume
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master unmute && amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master unmute && amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master unmute && amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master unmute && amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+
+bindsym $mod+plus exec amixer -q -D pulse sset Master unmute && amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
+bindsym $mod+minus exec amixer -q -D pulse sset Master unmute && amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 
 # brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 15
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 15
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 && pkill -RTMIN+2 i3blocks
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 && pkill -RTMIN+2 i3blocks
 
-# /XF86 shortcuts }}}
+# /volume and brightness }}}
 
 # keyboards and monitors {{{
 

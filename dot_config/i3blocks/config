@@ -5,10 +5,15 @@ markup=pango
 command=$HOME/.config/i3blocks/bin/disk
 interval=30
 
+[backlight]
+command=$HOME/.config/i3blocks/bin/backlight
+interval=once
+signal=2
+
 [volume]
 command=$HOME/.config/i3blocks/bin/volume-pulseaudio
 interval=once
-signal=10
+signal=1
 
 [battery]
 command=$HOME/.config/i3blocks/bin/battery2
@@ -16,5 +21,5 @@ markup=pango
 interval=30
 
 [datetime]
-command=date +"%a %d %b %H:%M"
+command=date +"%a %d %b, %H:%M"
 interval=5
