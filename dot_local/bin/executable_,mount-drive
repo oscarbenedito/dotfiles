@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+get_drives() { lsblk -rpo "name,type,size,mountpoint" | sed '1d' | grep -v "/dev/sda" ; }
+format_drives() { awk '$2=="part"{printf "%s (%s%s)\n",$1,$3,($4=="")?"":", mounted"}' ; }
+select_drive() { dmenu -i -p "Select drive" ; }
+mount_point() { grep "^$drive " /proc/mounts | cut -d ' ' -f 2 ; }
+
+info="$(get_drives | format_drives | select_drive)"
+
+[ -z "$info" ] && exit
+
+drive="$(echo "$info" | awk '{print $1}')"
+mounted="$(echo "$info" | grep "mounted")"
+
+if [ -z "$mounted" ]; then
+  udisksctl mount -b "$drive" \
+    && notify-send "Drive mounted" "$(mount_point)" \
+    || notify-send "Error while mounting drive"
+else
+  udisksctl unmount -b "$drive" \
+    && notify-send "Drive unmounted" \
+    || notify-send "Error while unmounting drive"
+fi

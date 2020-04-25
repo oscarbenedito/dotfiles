@@ -12,17 +12,13 @@ font pango:monospace 10
 
 # /initial declarations }}}
 
-# i3 shortcuts {{{
+# shortcuts {{{
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-
-# /i3 shortcuts }}}
-
-# program shortcuts {{{
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -46,7 +42,10 @@ mode "$mode_open" {
     bindsym Escape mode "default"
 }
 
-# /program shortcuts }}}
+# mount/unmount drives
+bindsym $mod+m exec "$HOME/.local/bin/,mount-drive"
+
+# /shortcuts }}}
 
 # windows {{{
 
@@ -88,7 +87,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -176,7 +175,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 # exit session
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+m mode "$mode_system"
+bindsym $mod+i mode "$mode_system"
 set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id "i3lock -i $wp", mode "default"
