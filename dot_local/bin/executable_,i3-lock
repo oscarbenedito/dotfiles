@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+DIMS="$(xdpyinfo | grep dimensions | awk '{print $2}')"
+WALL="$XDG_CONFIG_HOME/i3/wallpaper.png"
+OUTDIR="$XDG_CACHE_HOME/i3/wallpapers"
+OUT="$OUTDIR/$DIMS.png"
+
+[ -f "$OUT" ] && i3lock -i "$OUT" && exit
+[ ! -f "$WALL" ] && i3lock -c 142a3a && exit
+[ ! -d "$OUTDIR" ] && mkdir --parents $OUTDIR
+convert -resize "$DIMS^" -gravity center -extent "$DIMS" $WALL $OUT
+i3lock -i "$OUT"

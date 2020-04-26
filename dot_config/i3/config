@@ -178,7 +178,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+i mode "$mode_system"
 set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id "i3lock -i $wp", mode "default"
+    bindsym l exec --no-startup-id "$HOME/.local/bin/,i3-lock", mode "default"
     bindsym e exec --no-startup-id "i3-msg exit", mode "default"
     bindsym r exec --no-startup-id "systemctl reboot", mode "default"
     bindsym s exec --no-startup-id "systemctl poweroff", mode "default"
