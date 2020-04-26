@@ -4,7 +4,7 @@ ndf=""
 
 for f in $(ls -A "$HOME" | grep "^\."); do
   case $f in
-    .cache|.config|.gnupg|.local|.mozilla|.pki|.ssh|.zshenv|.zshrc) continue ;;
+    .cache|.config|.gnupg|.local|.mozilla|.pki|.ssh|.zshenv) continue ;;
     *) [ -z "$ndf" ] && ndf="$f" || ndf="$ndf, $f" ;;
   esac
 done
