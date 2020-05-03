@@ -14,6 +14,7 @@ Plug 'sheerun/vim-polyglot'     " languages syntax
 Plug 'tpope/vim-surround'       " surrounding objects
 Plug 'tpope/vim-commentary'     " easily comment objects
 Plug 'tpope/vim-fugitive'       " git wrapper
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " /plugins }}}
@@ -137,10 +138,16 @@ set laststatus=2                " activate status line
 " templates {{{
 
 nnoremap <Leader>sh :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.sh<CR>:w<CR>:e<CR>j
-nnoremap <Leader>texs :-1read $XDG_CONFIG_HOME/nvim/templates/summary.tex<CR>
-nnoremap <Leader>texg :-1read $XDG_CONFIG_HOME/nvim/templates/tex.gitignore<CR>
-nnoremap <Leader>texm :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
+nnoremap <Leader>latexs :-1read $XDG_CONFIG_HOME/nvim/templates/summary.tex<CR>
+nnoremap <Leader>latexg :-1read $XDG_CONFIG_HOME/nvim/templates/tex.gitignore<CR>
+nnoremap <Leader>latexm :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
 
 " /templates }}}
 
 runtime shortcuts.vim
+
+let g:vimwiki_list = [{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki/build/html', 'custom_wiki2html': '~/Documents/wiki/build/sonic-screwdriver.py', 'syntax': 'markdown', 'ext': '.md' }]
+let g:vimwiki_folding = 'expr'
+autocmd FileType vimwiki set foldlevel=1
+
+:nmap <Leader>t <Plug>VimwikiVSplitLink

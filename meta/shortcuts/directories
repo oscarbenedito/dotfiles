@@ -2,3 +2,4 @@
 dc $HOME/Documents
 dg $HOME/Git
 dw $HOME/Downloads
+dvw $HOME/Documents/wiki
