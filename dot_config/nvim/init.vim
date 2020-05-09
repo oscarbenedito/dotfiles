@@ -17,6 +17,12 @@ Plug 'tpope/vim-fugitive'       " git wrapper
 Plug 'vimwiki/vimwiki'
 call plug#end()
 
+" netrw
+let g:netrw_liststyle=3         " tree structure
+let g:netrw_banner=0            " get rid of banner
+" adds 'number' and 'relativenumber', other options are the default ones
+let g:netrw_bufsettings="nomodifiable nomodified number nobuflisted nowrap readonly relativenumber"
+
 " vimwiki
 let g:vimwiki_list=[{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki/build/html', 'custom_wiki2html': '~/Documents/wiki/build/build.py', 'syntax': 'markdown', 'ext': '.md' }]
 let g:vimwiki_folding='expr'
@@ -97,6 +103,10 @@ nnoremap U <C-r>
 " edit/reload config file
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>sv :so $MYVIMRC<CR>
+
+" edit file
+nmap <Leader>ee :Explore<CR>
+nmap <Leader>ev :Vexplore<CR>
 
 " save with sudo privileges using w!!
 cmap w!! w !sudo tee % >/dev/null
