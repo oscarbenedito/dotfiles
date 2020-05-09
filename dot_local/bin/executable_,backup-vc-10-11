@@ -8,7 +8,7 @@ read PW
 stty echo
 printf "\n"
 
-alias keepassxc="$XDG_DATA_HOME/keepassxc/KeePassXC-2.5.3-x86_64.AppImage"
+alias keepassxc="$XDG_DATA_HOME/keepassxc/KeePassXC-2.5.4-x86_64.AppImage"
 
 printf "\nObtaining encryption passwords..."
 PW1="$(echo "$PW" | keepassxc cli show "$KDBX" \
