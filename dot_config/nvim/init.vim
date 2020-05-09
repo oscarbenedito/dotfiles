@@ -15,7 +15,22 @@ Plug 'tpope/vim-surround'       " surrounding objects
 Plug 'tpope/vim-commentary'     " easily comment objects
 Plug 'tpope/vim-fugitive'       " git wrapper
 Plug 'vimwiki/vimwiki'
+Plug 'Yggdroot/indentLine'      " leading spaces
 call plug#end()
+
+" vimwiki
+let g:vimwiki_list = [{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki/build/html', 'custom_wiki2html': '~/Documents/wiki/build/build.py', 'syntax': 'markdown', 'ext': '.md' }]
+let g:vimwiki_folding = 'expr'
+let g:vimwiki_global_ext = 0
+autocmd FileType vimwiki set foldlevel=1
+:nmap <Leader>t <Plug>VimwikiVSplitLink
+
+" indentLine
+let g:indentLine_leadingSpaceChar='·'
+let g:indentLine_leadingSpaceEnabled=1
+let g:indentLine_enabled=0
+let g:indentLine_color_term='238'       " onedark color
+let g:indentLine_color_gui='#3B4048'    " onedark color
 
 " /plugins }}}
 
@@ -45,7 +60,6 @@ set expandtab                   " insert spaces instead of tabs
 set tabstop=4                   " number of spaces when tab is pressed
 set shiftwidth=2                " number of spaces for indentation
 
-
 " line numbers
 set number                      " show line numbers
 set relativenumber              " show numbers relative to current line
@@ -53,6 +67,8 @@ set relativenumber              " show numbers relative to current line
 " line wrapping
 set wrap                        " wrap lines
 set linebreak                   " don't cut words when wrapping
+set breakindent                 " keeps indentation on wrapped lines
+set showbreak=↪↪                " adds characters in front of wrapped line
 
 " new splits position
 set splitbelow
@@ -144,10 +160,5 @@ nnoremap <Leader>latexm :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
 
 " /templates }}}
 
+
 runtime shortcuts.vim
-
-let g:vimwiki_list = [{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki/build/html', 'custom_wiki2html': '~/Documents/wiki/build/sonic-screwdriver.py', 'syntax': 'markdown', 'ext': '.md' }]
-let g:vimwiki_folding = 'expr'
-autocmd FileType vimwiki set foldlevel=1
-
-:nmap <Leader>t <Plug>VimwikiVSplitLink
