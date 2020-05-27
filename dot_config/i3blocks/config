@@ -5,6 +5,10 @@ markup=pango
 command=$HOME/.config/i3blocks/bin/disk
 interval=30
 
+[updates]
+command=$HOME/.config/i3blocks/bin/apt-updates
+interval=3600
+
 [backlight]
 command=$HOME/.config/i3blocks/bin/backlight
 interval=once
@@ -17,7 +21,6 @@ signal=1
 
 [battery]
 command=$HOME/.config/i3blocks/bin/battery2
-markup=pango
 interval=30
 
 [datetime]
