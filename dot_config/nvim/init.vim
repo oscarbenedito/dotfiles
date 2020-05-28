@@ -120,18 +120,9 @@ nmap <Space> za
 " /shortcuts }}}
 
 " colorscheme {{{
-
 colorscheme onedark
 set t_ut=""                     " deactivates vim BCE option (messes up colors)
-
-if (empty($TMUX))               " 24-bit true-color configuration
-  if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
+set termguicolors
 
 " /colorscheme }}}
 
@@ -162,4 +153,9 @@ nnoremap <Leader>latexm :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
 
 " /templates }}}
 
+" other {{{
+
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 runtime shortcuts.vim
+
+" /other }}}
