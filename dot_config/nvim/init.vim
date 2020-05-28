@@ -23,6 +23,21 @@ let g:netrw_banner=0            " get rid of banner
 " adds 'number' and 'relativenumber', other options are the default ones
 let g:netrw_bufsettings="nomodifiable nomodified number nobuflisted nowrap readonly relativenumber"
 
+" latex-suite
+filetype plugin on              " invokes latex-suite
+set grepprg=grep\ -nH\ $*
+filetype indent on              " automatic indentation
+let g:tex_flavor='latex'
+let g:Tex_Folding=0
+let g:Tex_AutoFolding=0
+autocmd BufRead,BufNewFile *.tex set filetype=tex
+autocmd BufRead,BufNewFile *.cls set filetype=tex
+autocmd BufRead,BufNewFile *.sty set filetype=tex
+
+" vim-commentary
+autocmd FileType cpp setlocal commentstring=//\ %s
+autocmd FileType c setlocal commentstring=//\ %s
+
 " vimwiki
 let g:vimwiki_list=[{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki/build/html', 'custom_wiki2html': '~/Documents/wiki/build/build.py', 'syntax': 'markdown', 'ext': '.md' }]
 let g:vimwiki_folding='expr'
@@ -31,21 +46,6 @@ autocmd FileType vimwiki set foldlevel=1
 :nmap <Leader>t <Plug>VimwikiVSplitLink
 
 " /plugins }}}
-
-" latex-suite {{{
-
-filetype plugin on              " invokes latex-suite
-set grepprg=grep\ -nH\ $*
-filetype indent on              " automatic indentation
-let g:tex_flavor='latex'
-let g:Tex_Folding=0
-let g:Tex_AutoFolding=0
-
-autocmd BufRead,BufNewFile *.tex set filetype=tex
-autocmd BufRead,BufNewFile *.cls set filetype=tex
-autocmd BufRead,BufNewFile *.sty set filetype=tex
-
-" /latex-suite }}}
 
 " change default behaviours {{{
 
@@ -77,16 +77,27 @@ syntax on                       " syntax coloring
 set foldmethod=marker           " using {{{ and }}} to delimit folding areas
 set modeline                    " enable per-file settings with modeline
 set colorcolumn=81              " color column 81 differently
-set textwidth=80                " break lines longer than 80 characters
+set textwidth=80                " break lines longer than 80 characters, this is done to change behaviour of gq, see next line
+set formatoptions-=t            " don't break lines at column 80
 set nojoinspaces                " joining lines: no double space after period
 
 " show blank characters when invisible
 set list
 set listchars=tab:>-,trail:·,extends:#,nbsp:.
 
+" filetypes
+autocmd BufRead,BufNewFile *.zone set filetype=bindzone
+
+" filetype specific
+autocmd FileType markdown set formatoptions+=t   " break lines at column 80
+autocmd FileType vimwiki set formatoptions+=t   " break lines at column 80
+
 " /change default behaviours }}}
 
 " shortcuts {{{
+
+" for spanish keyboard
+map ñ :
 
 " change change latex-suite C-j shortcut on normal mode
 nmap <Leader>n <Plug>IMAP_JumpForward
