@@ -36,7 +36,7 @@ mode "$mode_open" {
     bindsym j exec "$HOME/.local/bin/,appimage $ai/appimagekit-joplin.desktop", mode "default"
     bindsym k exec "$HOME/.local/bin/,appimage $ai/keepassxc.desktop", mode "default"
     bindsym n exec "$HOME/.local/bin/,appimage $ai/nextcloud.desktop", mode "default"
-    bindsym s exec "signal-desktop", mode "default"
+    bindsym s exec "signal-desktop --no-sandbox", mode "default"
     bindsym t exec "$HOME/.local/bin/,appimage $ai/tutanota-desktop.desktop", mode "default"
 
     # exit open mode: "Enter" or "Escape"
