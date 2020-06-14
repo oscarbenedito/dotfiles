@@ -47,7 +47,8 @@ mode "$mode_open" {
 bindsym $mod+m exec "$HOME/.local/bin/mount-drive"
 
 # take screenshot
-bindsym Print exec "gnome-screenshot -i"
+bindsym Print --release exec "scrot --select /tmp/screenshot-$(date +%F_%T).png --exec 'xclip -selection c -target image/png < $f'; notify-send 'Screenshot copied to clipboard'"
+bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png --exec 'xclip -selection c -target image/png < $f'; notify-send 'Screenshot copied to clipboard'"
 
 # /shortcuts }}}
 
