@@ -33,10 +33,10 @@ bindsym $mod+o mode "$mode_open"
 set $mode_open (f)irefox, (k)eepassxc, (n)extcloud, (s)ignal, (t)utanota
 mode "$mode_open" {
     bindsym f exec firefox, mode "default"
-    bindsym k exec "$HOME/.local/bin/,appimage $ai/keepassxc.desktop", mode "default"
-    bindsym n exec "$HOME/.local/bin/,appimage $ai/nextcloud.desktop", mode "default"
+    bindsym k exec "$HOME/.local/bin/appimage $ai/keepassxc.desktop", mode "default"
+    bindsym n exec "$HOME/.local/bin/appimage $ai/nextcloud.desktop", mode "default"
     bindsym s exec "signal-desktop --no-sandbox", mode "default"
-    bindsym t exec "$HOME/.local/bin/,appimage $ai/tutanota-desktop.desktop", mode "default"
+    bindsym t exec "$HOME/.local/bin/appimage $ai/tutanota-desktop.desktop", mode "default"
 
     # exit open mode: "Enter" or "Escape"
     bindsym Return mode "default"
@@ -44,7 +44,7 @@ mode "$mode_open" {
 }
 
 # mount/unmount drives
-bindsym $mod+m exec "$HOME/.local/bin/,mount-drive"
+bindsym $mod+m exec "$HOME/.local/bin/mount-drive"
 
 # take screenshot
 bindsym Print exec "gnome-screenshot -i"
@@ -182,7 +182,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+i mode "$mode_system"
 set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id "$HOME/.local/bin/,i3-lock", mode "default"
+    bindsym l exec --no-startup-id "$HOME/.local/bin/i3-lock", mode "default"
     bindsym e exec --no-startup-id "i3-msg exit", mode "default"
     bindsym r exec --no-startup-id "systemctl reboot", mode "default"
     bindsym s exec --no-startup-id "systemctl poweroff", mode "default"
@@ -193,7 +193,7 @@ mode "$mode_system" {
 }
 
 # Autolock after 5 minutes of inactivity
-exec --no-startup-id xautolock -detectsleep -corners 0-00 -time 5 -locker "$HOME/.local/bin/,i3-lock" -notify 30 -notifier "notify-send -u critical -t 10000 'Locking screen in 30 seconds'"
+exec --no-startup-id xautolock -detectsleep -corners 0-00 -time 5 -locker "$HOME/.local/bin/i3-lock" -notify 30 -notifier "notify-send -u critical -t 10000 'Locking screen in 30 seconds'"
 
 # /session commands }}}
 
@@ -258,10 +258,10 @@ exec --no-startup-id "xcape -e 'Super_L=Escape'"
 exec --no-startup-id "numlockx"
 
 # configure monitors
-exec --no-startup-id "$HOME/.local/bin/,configure-monitors"
+exec --no-startup-id "$HOME/.local/bin/configure-monitors"
 
 # toggle keymap
-bindsym $mod+space exec "$HOME/.local/bin/,toggle-kbmap"
+bindsym $mod+space exec "$HOME/.local/bin/toggle-kbmap"
 
 # /keyboards and monitors }}}
 
