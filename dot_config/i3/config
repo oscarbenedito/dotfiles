@@ -33,7 +33,6 @@ bindsym $mod+o mode "$mode_open"
 set $mode_open (f)irefox, (k)eepassxc, (n)extcloud, (s)ignal, (t)utanota
 mode "$mode_open" {
     bindsym f exec firefox, mode "default"
-    bindsym j exec "$HOME/.local/bin/,appimage $ai/appimagekit-joplin.desktop", mode "default"
     bindsym k exec "$HOME/.local/bin/,appimage $ai/keepassxc.desktop", mode "default"
     bindsym n exec "$HOME/.local/bin/,appimage $ai/nextcloud.desktop", mode "default"
     bindsym s exec "signal-desktop --no-sandbox", mode "default"
