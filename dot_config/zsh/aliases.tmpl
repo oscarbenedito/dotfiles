@@ -23,17 +23,11 @@ alias ...="cd ../.."
 alias vw="cd $HOME/Documents/wiki && vim index.md"
 alias bvw="firefox $HOME/Documents/wiki/build/html/index.html"
 
-{{- if ne .chezmoi.hostname "fme-desktop" }}
-
 # Zsh aliases
 alias -g L="|less"
 alias -g NULL="> /dev/null 2>&1"
-{{- end }}
 
 # Chezmoi
-{{- if eq .chezmoi.hostname "fme-desktop" }}
-alias chezmoi="$HOME/.local/bin/chezmoi"
-{{- end }}
 alias c="chezmoi"
 alias ce="chezmoi edit --apply"
 
@@ -48,18 +42,12 @@ alias gps="git push"
 alias gsh="git stash"
 alias gl="git log"
 
-{{ if ne .chezmoi.hostname "fme-desktop" -}}
 {{- if eq .chezmoi.osRelease.id "debian" -}}
 alias upgrade="sudo apt-get update && sudo apt-get -y upgrade"
 alias ag="sudo apt-get"
 {{- else -}}
 alias upgrade="sudo pacman -Syyu --noconfirm"
 alias p="sudo pacman"
-{{- end }}
-{{- end }}
-
-{{- if eq .chezmoi.hostname "fme-desktop" }}
-alias vscode="$HOME/KOLMOGOROV/VSCode-linux-x64/bin/code"
 {{- end }}
 
 {{- if .backup }}
@@ -69,9 +57,4 @@ alias backup_all='rsync -loptruzvP --delete {{ range $i, $dir := .backup.backup_
 
 # Backup the contents of the USB
 alias backup_usb='rsync -gloptruzvP --delete --exclude "/Varis/copia-gris.hc" --exclude "/Varis/copia-gris-git.hc" --exclude "/.Trash-1000" --exclude "/.Trashes" --exclude "/.Spotlight-V100" "/media/$USER/Oscar/" "$HOME/Documents/Backups/USB/"'
-{{- end }}
-
-{{- if eq .chezmoi.hostname "fme-desktop" }}
-
-setxkbmap -option "caps:swapescape"     # Switch caps and escape
 {{- end }}
