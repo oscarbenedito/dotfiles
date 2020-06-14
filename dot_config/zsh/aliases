@@ -42,19 +42,12 @@ alias gps="git push"
 alias gsh="git stash"
 alias gl="git log"
 
-{{- if eq .chezmoi.osRelease.id "debian" -}}
+# Updates
 alias upgrade="sudo apt-get update && sudo apt-get -y upgrade"
-alias ag="sudo apt-get"
-{{- else -}}
-alias upgrade="sudo pacman -Syyu --noconfirm"
-alias p="sudo pacman"
-{{- end }}
-
-{{- if .backup }}
+# alias upgrade="sudo pacman -Syyu --noconfirm"
 
 # Backup to external HD
-alias backup_all='rsync -loptruzvP --delete {{ range $i, $dir := .backup.backup_exclude }}--exclude "{{ $dir }}" {{ end }} "$HOME/" "/media/$USER/OSCAR/.{{ .backup.backup_dir }}/"'
+alias backup_all='rsync -loptruzvP --delete --exclude "/.*" "$HOME/" "/media/$USER/OSCAR/.backup_$(hostname)/"'
 
 # Backup the contents of the USB
 alias backup_usb='rsync -gloptruzvP --delete --exclude "/Varis/copia-gris.hc" --exclude "/Varis/copia-gris-git.hc" --exclude "/.Trash-1000" --exclude "/.Trashes" --exclude "/.Spotlight-V100" "/media/$USER/Oscar/" "$HOME/Documents/Backups/USB/"'
-{{- end }}

@@ -1,10 +1,6 @@
 [user]
   email = oscar@oscarbenedito.com
   name = oscarbenedito
-  {{- if .pgpkey }}
   signingkey = 827E5A8E3AE8A499
-  {{- end }}
-{{- if .pgpkey }}
 [commit]
   gpgsign = true
-{{- end }}
