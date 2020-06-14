@@ -2,5 +2,18 @@
   email = oscar@oscarbenedito.com
   name = oscarbenedito
   signingkey = 827E5A8E3AE8A499
+[alias]
+  a = add
+  c = commit
+  cm = commit -m
+  d = diff
+  dc = diff --cached
+  l = log
+  pl = pull
+  ps = push
+  psf = push --force
+  s = status
+  sh = stash
+  shp = stash pop
 [commit]
   gpgsign = true

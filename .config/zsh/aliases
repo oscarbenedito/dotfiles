@@ -18,6 +18,7 @@ alias tmux="TERM=screen-256color tmux"
 # Shortcuts
 alias v="nvim"
 alias vim="nvim"
+alias g="git"
 alias ..="cd .."
 alias ...="cd ../.."
 alias vw="cd $HOME/Documents/wiki && vim index.md"
@@ -28,17 +29,6 @@ alias cv="GIT_DIR=$HOME/.local/share/dotfiles GIT_WORK_TREE=$HOME nvim -c Git -c
 # Zsh aliases
 alias -g L="|less"
 alias -g NULL="> /dev/null 2>&1"
-
-# Git
-alias g="git"
-alias gs="git status"
-alias gc="git commit -m"
-alias gd="git diff"
-alias ga="git add"
-alias gpl="git pull"
-alias gps="git push"
-alias gsh="git stash"
-alias gl="git log"
 
 # Updates
 alias upgrade="sudo apt-get update && sudo apt-get -y upgrade"
