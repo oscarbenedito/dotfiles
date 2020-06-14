@@ -1,8 +1,11 @@
-# shortcuts for files that should be edited with chezmoi
+# shortcuts for files
 cfa     $XDG_CONFIG_HOME/zsh/aliases
 cfal    $XDG_CONFIG_HOME/alacritty/alacritty.yml
 cfb     $XDG_CONFIG_HOME/i3blocks/config
-cfe     $HOME/.zshenv
+cfd     $XDG_CONFIG_HOME/directories
+cfe     $XDG_CONFIG_HOME/zsh/.zshenv
+cff     $XDG_CONFIG_HOME/files
 cfi     $XDG_CONFIG_HOME/i3/config
 cfv     $XDG_CONFIG_HOME/nvim/init.vim
+cfx     $HOME/.Xresources
 cfz     $XDG_CONFIG_HOME/zsh/.zshrc

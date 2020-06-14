@@ -1,5 +1,0 @@
-# shortcuts for files
-cfd     $XDG_DATA_HOME/chezmoi/meta/shortcuts/directories
-cff     $XDG_DATA_HOME/chezmoi/meta/shortcuts/files
-cffc    $XDG_DATA_HOME/chezmoi/meta/shortcuts/files-chezmoi
-cfx     $HOME/.Xresources

@@ -22,14 +22,12 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias vw="cd $HOME/Documents/wiki && vim index.md"
 alias bvw="firefox $HOME/Documents/wiki/build/html/index.html"
+alias c="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
+alias cv="GIT_DIR=$HOME/.local/share/dotfiles GIT_WORK_TREE=$HOME nvim"
 
 # Zsh aliases
 alias -g L="|less"
 alias -g NULL="> /dev/null 2>&1"
-
-# Chezmoi
-alias c="chezmoi"
-alias ce="chezmoi edit --apply"
 
 # Git
 alias g="git"
