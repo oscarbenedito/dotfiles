@@ -9,10 +9,11 @@
 
 call plug#begin()
 Plug 'junegunn/goyo.vim'        " minimalist design, nice for writing text
-Plug 'vim-latex/vim-latex'
+Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'sheerun/vim-polyglot'     " languages syntax
 Plug 'tpope/vim-surround'       " surrounding objects
 Plug 'tpope/vim-commentary'     " easily comment objects
+Plug 'tpope/vim-repeat'         " make surround commands repeatable
 Plug 'tpope/vim-fugitive'       " git wrapper
 Plug 'vimwiki/vimwiki'
 call plug#end()
@@ -52,6 +53,7 @@ autocmd FileType vimwiki set foldlevel=1
 let mapleader=","               " set ',' as leader
 set hidden                      " hide buffers instead of closing them
 set path+=**                    " find in subdirectories as well
+set mouse=""                    " gets rid of mouse, should be by default
 
 " indentation
 set expandtab                   " insert spaces instead of tabs
