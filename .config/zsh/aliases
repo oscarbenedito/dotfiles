@@ -26,6 +26,16 @@ alias bvw="firefox $HOME/Documents/wiki/build/html/index.html"
 alias c="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 alias cv="GIT_DIR=$HOME/.local/share/dotfiles GIT_WORK_TREE=$HOME nvim -c Git -c only"
 
+c-clean() {
+  rm README.md COPYING
+  c update-index --skip-worktree README.md COPYING
+}
+
+c-populate() {
+  c update-index --no-skip-worktree README.md COPYING
+  c checkout README.md COPYING
+}
+
 # Zsh aliases
 alias -g L="|less"
 alias -g NULL="> /dev/null 2>&1"
