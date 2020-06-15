@@ -2,16 +2,32 @@
 
 This directory hosts some of my dotfiles. It is currently a work in progress.
 
+## Palette
+
+The colors used on most places are based on the vim onedark theme. They are the
+following:
+
+| Color code | Color   | Color number |
+| :--------: | :-----: | :----------: |
+| 30         | black   | #282c34      |
+| 31         | red     | #e06c75      |
+| 32         | green   | #98c379      |
+| 33         | yellow  | #e5c07b      |
+| 34         | blue    | #61afef      |
+| 35         | magenta | #c678dd      |
+| 36         | cyan    | #56b6c2      |
+| 37         | white   | #ffffff      |
+
 ## Working with this repository
 
 My solution is based on [this comment][hn-comment] (more info: [1][setup-1],
 [2][setup-2]). A bare repository is initialized on a specified directory
 (`$XDG_DATA_HOME/dotfiles` in my case) and then it is used as if it was in the
-home directory (using the `--work-tree` option). I have aliased this git command
+home directory using the `--work-tree` option. I have aliased this git command
 with options to `c` (see setup below). The `status.showUntrackedFiles no`
-setting is used to avoid seeing all files in our home directory.
+setting is used to avoid seeing all files in the home directory.
 
-### Setup
+### Start from scratch
 
 To start your dotfiles from scratch:
 
@@ -21,13 +37,14 @@ alias c='/usr/bin/git --git-dir=$XDG_DATA_HOME/dotfiles --work-tree=$HOME'
 c config --local status.showUntrackedFiles no
 c config --local core.bare false
 c config --local core.worktree "$HOME"
+# I'm unsure about the following lines
 c push --set-upstream origin master
 c branch --set-upstream-to=origin/master master
 ```
 
 You should put the alias line on your `.zshrc` or `.bashrc`.
 
-### Cloning
+### Replicate (method #1)
 
 If you already have a repository and want to set up a new computer:
 
@@ -38,6 +55,7 @@ c checkout
 c config --local status.showUntrackedFiles no
 c config --local core.bare false
 c config --local core.worktree "$HOME"
+# I'm unsure about the following lines
 c push --set-upstream origin master
 c branch --set-upstream-to=origin/master master
 ```
@@ -61,7 +79,25 @@ mkdir -p dotfiles-backup && \
   xargs -I{} mv {} dotfiles-backup/{}
 ```
 
-## Notes
+### Replicate (method #2)
+
+If you don't care about deleting conflicting dotfiles on your computer, the
+following method also works:
+
+```sh
+git clone --separate-git-dir="$XDG_DATA_HOME/dotfiles" <git-repo-url> dotfiles-tmp
+rsync --recursive --verbose --exclude '.git' dotfiles-tmp/ $HOME/
+rm --recursive my-dotfiles-tmp
+alias c='/usr/bin/git --git-dir=$XDG_DATA_HOME/dotfiles --work-tree=$HOME'
+c config --local status.showUntrackedFiles no
+c config --local core.worktree "$HOME"
+```
+
+Run `c status` to make sure everywithing was copied as expected (symlinks will
+not). Add the `--ignore-existing` to `rsync` to ignore already existing files,
+so you don't override them.
+
+### Notes
 
 I have also created alises `c-clean` and `c-populate` to hide or show the files
 `README.md` and `COPYING`. This functions will delete or override the files on
@@ -70,22 +106,6 @@ the home directory respectively.
 On Debian, you might need to change ZSH's syntax highlightning plugin location
 from `/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh` to
 `/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh`.
-
-## Colors
-
-I have the terminal emulator set up with the following colors (based on the
-onedark vim theme):
-
-| Color code | Color   | Color number |
-| :--------: | :-----: | :----------: |
-| 30         | black   | #282c34      |
-| 31         | red     | #e06c75      |
-| 32         | green   | #98c379      |
-| 33         | yellow  | #e5c07b      |
-| 34         | blue    | #61afef      |
-| 35         | magenta | #c678dd      |
-| 36         | cyan    | #56b6c2      |
-| 37         | white   | #ffffff      |
 
 ## License
 
