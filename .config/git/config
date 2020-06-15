@@ -9,11 +9,13 @@
   d = diff
   dc = diff --cached
   l = log
+  lp = log --graph --pretty=format:'%Cred%h%Creset %Cblue%an%Creset: %s%Creset%C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   pl = pull
   ps = push
   psf = push --force
-  s = status
+  s = status --short
   sh = stash
   shp = stash pop
+  ss = status
 [commit]
   gpgsign = true
