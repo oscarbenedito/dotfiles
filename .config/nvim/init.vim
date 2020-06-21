@@ -35,10 +35,6 @@ autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufRead,BufNewFile *.cls set filetype=tex
 autocmd BufRead,BufNewFile *.sty set filetype=tex
 
-" vim-commentary
-autocmd FileType cpp setlocal commentstring=//\ %s
-autocmd FileType c setlocal commentstring=//\ %s
-
 " vimwiki
 let g:vimwiki_list=[{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki/build/html', 'custom_wiki2html': '~/Documents/wiki/build/build.py', 'syntax': 'markdown', 'ext': '.md' }]
 let g:vimwiki_folding='expr'
