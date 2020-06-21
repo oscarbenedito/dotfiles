@@ -4,8 +4,10 @@
   signingkey = 827E5A8E3AE8A499
 [alias]
   a = add
+  addurl = remote set-url --add origin
   c = commit
   cm = commit -m
+  co = checkout
   d = diff
   dc = diff --cached
   l = log
@@ -16,6 +18,6 @@
   s = status --short
   sh = stash
   shp = stash pop
-  ss = status
+  st = status
 [commit]
   gpgsign = true
