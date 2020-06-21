@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+cmds="\
+lock        | slock
+exit        | kill -TERM $(pidof -s dwm)
+hibernate   | sudo -A systemctl suspend-then-hibernate
+reboot      | sudo -A reboot
+shutdown    | sudo -A shutdown -h now"
+
+choice="$(echo "$cmds" | sed "s/ *|/|/g" | cut -d'|' -f 1 | dmenu)" || exit 1
+
+`echo "$cmds" | grep "^$choice *| " | cut -d '|' -f2-`

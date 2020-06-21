@@ -23,6 +23,7 @@ export LESSHISTFILE="-"
 export VISUAL="nvim"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
+export SUDO_ASKPASS="$HOME/.local/bin/sudoaskpass-dmenu"
 
 # Go bin to path
 [ -d "$XDG_DATA_HOME/go/bin" ] && export PATH="$XDG_DATA_HOME/go/bin:$PATH"
