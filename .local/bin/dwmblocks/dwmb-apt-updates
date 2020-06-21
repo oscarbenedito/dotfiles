@@ -2,4 +2,4 @@
 
 sudo apt-get update > /dev/null 2> /dev/null
 UPDATES="$(apt-get upgrade -s |grep -P '^\d+ upgraded'|cut -d" " -f1)"
-[ "0" != "$UPDATES" ] && echo "<span font='FontAwesome'></span> $UPDATES"
+[ "0" != "$UPDATES" ] && echo " $UPDATES"

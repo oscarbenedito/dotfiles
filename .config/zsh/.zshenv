@@ -1,5 +1,6 @@
 # Local bin to path
-[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && \
+  export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
 
 # XDG dirs
 export XDG_DATA_HOME="$HOME/.local/share"
