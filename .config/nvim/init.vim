@@ -44,7 +44,7 @@ let g:vimwiki_list=[{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki
 let g:vimwiki_folding='expr'
 let g:vimwiki_global_ext=0
 autocmd FileType vimwiki set foldlevel=1
-:nmap <Leader>t <Plug>VimwikiVSplitLink
+:nnoremap <Leader>t <Plug>VimwikiVSplitLink
 
 " /plugins }}}
 
@@ -87,6 +87,16 @@ set nojoinspaces                " joining lines: no double space after period
 set list
 set listchars=tab:>-,trail:·,extends:#,nbsp:.
 
+" switch : and ;
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+nnoremap ñ :
+nnoremap Ñ :
+vnoremap ñ :
+nnoremap Ñ ;
+
 " filetypes
 autocmd BufRead,BufNewFile *.zone set filetype=bindzone
 
@@ -98,37 +108,34 @@ autocmd FileType vimwiki set formatoptions+=t   " break lines at column 80
 
 " shortcuts {{{
 
-" for spanish keyboard
-map ñ :
-
 " change change latex-suite C-j shortcut on normal mode
-nmap <Leader>n <Plug>IMAP_JumpForward
+nnoremap <Leader>n <Plug>IMAP_JumpForward
 
 " set up vim-like commands to switch panels
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " undo
 nnoremap U <C-r>
 
 " edit/reload config file
-nmap <silent> <Leader>ev :e $MYVIMRC<CR>
-nmap <silent> <Leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 
 " edit file
-nmap <Leader>ee :Explore<CR>
-nmap <Leader>ev :Vexplore<CR>
+nnoremap <Leader>ee :Explore<CR>
+nnoremap <Leader>ev :Vexplore<CR>
 
 " save with sudo privileges using w!!
-cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
 " clean search highlights
-nmap <silent> <Leader>/ :nohlsearch<CR>
+nnoremap <silent> <Leader>/ :nohlsearch<CR>
 
 " space to toggle fold
-nmap <Space> za
+nnoremap <Space> za
 
 " /shortcuts }}}
 
