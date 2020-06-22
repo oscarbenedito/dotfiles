@@ -1,0 +1,32 @@
+! vim: filetype=xdefaults
+
+! Xft.dpi: 192
+
+#define black           #282c34
+#define red             #e06c75
+#define green           #98c379
+#define yellow          #e5c07b
+#define blue            #61afef
+#define purple          #c678dd
+#define cyan            #56b6c2
+#define white           #d3d7de
+
+#define bg              #000000
+#define fg              #eeeeee
+#define border          #444444
+#define selbg           #285577
+#define selfg           #eeeeee
+#define selborder       selbg
+
+
+dmenu.background:       bg
+dmenu.foreground:       fg
+dmenu.selbackground:    selbg
+dmenu.selforeground:    selfg
+
+dwm.normbgcolor:        bg
+dwm.normfgcolor:        fg
+dwm.normbordercolor:    border
+dwm.selbgcolor:         selbg
+dwm.selfgcolor:         selfg
+dwm.selbordercolor:     selborder

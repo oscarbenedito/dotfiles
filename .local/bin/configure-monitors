@@ -1,9 +1,19 @@
 #!/usr/bin/env sh
 
+xr="${XDG_CONFIG_HOME:-$HOME/.config}/Xresources"
+
 if [ -n "$(xrandr --query | grep "DP2 connected")" ]; then
   xrandr --output eDP1 --off --output DP2 --auto
-  echo "! Xft.dpi: 192" > $HOME/.Xresources
+  if grep --quiet "Xft.dpi: 192" "$xr"; then
+    sed -i "s/^Xft.dpi: 192/! Xft.dpi: 192/g" "$xr"
+  else
+    echo "! Xft.dpi: 192" >> "$xr"
+  fi
 else
   xrandr --output eDP1 --auto --output DP2 --off
-  echo "Xft.dpi: 192" > $HOME/.Xresources
+  if grep --quiet "Xft.dpi: 192" "$xr"; then
+    sed -i "s/^! Xft.dpi: 192/Xft.dpi: 192/g" "$xr"
+  else
+    echo "Xft.dpi: 192" >> "$xr"
+  fi
 fi

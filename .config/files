@@ -5,5 +5,5 @@ cfd     $XDG_CONFIG_HOME/directories
 cfe     $XDG_CONFIG_HOME/zsh/.zshenv
 cff     $XDG_CONFIG_HOME/files
 cfv     $XDG_CONFIG_HOME/nvim/init.vim
-cfx     $HOME/.Xresources
+cfx     $XDG_CONFIG_HOME/Xresources
 cfz     $XDG_CONFIG_HOME/zsh/.zshrc
