@@ -30,3 +30,23 @@ dwm.normbordercolor:    border
 dwm.selbgcolor:         selbg
 dwm.selfgcolor:         selfg
 dwm.selbordercolor:     selborder
+
+st.color0:              black
+st.color8:              black
+st.color1:              red
+st.color9:              red
+st.color2:              green
+st.color10:             green
+st.color3:              yellow
+st.color11:             yellow
+st.color4:              blue
+st.color12:             blue
+st.color5:              purple
+st.color13:             purple
+st.color6:              cyan
+st.color14:             cyan
+st.color7:              white
+st.color15:             white
+
+st.background:          white
+st.foreground:          black
