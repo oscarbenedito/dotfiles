@@ -2,6 +2,7 @@
 
 ! Xft.dpi: 192
 
+! application colors
 #define black           #282c34
 #define red             #e06c75
 #define green           #98c379
@@ -11,25 +12,29 @@
 #define cyan            #56b6c2
 #define white           #d3d7de
 
-#define bg              #000000
-#define fg              #eeeeee
-#define border          #444444
-#define selbg           #285577
-#define selfg           #eeeeee
-#define selborder       selbg
+! window manager colors
+#define background      #000000
+#define foreground      #eeeeee
+#define inactive        #444444
+#define primary         #285577
+#define error           #CC3333
 
 
-dmenu.background:       bg
-dmenu.foreground:       fg
-dmenu.selbackground:    selbg
-dmenu.selforeground:    selfg
+dmenu.background:       background
+dmenu.foreground:       foreground
+dmenu.selbackground:    primary
+dmenu.selforeground:    foreground
 
-dwm.normbgcolor:        bg
-dwm.normfgcolor:        fg
-dwm.normbordercolor:    border
-dwm.selbgcolor:         selbg
-dwm.selfgcolor:         selfg
-dwm.selbordercolor:     selborder
+dwm.normbgcolor:        background
+dwm.normfgcolor:        foreground
+dwm.normbordercolor:    inactive
+dwm.selbgcolor:         primary
+dwm.selfgcolor:         foreground
+dwm.selbordercolor:     primary
+
+slock.color0:           background
+slock.color4:           primary
+slock.color1:           error
 
 st.color0:              black
 st.color8:              black
@@ -47,6 +52,5 @@ st.color6:              cyan
 st.color14:             cyan
 st.color7:              white
 st.color15:             white
-
 st.background:          white
 st.foreground:          black
