@@ -1,56 +1,57 @@
 ! vim: filetype=xdefaults
 
-! Xft.dpi: 192
+Xft.dpi: 192
 
 ! application colors
-#define black           #282c34
-#define red             #e06c75
-#define green           #98c379
-#define yellow          #e5c07b
-#define blue            #61afef
-#define purple          #c678dd
-#define cyan            #56b6c2
-#define white           #d3d7de
+#define _black          #282c34
+#define _red            #e06c75
+#define _green          #98c379
+#define _yellow         #e5c07b
+#define _blue           #61afef
+#define _purple         #c678dd
+#define _cyan           #56b6c2
+#define _white          #d3d7de
 
 ! window manager colors
-#define background      #000000
-#define foreground      #eeeeee
-#define inactive        #444444
-#define primary         #285577
-#define error           #CC3333
+#define _background     #000000
+#define _foreground     #eeeeee
+#define _inactive       #444444
+#define _primary        #285577
+#define _secondary      #a8c138
+#define _error          #CC3333
 
 
-dmenu.background:       background
-dmenu.foreground:       foreground
-dmenu.selbackground:    primary
-dmenu.selforeground:    foreground
+dmenu.background:       _background
+dmenu.foreground:       _foreground
+dmenu.selbackground:    _primary
+dmenu.selforeground:    _foreground
 
-dwm.normbgcolor:        background
-dwm.normfgcolor:        foreground
-dwm.normbordercolor:    inactive
-dwm.selbgcolor:         primary
-dwm.selfgcolor:         foreground
-dwm.selbordercolor:     primary
+dwm.normbgcolor:        _background
+dwm.normfgcolor:        _foreground
+dwm.normbordercolor:    _inactive
+dwm.selbgcolor:         _primary
+dwm.selfgcolor:         _foreground
+dwm.selbordercolor:     _secondary
 
-slock.color0:           background
-slock.color4:           primary
-slock.color1:           error
+slock.color0:           _background
+slock.color4:           _primary
+slock.color1:           _error
 
-st.color0:              black
-st.color8:              black
-st.color1:              red
-st.color9:              red
-st.color2:              green
-st.color10:             green
-st.color3:              yellow
-st.color11:             yellow
-st.color4:              blue
-st.color12:             blue
-st.color5:              purple
-st.color13:             purple
-st.color6:              cyan
-st.color14:             cyan
-st.color7:              white
-st.color15:             white
-st.background:          white
-st.foreground:          black
+st.color0:              _black
+st.color8:              _black
+st.color1:              _red
+st.color9:              _red
+st.color2:              _green
+st.color10:             _green
+st.color3:              _yellow
+st.color11:             _yellow
+st.color4:              _blue
+st.color12:             _blue
+st.color5:              _purple
+st.color13:             _purple
+st.color6:              _cyan
+st.color14:             _cyan
+st.color7:              _white
+st.color15:             _white
+st.background:          _white
+st.foreground:          _black
