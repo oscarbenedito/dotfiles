@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+pkill dunst
+dunst -config ~/.config/dunst/dunstrc &
+
+notify-send -u critical "Test message: critical test 1" "This is the contents of the message"
+notify-send -u normal "Test message: normal test 2" "This is the contents of the message"
+notify-send -u low "Test message: low test 3" "This is the contents of the message"
+notify-send -u critical "Test message: critical test 4" "This is the contents of the message"
+notify-send -u normal "Test message: normal test 5" "This is the contents of the message"
+notify-send -u low "Test message: low test 6" "This is the contents of the message"
+notify-send -u critical "Test message: critical test 7" "This is the contents of the message"
+notify-send -u normal "Test message: normal test 8" "This is the contents of the message"
+notify-send -u low "Test message: low test 9" "This is the contents of the message"
