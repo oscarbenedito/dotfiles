@@ -34,6 +34,8 @@ let g:Tex_AutoFolding=0
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufRead,BufNewFile *.cls set filetype=tex
 autocmd BufRead,BufNewFile *.sty set filetype=tex
+" change change latex-suite C-j shortcut on normal mode
+nnoremap <Leader>n <Plug>IMAP_JumpForward
 
 " vimwiki
 let g:vimwiki_list=[{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki/build/html', 'custom_wiki2html': '~/Documents/wiki/build/build.py', 'syntax': 'markdown', 'ext': '.md' }]
@@ -54,7 +56,7 @@ set mouse=""                    " gets rid of mouse, should be by default
 " indentation
 set expandtab                   " insert spaces instead of tabs
 set tabstop=4                   " number of spaces when tab is pressed
-set shiftwidth=2                " number of spaces for indentation
+set shiftwidth=4                " number of spaces for indentation
 
 " line numbers
 set number                      " show line numbers
@@ -78,6 +80,7 @@ set colorcolumn=81              " color column 81 differently
 set textwidth=80                " break lines longer than 80 characters, this is done to change behaviour of gq, see next line
 set formatoptions-=t            " don't break lines at column 80
 set nojoinspaces                " joining lines: no double space after period
+set scrolloff=3                 " minimum #lines between cursor and edge when scrolling
 
 " show blank characters when invisible
 set list
@@ -97,24 +100,31 @@ nnoremap Ñ ;
 autocmd BufRead,BufNewFile *.zone set filetype=bindzone
 
 " filetype specific
-autocmd FileType markdown set formatoptions+=t   " break lines at column 80
-autocmd FileType vimwiki set formatoptions+=t   " break lines at column 80
+autocmd FileType markdown,vimwiki set formatoptions+=t  " break lines at column 80
+autocmd FileType markdown,vimwiki set tabstop=2         " number of spaces when tab is pressed
+autocmd FileType markdown,vimwiki set shiftwidth=2      " number of spaces for indentation
 
 " /change default behaviours }}}
 
 " shortcuts {{{
 
-" change change latex-suite C-j shortcut on normal mode
-nnoremap <Leader>n <Plug>IMAP_JumpForward
-
-" set up vim-like commands to switch panels
+" set up vim-like commands to switch panes
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" resize pane
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+
 " undo
 nnoremap U <C-r>
+
+" Search and replace all
+nnoremap S :%s//g<Left><Left>
 
 " edit/reload config file
 nnoremap <silent> <Leader>ev :e $MYVIMRC<CR>
@@ -123,9 +133,6 @@ nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 " edit file
 nnoremap <Leader>ee :Explore<CR>
 nnoremap <Leader>ev :Vexplore<CR>
-
-" save with sudo privileges using w!!
-cnoremap w!! w !sudo tee % >/dev/null
 
 " clean search highlights
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
