@@ -19,5 +19,11 @@
   sh = stash
   shp = stash pop
   st = status
+[sendemail]
+  from = Oscar Benedito <oscar@oscarbenedito.com>
+  smtpserver = smtp.mailbox.org
+  smtpuser = etn@mailbox.org
+  smtpencryption = tls
+  smtpserverport = 587
 [commit]
   gpgsign = true

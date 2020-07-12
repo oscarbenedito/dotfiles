@@ -2,6 +2,7 @@
 cfa     $XDG_CONFIG_HOME/zsh/aliases
 cfal    $XDG_CONFIG_HOME/alacritty/alacritty.yml
 cfd     $XDG_CONFIG_HOME/directories
+cfg     $XDG_CONFIG_HOME/git/config
 cfe     $XDG_CONFIG_HOME/zsh/.zshenv
 cff     $XDG_CONFIG_HOME/files
 cfv     $XDG_CONFIG_HOME/nvim/init.vim
