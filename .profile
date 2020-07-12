@@ -26,6 +26,7 @@ export LESSHISTFILE="-"
 # Environment variables
 export VISUAL="nvim"
 export EDITOR="nvim"
+export PAGER="less"
 export TERMINAL="alacritty"
 export SUDO_ASKPASS="$HOME/.local/bin/sudoaskpass-dmenu"
 
