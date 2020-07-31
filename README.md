@@ -1,6 +1,6 @@
 # Dotfiles
 
-This directory hosts some of my dotfiles. It is currently a work in progress.
+This directory hosts some of my dotfiles.
 
 ## Palette
 
@@ -8,7 +8,7 @@ The colors used on most places are based on the vim onedark theme. They are the
 following:
 
 | Color code | Color   | Color number |
-| :--------: | :-----: | :----------: |
+| :--------- | :------ | :----------- |
 | 30         | black   | #282c34      |
 | 31         | red     | #e06c75      |
 | 32         | green   | #98c379      |
@@ -66,7 +66,7 @@ normally, I'm unsure why it doesn't do it by default, I'll investigate some
 other time.
 
 ```toml
-	fetch = +refs/heads/*:refs/remotes/origin/*
+fetch = +refs/heads/*:refs/remotes/origin/*
 ```
 
 If it gives an error because you already have dotfiles that would be overriden,
