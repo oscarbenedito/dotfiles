@@ -29,6 +29,20 @@ alias bvw="firefox $HOME/Documents/wiki/build/html/index.html"
 alias c="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 alias cv="GIT_DIR=$HOME/.local/share/dotfiles GIT_WORK_TREE=$HOME nvim -c Git -c only"
 
+# frequent files and directories
+alias cfa="$EDITOR $XDG_CONFIG_HOME/zsh/aliases"
+alias cfg="$EDITOR $XDG_CONFIG_HOME/git/config"
+alias cfp="$EDITOR $HOME/.profile"
+alias cfv="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
+alias cfx="$EDITOR $XDG_CONFIG_HOME/Xresources"
+alias cfz="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc"
+alias db="cd $HOME/.local/bin && ls"
+alias dc="cd $HOME/Documents && ls"
+alias dg="cd $HOME/Git && ls"
+alias ds="cd $HOME/.local/src && ls"
+alias dvw="cd $HOME/Documents/wiki && ls"
+alias dw="cd $HOME/Downloads && ls"
+
 c-clean() {
   rm README.md COPYING
   c update-index --skip-worktree README.md COPYING

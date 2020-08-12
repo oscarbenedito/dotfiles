@@ -38,7 +38,6 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Process the alias file
 [ -f "$XDG_CONFIG_HOME/zsh/aliases" ] && source "$XDG_CONFIG_HOME/zsh/aliases"
-[ -f "$XDG_CONFIG_HOME/zsh/aliases-auto" ] && source "$XDG_CONFIG_HOME/zsh/aliases-auto"
 
 # Process fzf key bindings
 [ -f "$XDG_CONFIG_HOME/zsh/key-bindings.zsh" ] && source "$XDG_CONFIG_HOME/zsh/key-bindings.zsh"

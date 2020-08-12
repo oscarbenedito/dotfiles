@@ -1,7 +1,0 @@
-# shortcuts for directories
-db $HOME/.local/bin
-dc $HOME/Documents
-dg $HOME/Git
-ds $HOME/.local/src
-dvw $HOME/Documents/wiki
-dw $HOME/Downloads

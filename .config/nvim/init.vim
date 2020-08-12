@@ -179,6 +179,5 @@ nnoremap <Leader>latexm :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
 " other {{{
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
-runtime shortcuts.vim
 
 " /other }}}
