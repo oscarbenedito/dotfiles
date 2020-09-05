@@ -11,10 +11,6 @@ HISTFILE=~/.cache/zsh/history
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 
-# antlr4
-[ -z "$CLASSPATH" ] && export CLASSPATH=".:/home/oscar/Desktop/antlr/antlr-4.7.2-complete.jar" || export CLASSPATH=".:/home/oscar/Desktop/antlr/antlr-4.7.2-complete.jar:$CLASSPATH"
-alias grun='java org.antlr.v4.gui.TestRig'
-
 # Set up navigation menu when pressing tab multiple times
 autoload -U compinit
 zstyle ':completion:*' menu select
@@ -28,7 +24,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 # Set up vi style keys
 bindkey -v
 export KEYTIMEOUT=1
-bindkey "^?" backward-delete-char
 
 # Also set vi keys to navigate the menus when double pressing tab
 bindkey -M menuselect 'h' vi-backward-char

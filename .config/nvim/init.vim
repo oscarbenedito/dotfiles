@@ -21,6 +21,8 @@ call plug#end()
 " netrw
 let g:netrw_liststyle=3         " tree structure
 let g:netrw_banner=0            " get rid of banner
+let g:netrw_winsize=20          " when on side, only use 20% of space
+let g:netrw_browse_split=4      " open files in previous window
 " adds 'number' and 'relativenumber', other options are the default ones
 let g:netrw_bufsettings="nomodifiable nomodified number nobuflisted nowrap readonly relativenumber"
 
@@ -78,9 +80,13 @@ set foldmethod=marker           " using {{{ and }}} to delimit folding areas
 set modeline                    " enable per-file settings with modeline
 set colorcolumn=81              " color column 81 differently
 set textwidth=80                " break lines longer than 80 characters, this is done to change behaviour of gq, see next line
-set formatoptions-=t            " don't break lines at column 80
+set formatoptions-=t            " don't break lines when longer than textwidth
 set nojoinspaces                " joining lines: no double space after period
 set scrolloff=3                 " minimum #lines between cursor and edge when scrolling
+
+" undo
+set undofile                    " save undos after file closes
+set undodir=$HOME/.config/nvim/undo     " where to save undo histories
 
 " show blank characters when invisible
 set list
@@ -100,9 +106,10 @@ nnoremap Ñ ;
 autocmd BufRead,BufNewFile *.zone set filetype=bindzone
 
 " filetype specific
-autocmd FileType markdown,vimwiki set formatoptions+=t  " break lines at column 80
+autocmd FileType markdown,vimwiki,mail set formatoptions+=t  " break lines when longer than textwidth
 autocmd FileType markdown,vimwiki set tabstop=2         " number of spaces when tab is pressed
 autocmd FileType markdown,vimwiki set shiftwidth=2      " number of spaces for indentation
+autocmd FileType mail set textwidth=72
 
 " /change default behaviours }}}
 
@@ -123,16 +130,15 @@ noremap <silent> <C-Right> :vertical resize -3<CR>
 " undo
 nnoremap U <C-r>
 
-" Search and replace all
+" search and replace all
 nnoremap S :%s//g<Left><Left>
 
 " edit/reload config file
-nnoremap <silent> <Leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>v :e $MYVIMRC<CR>
+nnoremap <silent> <Leader>r :so $MYVIMRC<CR>
 
 " edit file
-nnoremap <Leader>ee :Explore<CR>
-nnoremap <Leader>ev :Vexplore<CR>
+nnoremap <Leader>e :Lexplore<CR>
 
 " clean search highlights
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
@@ -143,6 +149,7 @@ nnoremap <Space> za
 " /shortcuts }}}
 
 " colorscheme {{{
+
 colorscheme onedark
 set t_ut=""                     " deactivates vim BCE option (messes up colors)
 set termguicolors
