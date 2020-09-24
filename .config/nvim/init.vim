@@ -110,6 +110,7 @@ autocmd FileType markdown,vimwiki,mail set formatoptions+=t  " break lines when 
 autocmd FileType markdown,vimwiki set tabstop=2         " number of spaces when tab is pressed
 autocmd FileType markdown,vimwiki set shiftwidth=2      " number of spaces for indentation
 autocmd FileType mail set textwidth=72
+autocmd FileType c set noexpandtab
 
 " /change default behaviours }}}
 
