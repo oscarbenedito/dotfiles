@@ -7,6 +7,5 @@ tmux -2 new-session -d -s "$SESSION"
 
 # New window called Hugo running "hugo server" in website folder
 tmux select-window -t "$SESSION:0"
-tmux send-keys "firefox http://localhost:1313/ &" C-m
-tmux send-keys "cd $HOME/Git/oscarbenedito.com" C-m
-tmux send-keys "hugo server" C-m
+tmux send-keys "firefox http://localhost:8000/ &" C-m
+tmux send-keys "make -C $HOME/Git/oscarbenedito.com server" C-m
