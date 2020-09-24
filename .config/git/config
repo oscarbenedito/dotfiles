@@ -5,6 +5,7 @@
 [alias]
   a = add
   addurl = remote set-url --add origin
+  b = branch
   c = commit
   cm = commit -m
   co = checkout
@@ -19,6 +20,8 @@
   sh = stash
   shp = stash pop
   st = status
+  vd = difftool --tool=vimdiff --no-prompt
+  vdc = difftool --tool=vimdiff --no-prompt --cached
 [sendemail]
   from = Oscar Benedito <oscar@oscarbenedito.com>
   smtpserver = smtp.mailbox.org
