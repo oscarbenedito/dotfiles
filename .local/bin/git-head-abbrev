@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+c="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+if [ "$c" = "HEAD" ]; then
+    c="$(git describe --tags 2>/dev/null)"
+    [ -z "$c" ] && c="$(git rev-parse --short HEAD 2>/dev/null)"
+fi
+[ "$c" = "master" ] && unset c
+[ "$c" = "main" ] && unset c
+[ -n "$c" ] && printf " ($c)"

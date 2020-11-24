@@ -1,7 +1,8 @@
 # vim: filetype=zsh
 # Load colors and set up prompt
 autoload -U colors && colors
-PS1="%B%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%M %{$fg[yellow]%}%~%b%{$fg[red]%}$%{$reset_color%} "
+setopt PROMPT_SUBST
+PS1='%B%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%M %{$fg[yellow]%}%~%b%{$fg[cyan]%}$(git-head-abbrev)%{$fg[red]%}$%{$reset_color%} '
 
 # Set up history and history file
 HISTSIZE=1000
