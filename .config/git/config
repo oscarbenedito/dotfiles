@@ -25,7 +25,7 @@
 [sendemail]
   from = Oscar Benedito <oscar@oscarbenedito.com>
   smtpserver = smtp.mailbox.org
-  smtpuser = etn@mailbox.org
+  smtpuser = oscar@oscarbenedito.com
   smtpencryption = tls
   smtpserverport = 587
 [commit]
