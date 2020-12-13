@@ -13,6 +13,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 # XDG paths
 export R_LIBS_USER="$XDG_DATA_HOME/R"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export ATOM_HOME="$XDG_DATA_HOME/atom"
 export GOPATH="$XDG_DATA_HOME/go"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

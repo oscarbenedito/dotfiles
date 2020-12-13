@@ -16,6 +16,7 @@ Plug 'tpope/vim-commentary'     " easily comment objects
 Plug 'tpope/vim-repeat'         " make surround commands repeatable
 Plug 'tpope/vim-fugitive'       " git wrapper
 Plug 'vimwiki/vimwiki'
+Plug 'https://sanctum.geek.nz/code/vim-redact-pass.git'
 call plug#end()
 
 " netrw
