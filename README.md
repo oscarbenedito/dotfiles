@@ -112,11 +112,11 @@ from `/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh` to
 This repository is licensed under the CC0 1.0 Universal license and therefore is
 part of the public domain. To the extent possible under law, Oscar Benedito, who
 associated CC0 with this work, has waived all copyright and related or
-neighboring rights to this work. You can find a copy of the CC0 license
-[here][license].
+neighboring rights to this work. You can find a copy of the CC0 license on the
+`COPYING` file or [here][license].
 
 
 [hn-comment]: <https://news.ycombinator.com/item?id=11071754>
 [setup-1]: <https://www.atlassian.com/git/tutorials/dotfiles>
 [setup-2]: <https://www.paritybit.ca/blog/how-i-manage-my-dotfiles>
-[license]: <https://gitlab.com/oscarbenedito/dotfiles/blob/master/COPYING>
+[license]: <https://creativecommons.org/publicdomain/zero/1.0/>
