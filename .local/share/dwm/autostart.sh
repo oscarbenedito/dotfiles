@@ -20,5 +20,5 @@ numlockx &
 # configure monitors
 $HOME/.local/bin/configure-monitors &
 
-xsetroot -name "  $(date +"%a %d %b, %H:%M")" &
+xsetroot -name " $(date +"%a %d %b, %H:%M")" &
 dwmblocks &

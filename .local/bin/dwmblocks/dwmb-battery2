@@ -55,19 +55,32 @@ else:
     FA_PLUG = "\uf1e6"
 
     # stands for using battery
-    FA_BATTERY = "\uf240"
+    FA_BATTERY_0 = "\uf244" # 0/4
+    FA_BATTERY_1 = "\uf243" # 1/4
+    FA_BATTERY_2 = "\uf242" # 2/4
+    FA_BATTERY_3 = "\uf241" # 3/4
+    FA_BATTERY_4 = "\uf240" # 4/4
 
     # stands for unknown status of battery
     FA_QUESTION = "\uf128"
 
 
     if state == "Discharging":
-        fulltext = FA_BATTERY + " "
+        if percentleft <= 10:
+            fulltext = FA_BATTERY_0 + " "
+        elif percentleft < 35:
+            fulltext = FA_BATTERY_1 + " "
+        elif percentleft < 65:
+            fulltext = FA_BATTERY_2 + " "
+        elif percentleft < 90:
+            fulltext = FA_BATTERY_3 + " "
+        else:
+            fulltext = FA_BATTERY_4 + " "
     elif state == "Full":
         fulltext = FA_PLUG + " "
         timeleft = ""
     elif state == "Unknown":
-        fulltext = FA_QUESTION + " " + FA_BATTERY + " "
+        fulltext = FA_BATTERY_0 + " " + FA_QUESTION + " "
         timeleft = ""
     else:
         fulltext = FA_LIGHTNING + " "
