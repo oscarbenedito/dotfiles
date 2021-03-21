@@ -179,9 +179,8 @@ set laststatus=2                " activate status line
 " templates {{{
 
 nnoremap <Leader>sh :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.sh<CR>:w<CR>:e<CR>j
-nnoremap <Leader>latexs :-1read $XDG_CONFIG_HOME/nvim/templates/summary.tex<CR>
-nnoremap <Leader>latexg :-1read $XDG_CONFIG_HOME/nvim/templates/tex.gitignore<CR>
-nnoremap <Leader>latexm :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
+nnoremap <Leader>py :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.py<CR>:w<CR>:e<CR>j
+nnoremap <Leader>latexmk :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
 
 " /templates }}}
 

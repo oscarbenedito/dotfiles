@@ -1,7 +1,13 @@
 all: main
 
-main: *.tex
-	pdflatex main.tex
+.PHONY: main reload
+
+main:
+	latexmk -pdf main.tex
+
+reload:
+	latexmk -pdf -pvc -interaction=nonstopmode main.tex
 
 clean:
-	rm -f *.aux *.log *.out *.auxlock *.toc *.ind *.ilg *.idx *.pdf
+	latexmk -C
+	rm -f *.bbl *.run.xml
