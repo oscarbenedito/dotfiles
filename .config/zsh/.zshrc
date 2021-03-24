@@ -5,12 +5,13 @@ setopt PROMPT_SUBST
 PS1='%B%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%M %{$fg[yellow]%}%~%b%{$fg[cyan]%}$(git-head-abbrev)%{$fg[red]%}$%{$reset_color%} '
 
 # Set up history and history file
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.cache/zsh/history
 
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
+setopt EXTENDED_HISTORY
 
 # Set up navigation menu when pressing tab multiple times
 autoload -U compinit
