@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 scp $HOME/.config/nvim/init.vim blue:.config/nvim/init.vim
 ssh blue "nvim +PlugInstall +PlugClean! +qa"

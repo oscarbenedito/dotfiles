@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 xr="${XDG_CONFIG_HOME:-$HOME/.config}/Xresources"
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 transmission-remote -l | grep % |
 	sed " # The letters are for sorting and will not appear.

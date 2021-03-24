@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 xautolock -detectsleep -corners 0-00 -time 5 \
   -locker "slock" \
