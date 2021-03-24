@@ -185,21 +185,21 @@ frame_color = "#98C379"
 foreground = "#98C379"
 background = "#282C34"
 #background = "#2B313C"
-timeout = 4
+timeout = 10
 
 [urgency_normal]
 frame_color = "#61AFEF"
 foreground = "#61AFEF"
 background = "#282C34"
 #background = "#2B313C"
-timeout = 6
+timeout = 10
 
 [urgency_critical]
 frame_color = "#E06C75"
 foreground = "#E06C75"
 background = "#282C34"
 #background = "#2B313C"
-timeout = 8
+timeout = 0
 
 
 # Every section that isn't one of the above is interpreted as a rules to
