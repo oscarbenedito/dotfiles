@@ -69,7 +69,6 @@ set relativenumber              " show numbers relative to current line
 set wrap                        " wrap lines
 set linebreak                   " don't cut words when wrapping
 set breakindent                 " keeps indentation on wrapped lines
-set showbreak=↪↪                " adds characters in front of wrapped line
 
 " new splits position
 set splitbelow
@@ -107,7 +106,7 @@ nnoremap Ñ ;
 autocmd BufRead,BufNewFile *.zone set filetype=bindzone
 
 " filetype specific
-autocmd FileType markdown,vimwiki,mail set formatoptions+=t  " break lines when longer than textwidth
+autocmd FileType markdown,vimwiki,mail,tex set formatoptions+=t  " break lines when longer than textwidth
 autocmd FileType markdown,vimwiki set tabstop=2         " number of spaces when tab is pressed
 autocmd FileType markdown,vimwiki set shiftwidth=2      " number of spaces for indentation
 autocmd FileType mail set textwidth=72

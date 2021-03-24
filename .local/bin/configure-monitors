@@ -9,6 +9,20 @@ if [ -n "$(xrandr --query | grep "DP2 connected")" ]; then
   else
     echo "! Xft.dpi: 192" >> "$xr"
   fi
+elif [ -n "$(xrandr --query | grep "HDMI2 connected")" ]; then
+  xrandr --output eDP1 --off --output HDMI2 --auto
+  if grep --quiet "Xft.dpi: 192" "$xr"; then
+    sed -i "s/^Xft.dpi: 192/! Xft.dpi: 192/g" "$xr"
+  else
+    echo "! Xft.dpi: 192" >> "$xr"
+  fi
+elif [ -n "$(xrandr --query | grep "HDMI2 connected")" ]; then
+  xrandr --output eDP1 --off --output HDMI2 --mode 3840x2160
+  if grep --quiet "Xft.dpi: 192" "$xr"; then
+    sed -i "s/^! Xft.dpi: 192/Xft.dpi: 192/g" "$xr"
+  else
+    echo "Xft.dpi: 192" >> "$xr"
+  fi
 else
   xrandr --output eDP1 --auto --output DP2 --off
   if grep --quiet "Xft.dpi: 192" "$xr"; then

@@ -29,7 +29,7 @@ alias vw="cd $HOME/Documents/wiki && vim index.md"
 alias bvw="firefox $HOME/Documents/wiki/build/html/index.html"
 alias c="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 alias cv="GIT_DIR=$HOME/.local/share/dotfiles GIT_WORK_TREE=$HOME nvim -c Git -c only"
-alias up="sudo apt-get update && sudo apt-get -y upgrade"
+alias up="sudo apt-get update && sudo apt-get -y upgrade; pkill -RTMIN+4 dwmblocks"
 # alias up="sudo pacman -Syyu --noconfirm"
 
 # frequent files and directories

@@ -1,4 +1,4 @@
-#!/bin/sh
+# vim: filetype=zsh
 
 xrdb "${XDG_CONFIG_HOME:-$HOME/.config}/Xresources" &
 
