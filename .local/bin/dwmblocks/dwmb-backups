@@ -1,0 +1,26 @@
+#!/bin/sh
+
+outfile="/home/oscar/.local/share/backups"
+
+if [ ! -f "$outfile" ]; then
+    lastdate="0"
+    lasterr="0"
+else
+    tmp="$(cat "$outfile")"
+    lastdate="${tmp%% *}"
+    lasterr="${tmp##* }"
+fi
+
+if [ "$(date --date="12 hours ago" +%s)" -ge "$lastdate" ]; then
+    echo ""
+    restic-daily &
+    exit 0
+else
+    if [ "$lasterr" = "0" ]; then
+        exit 0
+    elif [ "$lasterr" = "2" ] && [ "$lastdate" -ge "$(date --date="20 mins ago" +%s)" ]; then
+        echo ""
+    else
+        echo ""
+    fi
+fi
