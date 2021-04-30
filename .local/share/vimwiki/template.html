@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} - Oscar's Wiki</title>
+    <style>
+body {
+    margin: 1em auto;
+    max-width: 800px;
+    line-height: 1.5;
+    padding: 0 1em;
+    font-family: sans-serif;
+}
+a {
+    color: #0022dd;
+}
+a:hover {
+    color: #330099;
+}
+blockquote {
+    padding: 0 0 0 1.2rem;
+    border-left: 3px solid #707070;
+    color: #707070;
+}
+code {
+    border: 1px solid #e0e0e0;
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    font-family: monospace;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+pre {
+    border-radius: 4px;
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+    background-color: #f5f5f5;
+}
+pre code {
+    display: block;
+    padding: 1em;
+    border: none;
+    background: none;
+}
+hr {
+    border: 0;
+    border-top: 2px solid #777;
+    height: 2px;
+}
+.header {
+    text-align: center;
+    margin: 2rem 0;
+}
+.header > p {
+    margin: 0;
+}
+a.nav {
+    color: #000;
+    text-decoration: none;
+}
+a.nav:hover {
+    text-decoration: underline;
+}
+.metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.category {
+    font-size: 14px;
+    float: left;
+    background-color: #e5e5e5;
+    padding: 5px 20px;
+    border-radius: 2px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.date {
+    margin-right: 0px;
+    color: #555;
+}
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <p><a style="font-size: 2.5em; font-weight: bold;" class="nav" href="{{ root_path }}index.html">Oscar's Wiki</a></p>
+      <p><a class="nav" href="{{ root_path }}toc.html">Table of Contents</a></p>
+    </div>
+    <hr/>
+<h1 style="margin-bottom: .25em;">{{ title }}</h1>
+{{ metadata }}
+{{ content }}
+  </body>
+</html>

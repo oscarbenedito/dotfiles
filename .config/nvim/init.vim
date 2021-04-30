@@ -41,7 +41,21 @@ autocmd BufRead,BufNewFile *.sty set filetype=tex
 nnoremap <Leader>n <Plug>IMAP_JumpForward
 
 " vimwiki
-let g:vimwiki_list=[{ 'path': '~/Documents/wiki', 'path_html': '~/Documents/wiki/build/html', 'custom_wiki2html': '~/Documents/wiki/build/build.py', 'syntax': 'markdown', 'ext': '.md' }]
+" first category is used for important meta files to be shown on root, last
+" category is used for uncategorized files
+let vw_toc='toc.md'
+let vw_categories='Arrel Notes Temporal Receptes Blog Projectes Tecnologia Programari Altres Arxiu Sense\ categoria'
+let g:vimwiki_list=[{
+    \ 'path':               '~/Documents/wiki',
+    \ 'path_html':          '~/.cache/vimwiki/html',
+    \ 'custom_wiki2html':   '~/.local/share/vimwiki/wiki2html.py',
+    \ 'syntax':             'markdown',
+    \ 'ext':                '.md',
+    \ 'template_path':      '~/.local/share/vimwiki/',
+    \ 'template_default':   'template',
+    \ 'template_ext':       '.html',
+    \ 'custom_wiki2html_args': vw_toc . ' ' . vw_categories }]
+
 let g:vimwiki_folding='expr'
 let g:vimwiki_global_ext=0
 autocmd FileType vimwiki set foldlevel=1
