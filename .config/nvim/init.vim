@@ -59,10 +59,10 @@ let g:vimwiki_list=[{
     \ 'template_ext':       '.html',
     \ 'custom_wiki2html_args': vw_toc . ' ' . vw_categories }]
 
-let g:vimwiki_folding='expr'
 let g:vimwiki_global_ext=0
-autocmd FileType vimwiki set foldlevel=1
+let g:vimwiki_folding='custom'
 nmap <Leader>t <Plug>VimwikiVSplitLink
+nnoremap <Leader>wha :VimwikiAll2HTML<CR>
 
 " /plugins }}}
 
@@ -71,6 +71,7 @@ nmap <Leader>t <Plug>VimwikiVSplitLink
 set hidden                      " hide buffers instead of closing them
 set path+=**                    " find in subdirectories as well
 set mouse=""                    " gets rid of mouse, should be by default
+set incsearch                   " incremental search (on by default on neovim)
 
 " indentation
 set expandtab                   " insert spaces instead of tabs
@@ -89,6 +90,10 @@ set breakindent                 " keeps indentation on wrapped lines
 " new splits position
 set splitbelow
 set splitright
+
+" smart case searching
+set ignorecase                  " required for smart case
+set smartcase
 
 " other useful defaults
 syntax on                       " syntax coloring
