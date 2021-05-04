@@ -5,6 +5,9 @@
 "  (_)_/ |_|_| |_| |_|_|  \___|
 "
 
+" set leader prior to anything else
+let mapleader=","
+
 " plugins {{{
 
 call plug#begin()
@@ -38,7 +41,7 @@ autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufRead,BufNewFile *.cls set filetype=tex
 autocmd BufRead,BufNewFile *.sty set filetype=tex
 " change change latex-suite C-j shortcut on normal mode
-nnoremap <Leader>n <Plug>IMAP_JumpForward
+nmap <Leader>n <Plug>IMAP_JumpForward
 
 " vimwiki
 " first category is used for important meta files to be shown on root, last
@@ -59,13 +62,12 @@ let g:vimwiki_list=[{
 let g:vimwiki_folding='expr'
 let g:vimwiki_global_ext=0
 autocmd FileType vimwiki set foldlevel=1
-:nnoremap <Leader>t <Plug>VimwikiVSplitLink
+nmap <Leader>t <Plug>VimwikiVSplitLink
 
 " /plugins }}}
 
 " change default behaviours {{{
 
-let mapleader=","               " set ',' as leader
 set hidden                      " hide buffers instead of closing them
 set path+=**                    " find in subdirectories as well
 set mouse=""                    " gets rid of mouse, should be by default
