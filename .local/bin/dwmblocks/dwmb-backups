@@ -13,7 +13,7 @@ fi
 
 if [ "$(date --date="12 hours ago" +%s)" -ge "$lastdate" ]; then
     echo ""
-    restic-daily &
+    restic-daily > /dev/null &
     exit 0
 else
     if [ "$lasterr" = "0" ]; then

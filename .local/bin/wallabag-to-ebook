@@ -4,6 +4,7 @@ domain=""
 phpsessid=""
 rememberme=""
 ebookpath=""
+uuid=""    # ebook UUID
 notify-send -u critical "Wallabag" "Script variables are not set."
 exit 1
 
@@ -14,32 +15,36 @@ override_notify() {
 }
 
 # check if ebook exists before starting download
-deviceinfo="$(lsblk | grep "1.2G")"
-[ -z "$deviceinfo" ] && { override_notify "Ebook not connected." -u critical; exit 1; }
-[ "$(echo "$deviceinfo" | wc -l)" != "1" ] && { override_notify "Multiple devices might be ebook, mount manually." -u critical; exit 1; }
+[ ! -e "/dev/disk/by-uuid/$uuid" ] && { override_notify "Ebook not connected." -u critical; exit 1; }
+
+# mount ebook and remove last entry if existent
+udisksctl mount -b "/dev/disk/by-uuid/$uuid" || { override_notify "Error mounting ebook." -u critical; exit 1; }
+rm -f $ebookpath/unread_articles_????-??-??.epub
+
+override_notify "Ebook mounted.\nDownloading..." -t 0
 
 # download new epub file
 outfile=$(mktemp)
-curl -s "https://$domain/export/unread.epub" \
+curl -s "https://$domain/export/unread.json" \
     -H "cookie: PHPSESSID=$phpsessid; REMEMBERME=$rememberme" \
     -o "$outfile" \
-    &
-pid="$!"
+    || { override_notify "Download failed." -u critical; exit 1; }
 
-override_notify "Downloading..." -t 0
+# if there new entries, download and transfer epub file
+if [ "0" != "$(jq length "$outfile")" ]; then
+    curl -s "https://$domain/export/unread.epub" \
+        -H "cookie: PHPSESSID=$phpsessid; REMEMBERME=$rememberme" \
+        -o "$outfile" \
+        || { override_notify "Download failed." -u critical; exit 1; }
 
-# mount ebook and remove last entry if existent
-udisksctl mount -b "/dev/${deviceinfo%% *}" || { override_notify "Error mounting ebook." -u critical; exit 1; }
-rm -f $ebookpath/unread_articles_????-??-??.epub
+    override_notify "Transferring files." -t 0
 
-override_notify "Downloading...\nEbook mounted." -t 0
+    mv "$outfile" "$ebookpath/unread_articles_$(date +"%Y-%m-%d").epub"
+fi
 
-# wait for download to finish
-wait "$pid"
-
-override_notify "Transferring files." -t 0
-
-mv "$outfile" "$ebookpath/unread_articles_$(date +"%Y-%m-%d").epub"
-udisksctl unmount -b "/dev/${deviceinfo%% *}" || { override_notify "Error unmounting ebook." -u critical; exit 1; }
+# if unmount failed check 1 second later, it normally fixes it
+udisksctl unmount -b "/dev/disk/by-uuid/$uuid" \
+    || { sleep 1; udisksctl unmount -b "/dev/disk/by-uuid/$uuid"; } \
+    || { override_notify "Error unmounting ebook." -u critical; exit 1; }
 
 override_notify "Finished successfully." -u low

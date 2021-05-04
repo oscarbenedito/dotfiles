@@ -22,3 +22,4 @@ $HOME/.local/bin/configure-monitors &
 
 xsetroot -name " $(date +"%a %d %b, %H:%M")" &
 dwmblocks &
+nm-applet &
