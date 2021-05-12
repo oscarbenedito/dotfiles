@@ -1,0 +1,18 @@
+/home/oscar/.local/bin/configure-monitors
+xrdb ~/.config/Xresources
+xwallpaper --zoom "${XDG_DATA_HOME:-$HOME/.local/share}/dwm/wallpaper.png" &
+xautolock -detectsleep -corners 0-00 -time 5 \
+    -locker "slock" \
+    -notify 30 \
+    -notifier "notify-send -u critical -t 10000 'Locking screen in 30 seconds'" &
+pulseaudio --start --exit-idle-time=-1
+dunst &
+setxkbmap -option 'caps:super' &    # use caps as super
+xcape -e 'Super_L=Escape' &         # tap caps for escape (hold down for super)
+xsetroot -name " $(date +"%a %d %b, %H:%M")" &
+dwmblocks &
+nm-applet &
+
+exec dwm
+
+# vim: ft=sh

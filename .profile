@@ -1,7 +1,5 @@
 # vim: filetype=zsh
 
-xrdb "${XDG_CONFIG_HOME:-$HOME/.config}/Xresources" &
-
 # Local bin to path
 [ -d "$HOME/.local/bin" ] && \
   export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | sed 's/\/$//g' | paste -sd ':')"
@@ -23,6 +21,7 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
 export LESSHISTFILE="-"
+export XINITRC="$XDG_CONFIG_HOME/xinitrc"
 
 # Environment variables
 export VISUAL="nvim"
