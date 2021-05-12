@@ -29,6 +29,7 @@ export EDITOR="nvim"
 export PAGER="less"
 export TERMINAL="alacritty"
 export SUDO_ASKPASS="$HOME/.local/bin/sudoaskpass-dmenu"
+export GPG_TTY="$(tty)"
 
 # Go bin to path
 [ -d "$GOPATH/bin" ] && export PATH="$PATH:$GOPATH/bin"

@@ -19,6 +19,7 @@ alias tmux="TERM=screen-256color tmux"
 # shortcuts
 alias v="nvim"
 alias vim="nvim"
+alias vimdiff="nvim -d"
 alias g="git"
 alias ..="cd .."
 alias ...="cd ../.."
@@ -29,9 +30,10 @@ alias vw="cd $HOME/Documents/wiki && vim index.md"
 alias bvw="firefox $HOME/Documents/wiki/build/html/index.html"
 alias c="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 alias cv="GIT_DIR=$HOME/.local/share/dotfiles GIT_WORK_TREE=$HOME nvim -c Git -c only"
-alias up="sudo apt update && sudo apt -y upgrade; pkill -RTMIN+4 dwmblocks"
-# alias up="sudo pacman -Syyu --noconfirm"
-alias ca="ncal -b -M -B1 -A1"
+# alias up="sudo apt update && sudo apt -y upgrade; pkill -RTMIN+4 dwmblocks"
+alias up="sudo pacman -Syu && yes | sudo pacman -Scc; pkill -RTMIN+4 dwmblocks"
+alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -; yes | sudo pacman -Scc"
+alias ca="cal -m -3"
 
 # frequent files and directories
 alias cfa="$EDITOR $XDG_CONFIG_HOME/zsh/aliases"
@@ -41,6 +43,7 @@ alias cfv="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
 alias cfx="$EDITOR $XDG_CONFIG_HOME/Xresources"
 alias cfz="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc"
 alias db="cd $HOME/.local/bin && ls"
+alias dbanc="cd /run/media/oscar/banc && ls"
 alias dc="cd $HOME/Documents && ls"
 alias dg="cd $HOME/Git && ls"
 alias ds="cd $HOME/.local/src && ls"
@@ -76,8 +79,17 @@ restart-wifi-daemon() {
   done
 }
 
-# Backup to external HD
-alias backup_all='rsync -loptruzvP --delete --exclude "/.*" "$HOME/" "/media/$USER/OSCAR/.backup_$(hostname)/"'
+mount-banc() {
+    sudo mkdir -p /run/media/oscar/banc || return
+    sudo chown oscar:oscar /run/media/oscar/banc
+    sshfs maroon:/media/banc /run/media/oscar/banc
+    echo "ls /run/media/oscar"
+    ls /run/media/oscar
+}
 
-# Backup the contents of the USB
-alias backup_usb='rsync -gloptruzvP --delete --exclude "/Varis/copia-gris.hc" --exclude "/Varis/copia-gris-git.hc" --exclude "/.Trash-1000" --exclude "/.Trashes" --exclude "/.Spotlight-V100" "/media/$USER/Oscar/" "$HOME/Documents/Backups/USB/"'
+umount-banc() {
+    sudo umount /run/media/oscar/banc
+    sudo rmdir /run/media/oscar/banc
+    echo "ls /run/media/oscar"
+    ls /run/media/oscar
+}

@@ -37,9 +37,7 @@ alias c='/usr/bin/git --git-dir=$XDG_DATA_HOME/dotfiles --work-tree=$HOME'
 c config --local status.showUntrackedFiles no
 c config --local core.bare false
 c config --local core.worktree "$HOME"
-# I'm unsure about the following lines
 c push --set-upstream origin master
-c branch --set-upstream-to=origin/master master
 ```
 
 You should put the alias line on your `.zshrc` or `.bashrc`.
@@ -55,9 +53,7 @@ c checkout
 c config --local status.showUntrackedFiles no
 c config --local core.bare false
 c config --local core.worktree "$HOME"
-# I'm unsure about the following lines
 c push --set-upstream origin master
-c branch --set-upstream-to=origin/master master
 ```
 
 You might need to add the following line to the file
@@ -106,6 +102,49 @@ the home directory respectively.
 On Debian, you might need to change ZSH's syntax highlightning plugin location
 from `/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh` to
 `/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh`.
+
+### Other programs you might/will need
+
+Some of the programs you will need (and some you won't) are the following
+(package names for Arch Linux, install with `pacman -S package1 package2 ...`:
+
+```
+# basic
+xf86-video-intel zsh zsh-syntax-highlighting fzf neovim wget man cronie htop sshfs dash pacman-contrib
+# xorg
+xorg-server xorg-xinit
+# utils
+xorg-xrandr xorg-xbacklight alsa-utils alsa-lib alsa-plugins xwallpaper xcape xautolock pulseaudio xorg-xsetroot dunst xdotool udisks2 acpi scrot mlocate
+# gnome
+gnome gnome-extra
+# fonts
+noto-fonts ttf-font-awesome ttf-dejavu
+# software
+mpv thunderbird alacritty firefox signal-desktop pass transmission-cli syncthing youtube-dl jq
+# other
+texlive-most texlive-lang biber gtk2 gtk3 gvfs zathura mupdf zathura-pdf-mupdf pdftk
+```
+
+and don't forget to install `dwm`, `dmenu`, `slock` and `dwmblocks`:
+
+```sh
+mkdir -p ~/.local/src
+git clone https://git.oscarbenedito.com/dwm ~/.local/src/dwm
+git clone https://git.oscarbenedito.com/dmenu ~/.local/src/dmenu
+git clone https://git.oscarbenedito.com/slock ~/.local/src/slock
+git clone https://git.oscarbenedito.com/dwmblocks ~/.local/src/blocks
+sudo make -C ~/.local/src/dwm install
+sudo make -C ~/.local/src/dmenu install
+sudo make -C ~/.local/src/slock install
+sudo make -C ~/.local/src/blocks install
+```
+
+Also don't forget to put your wallpaper under
+`~/.local/share/dwm/wallpaper.png` as well as enable PulseAudio:
+
+```
+systemctl --user enable pulseaudio.service
+```
 
 ## License
 
