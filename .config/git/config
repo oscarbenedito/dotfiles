@@ -18,6 +18,7 @@
   psf = push --force
   s = status --short
   sh = stash
+  shallow = clone --depth 1 --shallow-submodules --recurse-submodules
   shp = stash pop
   st = status
   vd = difftool --tool=vimdiff --no-prompt
