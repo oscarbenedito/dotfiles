@@ -146,6 +146,26 @@ Also don't forget to put your wallpaper under
 systemctl --user enable pulseaudio.service
 ```
 
+### Using the files on a server
+
+If you just want to use a subset of the files (for example in case you want to
+use them on a server), you can use `git update-index --skip-worktree file1
+file2` to stop tracking files and then delete them. For example, to only use the
+files under `.zshenv`, `.config/zsh`, `.config/git`, `.config/nvim` and
+`.local/bin/git-head-abbrev`, you could run the following:
+
+```
+git --git-dir=/root/.local/share/dotfiles --work-tree=/root ls-files | \
+  sed '/^\.config\/\(zsh\|git\|nvim\)\|^\.zshenv\|^\.local\/bin\/git-head-abbrev/d' | \
+  xargs git --git-dir=/root/.local/share/dotfiles --work-tree=/root update-index --skip-worktree
+git --git-dir=/root/.local/share/dotfiles --work-tree=/root ls-files | \
+  sed '/^\.config\/\(zsh\|git\|nvim\)\|^\.zshenv\|^\.local\/bin\/git-head-abbrev/d' | \
+  xargs rm -f
+```
+
+and add it to a `post-merge` hook. Alternatively, you can use multiple branches,
+but I find that more complicated (you'll have to keep merging them).
+
 ## License
 
 This repository is licensed under the CC0 1.0 Universal license and therefore is
