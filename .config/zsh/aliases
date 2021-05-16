@@ -74,7 +74,7 @@ unite-pdf() {
 restart-wifi-daemon() {
   while true; do
     curl -Is http://oscarbenedito.com > /dev/null || \
-      { printf "Restarting wifi..."; nmcli radio wifi off; sleep 5; nmcli radio wifi on; printf " done\n"; }
+      { printf "Restarting wifi..."; nmcli radio wifi off; sleep 1; nmcli radio wifi on; printf " done\n"; }
     sleep 30
   done
 }

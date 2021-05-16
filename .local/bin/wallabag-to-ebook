@@ -4,9 +4,7 @@ domain=""
 phpsessid=""
 rememberme=""
 ebookpath=""
-uuid=""    # ebook UUID
-notify-send -u critical "Wallabag" "Script variables are not set."
-exit 1
+uuid="" # ebook UUID
 
 override_notify() {
     sub="$1"
