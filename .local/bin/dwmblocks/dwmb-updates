@@ -1,7 +1,6 @@
 #!/bin/sh
 
-UPDATES="$(checkupdates | wc -l)"
+UPDATES="$(sudo dnf --quiet check-update | tail -n +2 | wc -l)"
 if [ "0" != "$UPDATES" ]; then
     echo " $UPDATES"
-    sudo checkupdates -d >/dev/null 2>&1 &
 fi
