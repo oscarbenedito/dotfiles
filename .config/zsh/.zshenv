@@ -30,6 +30,7 @@ export PAGER="less"
 export TERMINAL="alacritty"
 export SUDO_ASKPASS="$HOME/.local/bin/sudoaskpass-dmenu"
 export GPG_TTY="$(tty)"
+export PASSWORD_STORE_GENERATED_LENGTH=16
 
 # Go bin to path
 [ -d "$GOPATH/bin" ] && export PATH="$PATH:$GOPATH/bin"

@@ -3,9 +3,8 @@
 cmds="\
 lock        | slock
 exit        | kill -TERM $(pidof -s dwm)
-hibernate   | sudo -A systemctl suspend-then-hibernate
-reboot      | sudo -A reboot
-shutdown    | sudo -A shutdown now"
+reboot      | reboot
+shutdown    | shutdown now"
 
 choice="$(echo "$cmds" | sed "s/ *|/|/g" | cut -d'|' -f 1 | dmenu)" || exit 1
 

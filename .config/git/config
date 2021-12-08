@@ -31,3 +31,5 @@
   smtpserverport = 587
 [commit]
   gpgsign = true
+[init]
+  defaultBranch = main

@@ -8,5 +8,6 @@ transmission-remote -l | grep "%\|n/a" |
 	s/.*Uploading.*/E /;
 	s/.*Seeding.*/F /;
 	s/.*100%.*/G /;
-	s/.*%.*/A /" |
+	s/.*%.*/A /;
+	s/.*Downloading.*/A /" |
 		sort -h | uniq -c | awk '{print $3, $1}' | paste -sd ' ' -

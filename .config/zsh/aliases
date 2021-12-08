@@ -37,6 +37,7 @@ alias ca="cal -m -3"
 
 # frequent files and directories
 alias cfa="$EDITOR $XDG_CONFIG_HOME/zsh/aliases"
+alias cfe="$EDITOR $XDG_CONFIG_HOME/zsh/.zshenv"
 alias cfg="$EDITOR $XDG_CONFIG_HOME/git/config"
 alias cfp="$EDITOR $HOME/.profile"
 alias cfv="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
@@ -52,7 +53,7 @@ alias dw="cd $HOME/Downloads && ls"
 
 # dotfiles' repository metafiles
 c-clean() {
-  rm README.md COPYING
+  rm $HOME/README.md $HOME/COPYING
   c update-index --skip-worktree README.md COPYING
 }
 
@@ -74,9 +75,18 @@ unite-pdf() {
 restart-wifi-daemon() {
   while true; do
     curl -Is http://oscarbenedito.com > /dev/null || \
-      { printf "Restarting wifi..."; nmcli radio wifi off; sleep 1; nmcli radio wifi on; printf " done\n"; }
+      { printf "Restarting wifi..."; restart-wifi; printf " done at "; date +"%a %d %b, %H:%M"; printf "\n"; }
     sleep 30
   done
+}
+
+restart-wifi() {
+    printf "Restarting wifi...";
+    nmcli radio wifi off;
+    sleep 1;
+    nmcli radio wifi on;
+    printf " done:  ";
+    date +"%a %d %b, %H:%M";
 }
 
 mount-banc() {
