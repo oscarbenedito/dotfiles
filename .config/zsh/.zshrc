@@ -37,8 +37,11 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 [ -f "$XDG_CONFIG_HOME/zsh/aliases" ] && source "$XDG_CONFIG_HOME/zsh/aliases"
 
 # Process fzf key bindings
-[ -f "$XDG_CONFIG_HOME/zsh/key-bindings.zsh" ] && source "$XDG_CONFIG_HOME/zsh/key-bindings.zsh"
+# In other distributions, this file might be found at /usr/share/fzf/shell/key-bindings.zsh
+[ -f "/usr/share/fzf/key-bindings.zsh" ] && \
+    source "/usr/share/fzf/key-bindings.zsh" 2> /dev/null
 
 # Include the highlighting plug-in
+# In other distributions, this file might be found at /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
     source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2> /dev/null
