@@ -10,14 +10,16 @@ let mapleader=","
 
 " plugins {{{
 
-call plug#begin()
-Plug 'junegunn/goyo.vim'        " minimalist design, nice for writing text
-Plug 'vim-latex/vim-latex', { 'for': 'tex' }
+filetype plugin indent on
+let g:plug_shallow=0
+
+call plug#begin('~/.local/share/nvim/plugged')
 Plug 'sheerun/vim-polyglot'     " languages syntax
 Plug 'tpope/vim-surround'       " surrounding objects
 Plug 'tpope/vim-commentary'     " easily comment objects
 Plug 'tpope/vim-repeat'         " make surround commands repeatable
 Plug 'tpope/vim-fugitive'       " git wrapper
+Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'https://sanctum.geek.nz/code/vim-redact-pass.git'
 call plug#end()
@@ -29,19 +31,6 @@ let g:netrw_winsize=20          " when on side, only use 20% of space
 let g:netrw_browse_split=4      " open files in previous window
 " adds 'number' and 'relativenumber', other options are the default ones
 let g:netrw_bufsettings="nomodifiable nomodified number nobuflisted nowrap readonly relativenumber"
-
-" latex-suite
-filetype plugin on              " invokes latex-suite
-set grepprg=grep\ -nH\ $*
-filetype indent on              " automatic indentation
-let g:tex_flavor='latex'
-let g:Tex_Folding=0
-let g:Tex_AutoFolding=0
-autocmd BufRead,BufNewFile *.tex set filetype=tex
-autocmd BufRead,BufNewFile *.cls set filetype=tex
-autocmd BufRead,BufNewFile *.sty set filetype=tex
-" change change latex-suite C-j shortcut on normal mode
-nmap <Leader>n <Plug>IMAP_JumpForward
 
 " vimwiki
 " first category is used for important meta files to be shown on root, last
@@ -63,6 +52,11 @@ let g:vimwiki_global_ext=0
 let g:vimwiki_folding='custom'
 nmap <Leader>t <Plug>VimwikiVSplitLink
 nnoremap <Leader>wha :VimwikiAll2HTML<CR>
+
+" fzf
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>g :GFiles<CR>
+nnoremap <Leader>b :Buffer<CR>
 
 " /plugins }}}
 
@@ -107,7 +101,7 @@ set scrolloff=3                 " minimum #lines between cursor and edge when sc
 
 " undo
 set undofile                    " save undos after file closes
-set undodir=$HOME/.config/nvim/undo     " where to save undo histories
+set undodir=~/.local/share/nvim/undo    " where to save undo histories
 
 " show blank characters when invisible
 set list
@@ -127,9 +121,9 @@ nnoremap Ñ ;
 autocmd BufRead,BufNewFile *.zone set filetype=bindzone
 
 " filetype specific
-autocmd FileType markdown,vimwiki,mail,tex set formatoptions+=t  " break lines when longer than textwidth
-autocmd FileType markdown,vimwiki set tabstop=2         " number of spaces when tab is pressed
-autocmd FileType markdown,vimwiki set shiftwidth=2      " number of spaces for indentation
+autocmd FileType markdown,vimwiki,mail,tex,text set formatoptions+=t  " break lines when longer than textwidth
+autocmd FileType markdown,vimwiki,lua set tabstop=2         " number of spaces when tab is pressed
+autocmd FileType markdown,vimwiki,lua set shiftwidth=2      " number of spaces for indentation
 autocmd FileType mail set textwidth=72
 autocmd FileType c set noexpandtab
 
@@ -168,6 +162,24 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 " space to toggle fold
 nnoremap <Space> za
 
+" shortcuts for system clipboard
+nnoremap <Leader>y "+y
+nnoremap <Leader>p "+p
+vnoremap <Leader>y "+y
+vnoremap <Leader>p "+p
+
+" toggle mouse support
+function! ToggleMouse()
+    if &mouse == ""
+        set mouse=nv
+        echo "Mouse activated"
+    else
+        set mouse=
+        echo "Mouse desactivated"
+    endif
+endfunc
+nnoremap <Leader>m :call ToggleMouse()<CR>
+
 " /shortcuts }}}
 
 " colorscheme {{{
@@ -181,26 +193,36 @@ set termguicolors
 " status line {{{
 
 set statusline=
+" text color setting
 set statusline+=%#PmenuSbar#
+" filename
 set statusline+=%F
-set statusline+=%m\  
+" file status
+set statusline+=%m
+" vertical spacing
 set statusline+=%=
+" text color setting
 set statusline+=%#CursorColumn#
+" filetype
 set statusline+=\ %y
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\[%{&fileformat}\]
-set statusline+=\ %p%%
-set statusline+=\ %l:%c
-set statusline+=\  
+" encoding
+" set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" file format
+" set statusline+=\[%{&fileformat}\]
+" percentage of file of current row
+" set statusline+=\ %p%%
+" column and row
+set statusline+=\ %c:%l/%L
+
 set laststatus=2                " activate status line
 
 " /status line }}}
 
 " templates {{{
 
-nnoremap <Leader>sh :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.sh<CR>:w<CR>:e<CR>j
-nnoremap <Leader>py :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.py<CR>:w<CR>:e<CR>j
-nnoremap <Leader>latexmk :-1read $XDG_CONFIG_HOME/nvim/templates/tex.Makefile<CR>
+nnoremap <Leader>ts :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.sh<CR>:w<CR>:e<CR>
+nnoremap <Leader>tp :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.py<CR>:w<CR>:e<CR>
+nnoremap <Leader>tw :-1read $XDG_CONFIG_HOME/nvim/templates/vimwiki.md<CR>
 
 " /templates }}}
 
