@@ -30,7 +30,7 @@ alias vw="cd $HOME/Documents/wiki && vim index.md"
 alias bvw="firefox $HOME/Documents/wiki/build/html/index.html"
 alias c="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 alias cv="GIT_DIR=$HOME/.local/share/dotfiles GIT_WORK_TREE=$HOME nvim -c Git -c only"
-alias up="sudo pacman -Syu && yes | sudo pacman -Scc; pkill -RTMIN+4 dwmblocks"
+alias up="yay -Syu && yes | sudo pacman -Scc; pkill -RTMIN+4 dwmblocks"
 alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -; yes | sudo pacman -Scc"
 alias ca="cal -m -3"
 
