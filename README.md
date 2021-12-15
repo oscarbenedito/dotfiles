@@ -71,7 +71,7 @@ xf86-video-intel zsh zsh-syntax-highlighting fzf neovim wget man cronie htop ssh
 # xorg
 xorg-server xorg-xinit
 # utils
-xorg-xrandr xorg-xbacklight alsa-utils alsa-lib alsa-plugins xwallpaper xcape xautolock pulseaudio xorg-xsetroot dunst xdotool udisks2 acpi scrot mlocate rsync feh
+xorg-xrandr xorg-xbacklight alsa-utils alsa-lib alsa-plugins xwallpaper xcape xautolock pulseaudio xorg-xsetroot dunst xdotool udisks2 acpi scrot mlocate rsync feh exfat-utils
 # gnome
 gnome gnome-extra
 # fonts
