@@ -1,4 +1,0 @@
-#!/bin/sh
-
-[ "$(cat /sys/class/net/w*/operstate 2>/dev/null)" = "up" ] && \
-    printf "%s\n" "$(awk '/^\s*w/ { print "", int($3 * 100 / 70) "%" }' /proc/net/wireless)"

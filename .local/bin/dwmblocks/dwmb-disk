@@ -1,4 +1,0 @@
-#!/bin/sh
-
-#echo -n " "; df -h -l --output='used' "$HOME" | grep -E -o '[0-9\.]+G'
-echo -n " "; df -h -l --output='avail' "$HOME" | tail -n 1 | cut -d" " -f 3
