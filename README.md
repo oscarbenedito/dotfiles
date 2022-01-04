@@ -7,16 +7,17 @@ This directory hosts some of my dotfiles.
 The colors used on most places are based on the vim onedark theme. They are the
 following:
 
-| Color code | Color   | Color number |
-| :--------- | :------ | :----------- |
-| 30         | black   | #282c34      |
-| 31         | red     | #e06c75      |
-| 32         | green   | #98c379      |
-| 33         | yellow  | #e5c07b      |
-| 34         | blue    | #61afef      |
-| 35         | magenta | #c678dd      |
-| 36         | cyan    | #56b6c2      |
-| 37         | white   | #ffffff      |
+| Color   | Color number |
+| :------ | :----------- |
+| black   | #282c34      |
+| red     | #e06c75      |
+| green   | #98c379      |
+| yellow  | #e5c07b      |
+| blue    | #61afef      |
+| magenta | #c678dd      |
+| cyan    | #56b6c2      |
+| white   | #ffffff      |
+| bright black | #5c6370 |
 
 ## Working with this repository
 
