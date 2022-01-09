@@ -7,6 +7,7 @@
 
 " set leader prior to anything else
 let mapleader=","
+augroup vimrc | autocmd! | augroup END  " reset all autocmd in this file
 
 " plugins {{{
 
@@ -118,14 +119,18 @@ vnoremap ñ :
 nnoremap Ñ ;
 
 " filetypes
-autocmd BufRead,BufNewFile *.zone set filetype=bindzone
+augroup vimrc
+    autocmd BufRead,BufNewFile *.zone set filetype=bindzone
+augroup END
 
 " filetype specific
-autocmd FileType markdown,vimwiki,mail,tex,text set formatoptions+=t  " break lines when longer than textwidth
-autocmd FileType markdown,vimwiki,lua set tabstop=2         " number of spaces when tab is pressed
-autocmd FileType markdown,vimwiki,lua set shiftwidth=2      " number of spaces for indentation
-autocmd FileType mail set textwidth=72
-autocmd FileType c set noexpandtab
+augroup vimrc
+    autocmd FileType markdown,vimwiki,mail,tex,text set formatoptions+=t  " break lines when longer than textwidth
+    autocmd FileType markdown,vimwiki set tabstop=2         " number of spaces when tab is pressed
+    autocmd FileType markdown,vimwiki set shiftwidth=2      " number of spaces for indentation
+    autocmd FileType mail set textwidth=72
+    autocmd FileType c set noexpandtab
+augroup END
 
 " /change default behaviours }}}
 
