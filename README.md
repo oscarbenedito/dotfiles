@@ -103,7 +103,7 @@ Enable PulseAudio and syncthing, download neovim plugins:
 ```
 systemctl --user enable pulseaudio.service
 sudo systemctl enable "syncthing@$USER.service"
-nvim -e -i NONE -c "PlugInstall" -c "qa"
+nvim --headless -u NONE -c 'lua require("bootstrap-paq").run()'
 ```
 
 Finally, don't forget to put your wallpaper under

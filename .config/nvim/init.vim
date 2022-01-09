@@ -7,68 +7,9 @@
 
 " set leader prior to anything else
 let mapleader=","
-augroup vimrc | autocmd! | augroup END  " reset all autocmd in this file
-
-" plugins {{{
 
 filetype plugin indent on
-let g:plug_shallow=0
-
-call plug#begin('~/.local/share/nvim/plugged')
-Plug 'sheerun/vim-polyglot'     " languages syntax
-Plug 'tpope/vim-surround'       " surrounding objects
-Plug 'tpope/vim-commentary'     " easily comment objects
-Plug 'tpope/vim-repeat'         " make surround commands repeatable
-Plug 'tpope/vim-fugitive'       " git wrapper
-Plug 'tpope/vim-eunuch'         " helpers for UNIX shell commands
-Plug 'junegunn/fzf.vim'
-Plug 'vimwiki/vimwiki'
-Plug 'https://sanctum.geek.nz/code/vim-redact-pass.git'
-call plug#end()
-
-" netrw
-let g:netrw_liststyle=3         " tree structure
-let g:netrw_banner=0            " get rid of banner
-let g:netrw_winsize=20          " when on side, only use 20% of space
-let g:netrw_browse_split=4      " open files in previous window
-" adds 'number' and 'relativenumber', other options are the default ones
-let g:netrw_bufsettings="nomodifiable nomodified number nobuflisted nowrap readonly relativenumber"
-
-" vim-commentary
-augroup vimrc
-    autocmd FileType crontab setlocal commentstring=#\ %s
-augroup END
-
-" vim eunuch
-command W SudoWrite
-
-" fzf
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>g :GFiles<CR>
-nnoremap <Leader>b :Buffer<CR>
-
-" vimwiki
-" first category is used for important meta files to be shown on root, last
-" category is used for uncategorized files
-let vw_toc='toc.md'
-let vw_categories='Arrel Notes Temporal Receptes Blog Projectes Tecnologia Programari Altres Arxiu Sense\ categoria'
-let g:vimwiki_list=[{
-    \ 'path':               '~/Documents/wiki',
-    \ 'path_html':          '~/.cache/vimwiki/html',
-    \ 'custom_wiki2html':   '~/.local/share/vimwiki/wiki2html.py',
-    \ 'syntax':             'markdown',
-    \ 'ext':                '.md',
-    \ 'template_path':      '~/.local/share/vimwiki/',
-    \ 'template_default':   'template',
-    \ 'template_ext':       '.html',
-    \ 'custom_wiki2html_args': vw_toc . ' ' . vw_categories }]
-
-let g:vimwiki_global_ext=0
-let g:vimwiki_folding='custom'
-nmap <Leader>t <Plug>VimwikiVSplitLink
-nnoremap <Leader>wha :VimwikiAll2HTML<CR>
-
-" /plugins }}}
+augroup vimrc | autocmd! | augroup END  " reset all autocmd in this file
 
 " change default behaviours {{{
 
@@ -141,6 +82,13 @@ augroup vimrc
     autocmd FileType c set noexpandtab
     autocmd FileType help nnoremap q :q<CR>
 augroup END
+
+" netrw config
+let g:netrw_liststyle=3         " tree structure
+let g:netrw_banner=0            " get rid of banner
+let g:netrw_winsize=20          " when on side, only use 20% of space
+let g:netrw_browse_split=4      " open files in previous window
+let g:netrw_bufsettings="nomodifiable nomodified number nobuflisted nowrap readonly relativenumber" " adds 'number' and 'relativenumber', other options are the default ones
 
 " /change default behaviours }}}
 
@@ -249,6 +197,8 @@ nnoremap <Leader>tw :-1read $XDG_CONFIG_HOME/nvim/templates/vimwiki.md<CR>
 " /templates }}}
 
 " other {{{
+
+lua require("plugins")
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
