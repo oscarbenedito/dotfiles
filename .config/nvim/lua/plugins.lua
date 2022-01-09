@@ -32,6 +32,7 @@ do -- telescope
     vim.cmd "nnoremap <Leader>g :Telescope git_files<CR>"
     vim.cmd "nnoremap <Leader>b :Telescope buffers<CR>"
     vim.cmd "nnoremap <Leader>h :Telescope help_tags<CR>"
+    require("telescope-pickers")
 end
 
 
