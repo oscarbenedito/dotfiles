@@ -1,10 +1,3 @@
-"         _
-"  __   _(_)_ __ ___  _ __ ___
-"  \ \ / / | '_ ` _ \| '__/ __|
-"   \ V /| | | | | | | | | (__
-"  (_)_/ |_|_| |_| |_|_|  \___|
-"
-
 " set leader prior to anything else
 let mapleader=","
 
@@ -179,10 +172,8 @@ set statusline+=\ %y
 " set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 " file format
 " set statusline+=\[%{&fileformat}\]
-" percentage of file of current row
-" set statusline+=\ %p%%
 " column and row
-set statusline+=\ %c:%l/%L
+set statusline+=\ %c:%l/%L\ (%p%%)
 
 set laststatus=2                " activate status line
 
