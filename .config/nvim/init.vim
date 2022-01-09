@@ -20,6 +20,7 @@ Plug 'tpope/vim-surround'       " surrounding objects
 Plug 'tpope/vim-commentary'     " easily comment objects
 Plug 'tpope/vim-repeat'         " make surround commands repeatable
 Plug 'tpope/vim-fugitive'       " git wrapper
+Plug 'tpope/vim-eunuch'         " helpers for UNIX shell commands
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'https://sanctum.geek.nz/code/vim-redact-pass.git'
@@ -32,6 +33,19 @@ let g:netrw_winsize=20          " when on side, only use 20% of space
 let g:netrw_browse_split=4      " open files in previous window
 " adds 'number' and 'relativenumber', other options are the default ones
 let g:netrw_bufsettings="nomodifiable nomodified number nobuflisted nowrap readonly relativenumber"
+
+" vim-commentary
+augroup vimrc
+    autocmd FileType crontab setlocal commentstring=#\ %s
+augroup END
+
+" vim eunuch
+command W SudoWrite
+
+" fzf
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>g :GFiles<CR>
+nnoremap <Leader>b :Buffer<CR>
 
 " vimwiki
 " first category is used for important meta files to be shown on root, last
@@ -53,11 +67,6 @@ let g:vimwiki_global_ext=0
 let g:vimwiki_folding='custom'
 nmap <Leader>t <Plug>VimwikiVSplitLink
 nnoremap <Leader>wha :VimwikiAll2HTML<CR>
-
-" fzf
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>g :GFiles<CR>
-nnoremap <Leader>b :Buffer<CR>
 
 " /plugins }}}
 
@@ -123,13 +132,14 @@ augroup vimrc
     autocmd BufRead,BufNewFile *.zone set filetype=bindzone
 augroup END
 
-" filetype specific
+" filetype specific config
 augroup vimrc
     autocmd FileType markdown,vimwiki,mail,tex,text set formatoptions+=t  " break lines when longer than textwidth
     autocmd FileType markdown,vimwiki set tabstop=2         " number of spaces when tab is pressed
     autocmd FileType markdown,vimwiki set shiftwidth=2      " number of spaces for indentation
     autocmd FileType mail set textwidth=72
     autocmd FileType c set noexpandtab
+    autocmd FileType help nnoremap q :q<CR>
 augroup END
 
 " /change default behaviours }}}
@@ -188,6 +198,13 @@ nnoremap <Leader>m :call ToggleMouse()<CR>
 " /shortcuts }}}
 
 " colorscheme {{{
+
+augroup vimrc
+    " Bold VimWiki titles
+    autocmd FileType vimwiki call onedark#extend_highlight("Title", { "gui": "bold", "cterm": "bold" })
+    " Blue VimWiki links
+    autocmd FileType vimwiki call onedark#extend_highlight("Underlined", { "fg": onedark#GetColors().blue })
+augroup END
 
 colorscheme onedark
 set t_ut=""                     " deactivates vim BCE option (messes up colors)
