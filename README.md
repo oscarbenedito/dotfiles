@@ -118,10 +118,10 @@ them. For example, to only use the files under `.zshenv`, `.config/zsh`,
 `.config/git`, `.config/nvim` and `.config/tmux`, you could run the following:
 
 ```
-git --git-dir=/root/.local/share/dotfiles --work-tree=/root ls-files | \
+git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles" --work-tree="$HOME" ls-files | \
   sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv/d' | \
-  xargs git --git-dir=/root/.local/share/dotfiles --work-tree=/root update-index --skip-worktree
-git --git-dir=/root/.local/share/dotfiles --work-tree=/root ls-files | \
+  xargs git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles" --work-tree="$HOME" update-index --skip-worktree
+git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles" --work-tree="$HOME" ls-files | \
   sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv/d' | \
   xargs rm -f
 ```
