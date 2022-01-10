@@ -14,7 +14,7 @@
   l = log
   lp = log --graph --pretty=format:'%Cred%h%Creset %Cblue%an%Creset: %s%Creset%C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   pl = pull
-  ps = push
+  ps = push origin HEAD
   psf = push --force
   s = status --short
   sh = stash

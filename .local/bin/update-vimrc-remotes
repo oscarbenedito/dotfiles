@@ -1,8 +1,0 @@
-#!/bin/sh
-
-scp $HOME/.config/nvim/init.vim blue:.config/nvim/init.vim
-ssh blue "nvim +PlugInstall +PlugClean! +qa"
-scp $HOME/.config/nvim/init.vim cims:.config/nvim/init.vim
-ssh cims "nvim +PlugInstall +PlugClean! +qa"
-scp $HOME/.config/nvim/init.vim cangur:.config/nvim/init.vim
-ssh cangur "nvim +PlugInstall +PlugClean! +qa"

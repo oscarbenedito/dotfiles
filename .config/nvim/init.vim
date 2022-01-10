@@ -155,6 +155,16 @@ set termguicolors
 
 " status line {{{
 
+" let g:word_count=wordcount().words
+" function WordCount()
+"     if has_key(wordcount(), "visual_words")
+"         let g:word_count=wordcount().visual_words."/".wordcount().words " count selected words
+"     else
+"         let g:word_count=wordcount().cursor_words."/".wordcount().words " words up until cursor
+"     endif
+"     return g:word_count
+" endfunction
+
 set statusline=
 " text color setting
 set statusline+=%#PmenuSbar#
@@ -166,6 +176,8 @@ set statusline+=%m
 set statusline+=%=
 " text color setting
 set statusline+=%#CursorColumn#
+" number of words
+" set statusline+=w:%{WordCount()}
 " filetype
 set statusline+=\ %y
 " encoding

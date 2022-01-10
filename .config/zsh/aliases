@@ -34,7 +34,6 @@ alias ...........="cd ../../../../../../../../../.."
 alias ............="cd ../../../../../../../../../../.."
 alias .............="cd ../../../../../../../../../../../.."
 alias vw="cd $HOME/Documents/wiki && vim index.md"
-alias bvw="firefox $HOME/Documents/wiki/build/html/index.html"
 alias c="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 alias gv="nvim -c Git -c only"
 alias cv="(cd $HOME; GIT_DIR=$HOME/.local/share/dotfiles GIT_WORK_TREE=$HOME nvim -c Git -c only)"
@@ -71,13 +70,13 @@ up() {
 
 # dotfiles' repository metafiles
 c-clean() {
-  rm $HOME/README.md $HOME/COPYING
-  c update-index --skip-worktree README.md COPYING
+  rm -f "$HOME/README.md" "$HOME/COPYING"
+  c update-index --skip-worktree "$HOME/README.md" "$HOME/COPYING"
 }
 
 c-populate() {
-  c update-index --no-skip-worktree README.md COPYING
-  c checkout README.md COPYING
+  c update-index --no-skip-worktree "$HOME/README.md" "$HOME/COPYING"
+  c checkout "$HOME/README.md" "$HOME/COPYING"
 }
 
 # unite pdf after double side scanning
