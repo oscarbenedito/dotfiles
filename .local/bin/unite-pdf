@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# unite pdf after double side scanning
+if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: unite-pdf odd even [output]"
+else
+    [ -z "$3" ] && { 3="$(mktemp)" ; echo "$3" ; }
+    pdftk "A=$1" "B=$2" shuffle A Bend-1 output "$3"
+fi

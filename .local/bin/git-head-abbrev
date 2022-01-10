@@ -1,8 +1,0 @@
-#!/bin/sh
-
-c="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-if [ "$c" = "HEAD" ]; then
-    c="$(git describe --tags 2>/dev/null)"
-    [ -z "$c" ] && c="$(git rev-parse --short HEAD 2>/dev/null)"
-fi
-[ -n "$c" ] && printf " ($c)"

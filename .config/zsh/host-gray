@@ -1,0 +1,52 @@
+# vim: filetype=zsh
+
+alias dbanc="cd /run/media/oscar/banc && ls"
+alias dg="cd $HOME/Git && ls"
+
+alias vw="cd $HOME/Documents/wiki && vim index.md"
+alias dvw="cd $HOME/Documents/wiki && ls"
+
+alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -; yes | sudo pacman -Scc"
+alias volume="pasystray"
+
+# update system
+up() {
+    if ps aux | grep -q '[c]heckupdates'; then
+        echo "checkupdates in progress, exiting..."
+    else
+        yay -Syu && yes | sudo pacman -Scc
+        pkill -RTMIN+4 dwmblocks
+    fi
+}
+
+restart-wifi-daemon() {
+  while true; do
+    curl -Is http://oscarbenedito.com > /dev/null || \
+      { printf "Restarting wifi..."; restart-wifi; printf " done at "; date +"%a %d %b, %H:%M"; printf "\n"; }
+    sleep 30
+  done
+}
+
+restart-wifi() {
+    printf "Restarting wifi...";
+    nmcli radio wifi off;
+    sleep 1;
+    nmcli radio wifi on;
+    printf " done:  ";
+    date +"%a %d %b, %H:%M";
+}
+
+mount-banc() {
+    sudo mkdir -p /run/media/oscar/banc || return
+    sudo chown oscar:oscar /run/media/oscar/banc
+    sshfs maroon:/media/banc /run/media/oscar/banc
+    echo "ls /run/media/oscar"
+    ls /run/media/oscar
+}
+
+umount-banc() {
+    sudo umount /run/media/oscar/banc
+    sudo rmdir /run/media/oscar/banc
+    echo "ls /run/media/oscar"
+    ls /run/media/oscar
+}

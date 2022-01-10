@@ -68,7 +68,7 @@ Some of the programs you will need on a new installation are the following
 
 ```
 # basic
-xf86-video-intel zsh zsh-syntax-highlighting fzf neovim wget man cronie htop sshfs dash pacman-contrib xclip
+xf86-video-intel zsh zsh-syntax-highlighting fzf neovim wget man cronie htop sshfs dash pacman-contrib xclip inetutils
 # xorg
 xorg-server xorg-xinit
 # utils
@@ -115,15 +115,14 @@ If you just want to use a subset of the files without wanting to create a new
 branch (for example in case you want to use them on a server), you can use `git
 update-index --skip-worktree file1 file2` to stop tracking files and then delete
 them. For example, to only use the files under `.zshenv`, `.config/zsh`,
-`.config/git`, `.config/nvim`, `.config/tmux` and `.local/bin/git-head-abbrev`,
-you could run the following:
+`.config/git`, `.config/nvim` and `.config/tmux`, you could run the following:
 
 ```
 git --git-dir=/root/.local/share/dotfiles --work-tree=/root ls-files | \
-  sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv\|^\.local\/bin\/git-head-abbrev/d' | \
+  sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv/d' | \
   xargs git --git-dir=/root/.local/share/dotfiles --work-tree=/root update-index --skip-worktree
 git --git-dir=/root/.local/share/dotfiles --work-tree=/root ls-files | \
-  sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv\|^\.local\/bin\/git-head-abbrev/d' | \
+  sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv/d' | \
   xargs rm -f
 ```
 
