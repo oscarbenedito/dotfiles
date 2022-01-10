@@ -95,6 +95,9 @@ def wiki_to_html(input_file, output_file, template_file, root_path, wiki_path, c
 
     # format links for HTML
     text = re.sub('\[([^]]+)\]\(([^)#]*)(?:#([^)]*))?\)', href_to_html, text)
+    # add support for TODOs
+    text = re.sub('^([ \t]*- )\[[ .oO]\] ', lambda m : m.group(1) + '<input type="checkbox" disabled> ', text, flags=re.MULTILINE)
+    text = re.sub('^([ \t]*- )\[X\] ', lambda m : m.group(1) + '<input type="checkbox" checked disabled> ', text, flags=re.MULTILINE)
 
     params['metadata'] = ''
     if params['category'] != categories[0]:
