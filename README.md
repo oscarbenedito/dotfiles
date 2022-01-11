@@ -23,17 +23,17 @@ following:
 
 My solution is based on [this comment][hn-comment] (more info: [here][setup-1]
 and [here][setup-2]). A bare repository is initialized on a specified directory
-(`$XDG_DATA_HOME/dotfiles` in my case) and then it is used as if it was in the
-home directory using the `--work-tree` option. I have aliased this git command
-with options to `c` (see setup below). The `status.showUntrackedFiles no`
-setting is used to avoid seeing all files in the home directory.
+(`$XDG_DATA_HOME/dotfiles/repo.git` in my case) and then it is used as if it was
+in the home directory using the `--work-tree` option. I have aliased this git
+command with options to `c` (see setup below). The `status.showUntrackedFiles
+no` setting is used to avoid seeing all files in the home directory.
 
 To set up your computer with this repository, run the following:
 
 ```sh
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-git clone --bare "https://git.oscarbenedito.com/dotfiles" "$XDG_DATA_HOME/dotfiles"
-alias c='/usr/bin/git --git-dir=$XDG_DATA_HOME/dotfiles --work-tree=$HOME'
+git clone --bare "https://git.oscarbenedito.com/dotfiles" "$XDG_DATA_HOME/dotfiles/repo.git"
+alias c='/usr/bin/git --git-dir=$XDG_DATA_HOME/dotfiles/repo.git --work-tree=$HOME'
 c config --local status.showUntrackedFiles no
 c config --local core.bare false
 c config --local core.worktree "$HOME"
@@ -118,10 +118,10 @@ them. For example, to only use the files under `.zshenv`, `.config/zsh`,
 `.config/git`, `.config/nvim` and `.config/tmux`, you could run the following:
 
 ```
-git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles" --work-tree="$HOME" ls-files | \
+git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/repo.git" --work-tree="$HOME" ls-files | \
   sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv/d' | \
-  xargs git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles" --work-tree="$HOME" update-index --skip-worktree
-git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles" --work-tree="$HOME" ls-files | \
+  xargs git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/repo.git" --work-tree="$HOME" update-index --skip-worktree
+git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/repo.git" --work-tree="$HOME" ls-files | \
   sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv/d' | \
   xargs rm -f
 ```
