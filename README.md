@@ -28,40 +28,20 @@ in the home directory using the `--work-tree` option. I have aliased this git
 command with options to `c` (see setup below). The `status.showUntrackedFiles
 no` setting is used to avoid seeing all files in the home directory.
 
-To set up your computer with this repository, run the following:
-
-```sh
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-git clone --bare "https://git.oscarbenedito.com/dotfiles" "$XDG_DATA_HOME/dotfiles/repo.git"
-alias c='/usr/bin/git --git-dir=$XDG_DATA_HOME/dotfiles/repo.git --work-tree=$HOME'
-c config --local status.showUntrackedFiles no
-c config --local core.bare false
-c config --local core.worktree "$HOME"
-c checkout
-```
-
-If the last command gives an error because you already have dotfiles that would
-be overriden, you can run the following to put them on a different folder and
-continue with the process. You might need to create subfolder for the `mv` to
-work.
-
-```sh
-mkdir -p dotfiles-backup && \
-  c checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
-  xargs -I{} mv {} dotfiles-backup/{}
-```
+To set up your computer with this repository, run the script `bootstrap.sh`. To
+only track a subset of the files on the repository, look at how it's done on the
+`bootstrap.sh` script for the `--small` option. I also recommend adding a
+`post-merge` hook with the for loop that is run with the `--small` option on the
+`bootstrap.sh` script, to ensure it ignores any future files that don't match
+the regex.
 
 ### Notes
 
 I have also created alises `c-clean` and `c-populate` to hide or show the files
-`README.md` and `COPYING`. This functions will delete or override the files on
-the home directory respectively.
+`README.md`, `COPYING` and `bootstrap.sh`. This functions will delete or
+override the files on the home directory respectively (be careful!).
 
-On Debian, you might need to change ZSH's syntax highlightning plugin location
-from `/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh` to
-`/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh`.
-
-### Other notes for myself...
+### Notes for myself...
 
 Some of the programs you will need on a new installation are the following
 (package names for Arch Linux, install with `pacman -S package1 package2 ...`):
@@ -108,26 +88,6 @@ nvim --headless -u NONE -c 'lua require("bootstrap-paq").run()'
 
 Finally, don't forget to put your wallpaper under
 `~/.local/share/dwm/wallpaper.png`.
-
-### Using a subset of the files
-
-If you just want to use a subset of the files without wanting to create a new
-branch (for example in case you want to use them on a server), you can use `git
-update-index --skip-worktree file1 file2` to stop tracking files and then delete
-them. For example, to only use the files under `.zshenv`, `.config/zsh`,
-`.config/git`, `.config/nvim` and `.config/tmux`, you could run the following:
-
-```
-git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/repo.git" --work-tree="$HOME" ls-files | \
-  sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv/d' | \
-  xargs git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/repo.git" --work-tree="$HOME" update-index --skip-worktree
-git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/repo.git" --work-tree="$HOME" ls-files | \
-  sed '/^\.config\/\(zsh\|git\|nvim\|tmux\)\|^\.zshenv/d' | \
-  xargs rm -f
-```
-
-and add it to a `post-merge` hook. Alternatively, you can use multiple branches,
-but I find that more complicated (you'll have to keep merging them).
 
 ## License
 

@@ -57,11 +57,11 @@ alias dw="cd $HOME/Downloads && ls"
 
 # dotfiles' repository metafiles
 c-clean() {
-  rm -f "$HOME/README.md" "$HOME/COPYING"
-  c update-index --skip-worktree "$HOME/README.md" "$HOME/COPYING"
+  rm -f "$HOME/README.md" "$HOME/COPYING" "$HOME/bootstrap.sh"
+  c update-index --skip-worktree "$HOME/README.md" "$HOME/COPYING" "$HOME/bootstrap.sh"
 }
 
 c-populate() {
-  c update-index --no-skip-worktree "$HOME/README.md" "$HOME/COPYING"
-  c checkout "$HOME/README.md" "$HOME/COPYING"
+  c update-index --no-skip-worktree "$HOME/README.md" "$HOME/COPYING" "$HOME/bootstrap.sh"
+  c checkout "$HOME/README.md" "$HOME/COPYING" "$HOME/bootstrap.sh"
 }
