@@ -195,6 +195,7 @@ set laststatus=2                " activate status line
 
 nnoremap <Leader>ts :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.sh<CR>:w<CR>:e<CR>
 nnoremap <Leader>tp :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.py<CR>:w<CR>:e<CR>
+nnoremap <Leader>tb :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.bash<CR>:w<CR>:e<CR>
 nnoremap <Leader>tw :lua telescope_vimwiki_categories_picker()<CR>
 
 " /templates }}}
