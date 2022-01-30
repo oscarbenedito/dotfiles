@@ -73,7 +73,7 @@ augroup vimrc
     autocmd FileType markdown,vimwiki set shiftwidth=2      " number of spaces for indentation
     autocmd FileType mail set textwidth=72
     autocmd FileType c set noexpandtab
-    autocmd FileType help nnoremap q :q<CR>
+    autocmd FileType help nnoremap q <Cmd>q<CR>
 augroup END
 
 " netrw config
@@ -94,26 +94,26 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 " resize pane
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :resize -3<CR>
-noremap <silent> <C-Left> :vertical resize +3<CR>
-noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> <Cmd>resize +3<CR>
+noremap <silent> <C-Down> <Cmd>resize -3<CR>
+noremap <silent> <C-Left> <Cmd>vertical resize +3<CR>
+noremap <silent> <C-Right> <Cmd>vertical resize -3<CR>
 
 " undo
 nnoremap U <C-r>
 
 " search and replace all
-nnoremap S :%s//g<Left><Left>
+nnoremap S <Cmd>%s//g<Left><Left>
 
 " edit/reload config file
-nnoremap <silent> <Leader>v :e $MYVIMRC<CR>
-nnoremap <silent> <Leader>r :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>v <Cmd>e $MYVIMRC<CR>
+nnoremap <silent> <Leader>r <Cmd>so $MYVIMRC<CR>
 
 " edit file
-nnoremap <Leader>e :Lexplore<CR>
+nnoremap <Leader>e <Cmd>Lexplore<CR>
 
 " clean search highlights
-nnoremap <silent> <Leader>/ :nohlsearch<CR>
+nnoremap <silent> <Leader>/ <Cmd>nohlsearch<CR>
 
 " space to toggle fold
 nnoremap <Space> za
@@ -134,7 +134,7 @@ function! ToggleMouse()
         echo "Mouse desactivated"
     endif
 endfunc
-nnoremap <Leader>m :call ToggleMouse()<CR>
+nnoremap <Leader>m <Cmd>call ToggleMouse()<CR>
 
 " /shortcuts }}}
 
@@ -193,10 +193,10 @@ set laststatus=2                " activate status line
 
 " templates {{{
 
-nnoremap <Leader>ts :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.sh<CR>:w<CR>:e<CR>
-nnoremap <Leader>tp :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.py<CR>:w<CR>:e<CR>
-nnoremap <Leader>tb :-1read $XDG_CONFIG_HOME/nvim/templates/shebang.bash<CR>:w<CR>:e<CR>
-nnoremap <Leader>tw :lua telescope_vimwiki_categories_picker()<CR>
+nnoremap <Leader>ts <Cmd>-1read $XDG_CONFIG_HOME/nvim/templates/shebang.sh<CR><Cmd>w<CR><Cmd>e<CR>
+nnoremap <Leader>tp <Cmd>-1read $XDG_CONFIG_HOME/nvim/templates/shebang.py<CR><Cmd>w<CR><Cmd>e<CR>
+nnoremap <Leader>tb <Cmd>-1read $XDG_CONFIG_HOME/nvim/templates/shebang.bash<CR><Cmd>w<CR><Cmd>e<CR>
+nnoremap <Leader>tw <Cmd>lua telescope_vimwiki_categories_picker()<CR>
 
 " /templates }}}
 

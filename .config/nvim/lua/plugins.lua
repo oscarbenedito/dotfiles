@@ -28,23 +28,23 @@ end
 
 
 do -- telescope
-    vim.cmd "nnoremap <Leader>f :Telescope find_files<CR>"
-    vim.cmd "nnoremap <Leader>g :Telescope git_files<CR>"
-    vim.cmd "nnoremap <Leader>b :Telescope buffers<CR>"
-    vim.cmd "nnoremap <Leader>h :Telescope help_tags<CR>"
+    vim.cmd "nnoremap <Leader>f <Cmd>Telescope find_files<CR>"
+    vim.cmd "nnoremap <Leader>g <Cmd>Telescope git_files<CR>"
+    vim.cmd "nnoremap <Leader>b <Cmd>Telescope buffers<CR>"
+    vim.cmd "nnoremap <Leader>h <Cmd>Telescope help_tags<CR>"
     require("telescope-pickers")
 end
 
 
 do -- vimwiki
     vim.cmd "nmap <Leader>t <Plug>VimwikiVSplitLink"
-    vim.cmd "nnoremap <Leader>wha :VimwikiAll2HTML<CR>"
+    vim.cmd "nnoremap <Leader>wha <Cmd>VimwikiAll2HTML<CR>"
 
     vim.cmd [[
         augroup paq_vimwiki
             autocmd!
             autocmd FileType vimwiki
-                \ autocmd! paq_vimwiki BufWritePost <buffer> silent :Vimwiki2HTML
+                \ autocmd! paq_vimwiki BufWritePost <buffer> silent <Cmd>Vimwiki2HTML
         augroup END
     ]]
 
