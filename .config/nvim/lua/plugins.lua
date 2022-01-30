@@ -37,17 +37,6 @@ end
 
 
 do -- vimwiki
-    vim.cmd "nmap <Leader>t <Plug>VimwikiVSplitLink"
-    vim.cmd "nnoremap <Leader>wha <Cmd>VimwikiAll2HTML<CR>"
-
-    vim.cmd [[
-        augroup paq_vimwiki
-            autocmd!
-            autocmd FileType vimwiki
-                \ autocmd! paq_vimwiki BufWritePost <buffer> silent <Cmd>Vimwiki2HTML
-        augroup END
-    ]]
-
     vim.g.vimwiki_global_ext = 0
     vim.g.vimwiki_folding = "custom"
 
