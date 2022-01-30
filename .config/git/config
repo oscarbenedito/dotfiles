@@ -28,6 +28,8 @@
   smtpuser = oscar@oscarbenedito.com
   smtpencryption = tls
   smtpserverport = 587
+[pull]
+  rebase = true
 [init]
   defaultBranch = master    ; should probably change to main someday
 [include]

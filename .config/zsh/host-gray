@@ -3,11 +3,12 @@
 alias dbanc="cd /run/media/oscar/banc && ls"
 alias dg="cd $HOME/Git && ls"
 
-alias vw="cd $HOME/Documents/wiki && vim index.md"
+alias vw="(cd $HOME/Documents/wiki; vim index.md)"
 alias dvw="cd $HOME/Documents/wiki && ls"
 
 alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -; yes | sudo pacman -Scc"
 alias volume="pasystray"
+alias display="arandr"
 
 # update system
 up() {
