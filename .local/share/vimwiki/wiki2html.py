@@ -81,12 +81,15 @@ def make_toc_file(path, wiki_path, categories):
         f.write(text)
 
 
-def href_to_html(match):
+def href_to_html(match, wiki_path, root_path):
     href = match.group(2)
-    if not re.search('://', match.group(2)):
-        href += '.html'
-        if match.group(3):
-            href += '#' + match.group(3).replace(' ', '-').lower()
+    if not re.search('://', href):
+        if re.search('^' + root_path + 'static/', href): # it's a static file, link to it
+            href = wiki_path + href[len(root_path):]
+        else: # it's a vimwiki page, link to the output html
+            href += '.html'
+            if match.group(3):
+                href += '#' + match.group(3).replace(' ', '-').lower()
     return "[{}]({})".format(match.group(1), href)
 
 
@@ -94,7 +97,7 @@ def wiki_to_html(input_file, output_file, template_file, root_path, wiki_path, c
     params, text = get_file_metadata_and_text(input_file, wiki_path, categories)
 
     # format links for HTML
-    text = re.sub('\[([^]]+)\]\(([^)#]*)(?:#([^)]*))?\)', href_to_html, text)
+    text = re.sub('\[([^]]+)\]\(([^)#]*)(?:#([^)]*))?\)', lambda m: href_to_html(m, wiki_path, root_path), text)
     # add support for TODOs
     text = re.sub('^([ \t]*- )\[[ .oO]\] ', lambda m : m.group(1) + '<input type="checkbox" disabled> ', text, flags=re.MULTILINE)
     text = re.sub('^([ \t]*- )\[X\] ', lambda m : m.group(1) + '<input type="checkbox" checked disabled> ', text, flags=re.MULTILINE)

@@ -14,7 +14,7 @@ local ret = require("paq") {
 
 do -- vim-commentary
     vim.cmd [[
-        augroup packer_vimcommentary
+        augroup paq_vimcommentary
             autocmd!
             autocmd FileType apache,crontab setlocal commentstring=#\ %s
         augroup END
@@ -37,15 +37,23 @@ end
 
 
 do -- vimwiki
-    -- first category is used for important meta files to be shown on root,
-    -- last category is used for uncategorized files
-    vim.g.vw_categories = { "Arrel", "Notes", "Temporal", "Receptes", "Blog", "Projectes", "Tecnologia", "Programari", "Altres", "Arxiu", "Sense categoria" }
+    vim.cmd "nmap <Leader>t <Plug>VimwikiVSplitLink"
+    vim.cmd "nnoremap <Leader>wha :VimwikiAll2HTML<CR>"
+
+    vim.cmd [[
+        augroup paq_vimwiki
+            autocmd!
+            autocmd FileType vimwiki
+                \ autocmd! paq_vimwiki BufWritePost <buffer> silent :Vimwiki2HTML
+        augroup END
+    ]]
 
     vim.g.vimwiki_global_ext = 0
     vim.g.vimwiki_folding = "custom"
 
-    vim.cmd "nmap <Leader>t <Plug>VimwikiVSplitLink"
-    vim.cmd "nnoremap <Leader>wha :VimwikiAll2HTML<CR>"
+    -- first category is used for important meta files to be shown on root,
+    -- last category is used for uncategorized files
+    vim.g.vw_categories = { "Arrel", "Notes", "Temporal", "Receptes", "Blog", "Projectes", "Tecnologia", "Programari", "Altres", "Arxiu", "Sense categoria" }
 
     local vw_categories_str = ""
     for _, c in pairs(vim.g.vw_categories) do
