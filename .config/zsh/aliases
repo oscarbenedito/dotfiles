@@ -53,6 +53,7 @@ alias cfh="$EDITOR $XDG_CONFIG_HOME/zsh/host-$(hostname -s)"
 alias db="cd $HOME/.local/bin && ls"
 alias dc="cd $HOME/Documents && ls"
 alias ds="cd $HOME/.local/src && ls"
+alias dv="cd $XDG_CONFIG_HOME/nvim && ls"
 alias dw="cd $HOME/Downloads && ls"
 
 # dotfiles' repository metafiles

@@ -103,7 +103,7 @@ noremap <silent> <C-Right> <Cmd>vertical resize -3<CR>
 nnoremap U <C-r>
 
 " search and replace all
-nnoremap S <Cmd>%s//g<Left><Left>
+nnoremap S :%s//g<Left><Left>
 
 " edit/reload config file
 nnoremap <silent> <Leader>v <Cmd>e $MYVIMRC<CR>
