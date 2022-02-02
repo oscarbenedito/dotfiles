@@ -99,8 +99,11 @@ def wiki_to_html(input_file, output_file, template_file, root_path, wiki_path, c
     # format links for HTML
     text = re.sub('\[([^]]+)\]\(([^)#]*)(?:#([^)]*))?\)', lambda m: href_to_html(m, wiki_path, root_path), text)
     # add support for TODOs
-    text = re.sub('^([ \t]*- )\[[ .oO]\] ', lambda m : m.group(1) + '<input type="checkbox" disabled> ', text, flags=re.MULTILINE)
-    text = re.sub('^([ \t]*- )\[X\] ', lambda m : m.group(1) + '<input type="checkbox" checked disabled> ', text, flags=re.MULTILINE)
+    text = re.sub('^([ \t]*- )\[ \] ', lambda m : m.group(1) + '<img class="checkbox-0"> ', text, flags=re.MULTILINE)
+    text = re.sub('^([ \t]*- )\[\.\] ', lambda m : m.group(1) + '<img class="checkbox-1"> ', text, flags=re.MULTILINE)
+    text = re.sub('^([ \t]*- )\[o\] ', lambda m : m.group(1) + '<img class="checkbox-2"> ', text, flags=re.MULTILINE)
+    text = re.sub('^([ \t]*- )\[O\] ', lambda m : m.group(1) + '<img class="checkbox-3"> ', text, flags=re.MULTILINE)
+    text = re.sub('^([ \t]*- )\[X\] ', lambda m : m.group(1) + '<img class="checkbox-4"> ', text, flags=re.MULTILINE)
 
     params['metadata'] = ''
     if params['category'] != categories[0]:
