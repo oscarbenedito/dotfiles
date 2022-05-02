@@ -5,6 +5,7 @@
   a = add
   addurl = remote set-url --add origin
   b = branch
+  ba = branch -a
   c = commit
   cm = commit -m
   co = checkout

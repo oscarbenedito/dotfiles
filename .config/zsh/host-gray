@@ -20,15 +20,14 @@ up() {
     fi
 }
 
-restart-wifi-daemon() {
+rwd() {
   while true; do
-    curl -Is http://oscarbenedito.com > /dev/null || \
-      { printf "Restarting wifi..."; restart-wifi; printf " done at "; date +"%a %d %b, %H:%M"; printf "\n"; }
+    curl -Is http://oscarbenedito.com > /dev/null || { rw; sleep 30; }
     sleep 30
   done
 }
 
-restart-wifi() {
+rw() {
     printf "Restarting wifi...";
     nmcli radio wifi off;
     sleep 1;
