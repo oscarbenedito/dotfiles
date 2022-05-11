@@ -1,6 +1,6 @@
 -- This file is a modified version of paq-nvim (https://github.com/savq/paq-nvim),
 -- which has the following notice.
--- Last update: 2022-05-02 (commit c9451521e6e334b3651092f882cfa128d38a99cb)
+-- Last update: 2022-05-11 (commit cbbb8a550e35b1e6c9ddf7b098b25e6c2d8b1e86)
 
 -- MIT License
 --
@@ -184,9 +184,7 @@ end
 local function clone_or_pull(pkg, counter)
     if pkg.exists and not pkg.pin then
         pull(pkg, counter, "update")
-    -- Oscar: add condition to fix pinned packages bug
     elseif not pkg.exists then
-    -- end
         clone(pkg, counter, "install")
     end
 end
