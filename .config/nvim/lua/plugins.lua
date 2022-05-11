@@ -11,6 +11,11 @@ local ret = require("paq") {
     { url="https://dev.sanctum.geek.nz/code/vim-redact-pass.git", shallow=false }, -- disable leaky options when editing passwords with pass
 }
 
+-- don't run the package configs if we are doing the initial bootstrap
+if vim.g.headless_bootstrap then
+    return ret
+end
+
 
 do -- vim-commentary
     vim.cmd [[
