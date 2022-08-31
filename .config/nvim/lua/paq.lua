@@ -1,6 +1,6 @@
 -- This file is a modified version of paq-nvim (https://github.com/savq/paq-nvim),
 -- which has the following notice.
--- Last update: 2022-05-11 (commit cbbb8a550e35b1e6c9ddf7b098b25e6c2d8b1e86)
+-- Last update: 2022-08-31 (commit bc5950b990729464f2493b1eaab5a7721bd40bf5)
 
 -- MIT License
 --
@@ -30,7 +30,8 @@ local cfg = {
     path = vim.fn.stdpath("data") .. "/site/pack/paqs/",
     verbose = false,
 }
-local LOGFILE = vim.fn.stdpath("cache") .. "/paq.log"
+local logpath = vim.fn.has("nvim-0.8") == 1 and vim.fn.stdpath("log") or vim.fn.stdpath("cache")
+local logfile = logpath .. "/paq.log"
 local packages = {} -- 'name' = {options...} pairs
 local messages = {
     install = { ok = "Installed", err = "Failed to install" },
@@ -77,11 +78,12 @@ local function new_counter()
         vim.notify(summary:format(op, c.ok, c.err, c.nop))
         vim.cmd("packloadall! | silent! helptags ALL")
         vim.cmd("doautocmd User PaqDone" .. op:gsub("^%l", string.upper))
+        return true
     end)
 end
 
 local function call_proc(process, args, cwd, cb, print_stdout)
-    local log = uv.fs_open(LOGFILE, "a+", 0x1A4)
+    local log = uv.fs_open(logfile, "a+", 0x1A4)
     local stderr = uv.new_pipe(false)
     stderr:open(log)
     local handle, pid
@@ -101,7 +103,7 @@ local function call_proc(process, args, cwd, cb, print_stdout)
 end
 
 local function log(message)
-    local log = uv.fs_open(LOGFILE, "a+", 0x1A4)
+    local log = uv.fs_open(logfile, "a+", 0x1A4)
     uv.fs_write(log, message .. '\n')
     uv.fs_close(log)
 end
@@ -315,8 +317,9 @@ return setmetatable({
     _run_hook = function(name) return run_hook(packages[name]) end,
     _get_hooks = function() return vim.tbl_keys(vim.tbl_map(function(pkg) return pkg.run end, packages)) end,
     list = list,
-    log_open = function() vim.cmd("sp " .. LOGFILE) end,
-    log_clean = function() return assert(uv.fs_unlink(LOGFILE)) and vim.notify(" Paq: log file deleted") end,
+    log_open = function() vim.cmd("sp " .. logfile) end,
+    log_clean = function() return assert(uv.fs_unlink(logfile)) and vim.notify(" Paq: log file deleted") end,
+    register = function(pkg) register(pkg) end,
     paq = register, -- TODO: deprecate. not urgent
 }, {__call = function(self, tbl) packages = {} vim.tbl_map(register, tbl) return self end,
 })
