@@ -21,6 +21,7 @@ export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
 export LESSHISTFILE="-"
 export XINITRC="$XDG_CONFIG_HOME/xinitrc"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
 # Environment variables
 export VISUAL="nvim"

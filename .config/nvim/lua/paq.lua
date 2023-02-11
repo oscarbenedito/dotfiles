@@ -1,6 +1,6 @@
 -- This file is a modified version of paq-nvim (https://github.com/savq/paq-nvim),
 -- which has the following notice.
--- Last update: 2022-08-31 (commit bc5950b990729464f2493b1eaab5a7721bd40bf5)
+-- Last update: 2023-02-11 (commit 31556e9451300eb0fdc3ba45994ea83eea9f4bb2)
 
 -- MIT License
 --
@@ -28,40 +28,45 @@
 local uv = vim.loop
 local cfg = {
     path = vim.fn.stdpath("data") .. "/site/pack/paqs/",
+    opt = false,
     verbose = false,
+    url_format = "https://github.com/%s.git",
 }
 local logpath = vim.fn.has("nvim-0.8") == 1 and vim.fn.stdpath("log") or vim.fn.stdpath("cache")
 local logfile = logpath .. "/paq.log"
-local packages = {} -- 'name' = {options...} pairs
-local messages = {
-    install = { ok = "Installed", err = "Failed to install" },
-    update = { ok = "Updated", err = "Failed to update", nop = "(up-to-date)" },
-    remove = { ok = "Removed", err = "Failed to remove" },
-    hook = { ok = "Ran hook for", err = "Failed to run hook for" },
-}
+local packages = {} -- "name" = {options...} pairs
 
 -- This is done only once. Doing it for every process seems overkill
 local env = {}
-local envfn = vim.fn.has('nvim-0.6') == 1 and uv.os_environ or vim.fn.environ  -- compat
+local envfn = vim.fn.has("nvim-0.6") == 1 and uv.os_environ or vim.fn.environ
 for var, val in pairs(envfn()) do
-    table.insert(env, ("%s=%s"):format(var, val))
+    table.insert(env, string.format("%s=%s", var, val))
 end
 table.insert(env, "GIT_TERMINAL_PROMPT=0")
 
 vim.cmd([[
-    command! PaqInstall  lua require('paq'):install()
-    command! PaqUpdate   lua require('paq'):update()
-    command! PaqClean    lua require('paq'):clean()
-    command! PaqSync     lua require('paq'):sync()
-    command! PaqList     lua require('paq').list()
-    command! PaqLogOpen  lua require('paq').log_open()
-    command! PaqLogClean lua require('paq').log_clean()
-    command! -nargs=1 -complete=customlist,v:lua.require'paq'._get_hooks PaqRunHook lua require('paq')._run_hook(<f-args>)
+    command! -bar PaqInstall  lua require('paq'):install()
+    command! -bar PaqUpdate   lua require('paq'):update()
+    command! -bar PaqClean    lua require('paq'):clean()
+    command! -bar PaqSync     lua require('paq'):sync()
+    command! -bar PaqList     lua require('paq').list()
+    command! -bar PaqLogOpen  lua require('paq').log_open()
+    command! -bar PaqLogClean lua require('paq').log_clean()
+    command! -bar -nargs=1 -complete=customlist,v:lua.require'paq'._get_hooks PaqRunHook lua require('paq')._run_hook(<f-args>)
 ]])
 
 local function report(op, name, res, n, total)
-    local count = n and (" [%d/%d]"):format(n, total) or ""
-    vim.notify((" Paq:%s %s %s"):format(count, messages[op][res], name), res == "err" and vim.log.levels.ERROR)
+    local messages = {
+        install = { ok = "Installed", err = "Failed to install" },
+        update = { ok = "Updated", err = "Failed to update", nop = "(up-to-date)" },
+        remove = { ok = "Removed", err = "Failed to remove" },
+        hook = { ok = "Ran hook for", err = "Failed to run hook for" },
+    }
+    local count = n and string.format(" [%d/%d]", n, total) or ""
+    vim.notify(
+        string.format(" Paq:%s %s %s", count, messages[op][res], name),
+        res == "err" and vim.log.levels.ERROR
+    )
 end
 
 local function new_counter()
@@ -74,8 +79,8 @@ local function new_counter()
                 report(over_op or op, name, res, c.ok + c.nop, total)
             end
         end
-        local summary = (" Paq: %s complete. %d ok; %d errors;" .. (c.nop > 0 and " %d no-ops" or ""))
-        vim.notify(summary:format(op, c.ok, c.err, c.nop))
+        local summary = " Paq: %s complete. %d ok; %d errors;" .. (c.nop > 0 and " %d no-ops" or "")
+        vim.notify(string.format(summary, op, c.ok, c.err, c.nop))
         vim.cmd("packloadall! | silent! helptags ALL")
         vim.cmd("doautocmd User PaqDone" .. op:gsub("^%l", string.upper))
         return true
@@ -100,12 +105,6 @@ local function call_proc(process, args, cwd, cb, print_stdout)
     if not handle then
         vim.notify(string.format(" Paq: Failed to spawn %s (%s)", process, pid))
     end
-end
-
-local function log(message)
-    local log = uv.fs_open(logfile, "a+", 0x1A4)
-    uv.fs_write(log, message .. '\n')
-    uv.fs_close(log)
 end
 
 local function run_hook(pkg, counter, sync)
@@ -164,6 +163,27 @@ local function get_git_hash(dir)
     return head_ref and first_line(dir .. "/.git/" .. head_ref:gsub("ref: ", ""))
 end
 
+local function log_update_changes(pkg, prev_hash, cur_hash)
+    local output = {"\n\n" .. pkg.name .. " updated:\n"}
+    local stdout = uv.new_pipe()
+    local options = {
+        args = {"log", "--pretty=format:* %s", prev_hash .. ".." .. cur_hash},
+        cwd = pkg.dir, stdio = {nil, stdout, nil},
+    }
+    local handle
+    handle, _ = uv.spawn('git', options, function(code)
+        assert(code == 0, "Exited(" .. code .. ")")
+        handle:close()
+        local log = uv.fs_open(logfile, "a+", 0x1A4)
+        uv.fs_write(log, output, nil, nil)
+        uv.fs_close(log)
+    end)
+    stdout:read_start(function(err, data)
+        assert(not err, err)
+        table.insert(output, data)
+    end)
+end
+
 local function pull(pkg, counter, sync)
     local prev_hash = get_git_hash(pkg.dir)
     call_proc("git", { "pull", "--recurse-submodules", "--update-shallow" }, pkg.dir, function(ok)
@@ -172,8 +192,7 @@ local function pull(pkg, counter, sync)
         else
             local cur_hash = get_git_hash(pkg.dir)
             if cur_hash ~= prev_hash then
-                log(pkg.name .. " updating...")
-                call_proc("git", { "log", "--pretty=format:* %s", prev_hash .. ".." .. cur_hash }, pkg.dir, function(ok) end, true)
+                log_update_changes(pkg, prev_hash, cur_hash)
                 pkg.status = "updated"
                 return pkg.run and run_hook(pkg, counter, sync) or counter(pkg.name, "ok", sync)
             else
@@ -191,49 +210,59 @@ local function clone_or_pull(pkg, counter)
     end
 end
 
-local function walk_dir(path, fn)
-    local handle = uv.fs_scandir(path)
-    while handle do
-        local name, t = uv.fs_scandir_next(handle)
-        if not name then
-            break
+-- Return an interator that walks `dir` in post-order.
+local function walkdir(dir)
+    return coroutine.wrap(function()
+        local handle = uv.fs_scandir(dir)
+        while handle do
+            local name, t = uv.fs_scandir_next(handle)
+            if not name then
+                return
+            elseif t == "directory" then
+                for child, t in walkdir(dir .. "/" .. name) do
+                    coroutine.yield(child, t)
+                end
+            end
+            coroutine.yield(dir .. "/" .. name, t)
         end
-        if not fn(path .. "/" .. name, name, t) then
-            return
-        end
-    end
-    return true
+    end)
 end
 
-local function check_rm()
-    local to_remove = {}
-    for _, packdir in pairs({ "start", "opt" }) do
-        walk_dir(cfg.path .. packdir, function(dir, name)
-            if name == "paq-nvim" then
-                return true
-            end
-            local pkg = packages[name]
-            if not (pkg and pkg.dir == dir) then
-                table.insert(to_remove, { name = name, dir = dir })
-            end
-            return true
-        end)
+local function rmdir(dir)
+    for name, t in walkdir(dir) do
+        local ok = (t == "directory") and uv.fs_rmdir(name) or uv.fs_unlink(name)
+        if not ok then
+            return ok
+        end
     end
-    return to_remove
+    return uv.fs_rmdir(dir)
 end
 
-local function rmdir(dir, name, t)
-    if t == "directory" then
-        return walk_dir(dir, rmdir) and uv.fs_rmdir(dir)
-    else
-        return uv.fs_unlink(dir)
+local function find_unlisted()
+    local unlisted = {}
+    -- TODO(breaking): Replace with `vim.fs.dir`
+    for _, packdir in pairs { "start", "opt" } do
+        local path = cfg.path .. packdir
+        local handle = uv.fs_scandir(path)
+        while handle do
+            local name, t = uv.fs_scandir_next(handle)
+            if t == "directory" and name ~= "paq-nvim" then
+                local dir = path .. "/" .. name
+                local pkg = packages[name]
+                if not pkg or pkg.dir ~= dir then
+                    table.insert(unlisted, { name = name, dir = dir })
+                end
+            elseif not name then
+                break
+            end
+        end
     end
+    return unlisted
 end
 
 local function remove(p, counter)
-    local ok = walk_dir(p.dir, rmdir) and uv.fs_rmdir(p.dir)
+    local ok = rmdir(p.dir)
     counter(p.name, ok and "ok" or "err")
-
     if ok then
         packages[p.name] = { name = p.name, status = "removed" }
     end
@@ -255,29 +284,18 @@ end
 -- stylua: ignore
 local function list()
     local installed = vim.tbl_filter(function(pkg) return pkg.exists end, packages)
-    table.sort(installed, function(a, b) return a.name < b.name end)
-
     local removed = vim.tbl_filter(function(pkg) return pkg.status == "removed" end, packages)
-    table.sort(removed, function(a, b) return a.name < b.name end)
-
-    local sym_tbl = { installed = "+", updated = "*", removed = " " }
-    for header, pkgs in pairs({ ["Installed packages:"] = installed, ["Recently removed:"] = removed }) do
+    local sort_by_name = function(a, b) return a.name < b.name end
+    table.sort(installed, sort_by_name)
+    table.sort(removed, sort_by_name)
+    local markers = { installed = "+", updated = "*" }
+    for header, pkgs in pairs { ["Installed packages:"] = installed, ["Recently removed:"] = removed } do
         if #pkgs ~= 0 then
             print(header)
             for _, pkg in ipairs(pkgs) do
-                print(" ", sym_tbl[pkg.status] or " ", pkg.name)
+                print(" ", markers[pkg.status] or " ", pkg.name)
             end
         end
-    end
-end
-
-local function parse_name(args)
-    if args.as then
-        return args.as
-    elseif args.url then
-        return args.url:gsub("%.git$", ""):match("/([%w-_.]+)$"), args.url
-    else
-        return args[1]:match("^[%w-]+/([%w-_.]+)$"), args[1]
     end
 end
 
@@ -285,13 +303,16 @@ local function register(args)
     if type(args) == "string" then
         args = { args }
     end
-    local name, src = parse_name(args)
+    local url = args.url
+        or (args[1]:match("^https?://") and args[1]) -- [1] is a URL
+        or string.format(cfg.url_format, args[1]) -- [1] is a repository name
+    local name = args.as
+        or url:gsub("%.git$", ""):match("/([%w-_.]+)$") -- Infer name from `url`
     if not name then
-        return vim.notify(" Paq: Failed to parse " .. src, vim.log.levels.ERROR)
-    elseif packages[name] then
-        return
+        return vim.notify(" Paq: Failed to parse " .. vim.inspect(args), vim.log.levels.ERROR)
     end
-    local dir = cfg.path .. (args.opt and "opt/" or "start/") .. name
+    local opt = args.opt or cfg.opt and args.opt == nil
+    local dir = cfg.path .. (opt and "opt/" or "start/") .. name
     packages[name] = {
         name = name,
         branch = args.branch,
@@ -299,8 +320,8 @@ local function register(args)
         exists = vim.fn.isdirectory(dir) ~= 0,
         status = "listed", -- TODO: should probably merge this with `exists` in the future...
         pin = args.pin,
-        run = args.run,
-        url = args.url or "https://github.com/" .. args[1] .. ".git",
+        run = args.run, -- TODO(breaking): Rename
+        url = url,
         -- Oscar: add this line
         shallow = args.shallow == nil or args.shallow,
         -- end
@@ -311,7 +332,7 @@ end
 return setmetatable({
     install = function() exe_op("install", clone, vim.tbl_filter(function(pkg) return not pkg.exists and pkg.status ~= "removed" end, packages)) end,
     update = function() exe_op("update", pull, vim.tbl_filter(function(pkg) return pkg.exists and not pkg.pin end, packages)) end,
-    clean = function() exe_op("remove", remove, check_rm()) end,
+    clean = function() exe_op("remove", remove, find_unlisted()) end,
     sync = function(self) self:clean() exe_op("sync", clone_or_pull, vim.tbl_filter(function(pkg) return pkg.status ~= "removed" end, packages)) end,
     setup = function(self, args) for k, v in pairs(args) do cfg[k] = v end return self end,
     _run_hook = function(name) return run_hook(packages[name]) end,
@@ -319,7 +340,7 @@ return setmetatable({
     list = list,
     log_open = function() vim.cmd("sp " .. logfile) end,
     log_clean = function() return assert(uv.fs_unlink(logfile)) and vim.notify(" Paq: log file deleted") end,
-    register = function(pkg) register(pkg) end,
+    register = register,
     paq = register, -- TODO: deprecate. not urgent
 }, {__call = function(self, tbl) packages = {} vim.tbl_map(register, tbl) return self end,
 })

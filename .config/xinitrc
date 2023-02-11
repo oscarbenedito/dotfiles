@@ -1,6 +1,6 @@
 /home/oscar/.local/bin/configure-monitors
 xrdb ~/.config/Xresources
-feh --bg-scale "${XDG_DATA_HOME:-$HOME/.local/share}/dwm/wallpaper.png" &
+feh --no-fehbg --bg-scale "${XDG_DATA_HOME:-$HOME/.local/share}/dwm/wallpaper.png" &
 xautolock -detectsleep -corners 0-00 -time 5 \
     -locker "slock" \
     -notify 30 \
