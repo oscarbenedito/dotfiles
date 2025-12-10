@@ -32,6 +32,7 @@ for file in $(gitdotfiles ls-files); do
 done
 
 mkdir -p "$HOME/.cache/zsh"
+mkdir -p "$HOME/.local/share/zsh"
 
 if [ "$smallinstall" = "1" ]; then
     for file in $(gitdotfiles ls-files | sed '/^\.config\/\(zsh\|git\/config\|nvim\|tmux\)\|^\.zshenv/d'); do

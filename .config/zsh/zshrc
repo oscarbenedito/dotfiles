@@ -18,7 +18,7 @@ PS1='%B%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%m %{$fg[yellow]%}%~%b%{$fg
 # set up history and history file
 HISTSIZE=100000
 SAVEHIST=100000
-HISTFILE=~/.cache/zsh/history
+HISTFILE="$XDG_DATA_HOME/zsh/history"
 
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
@@ -28,7 +28,7 @@ setopt EXTENDED_HISTORY
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit -d ~/.cache/zsh/zcompdump
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 #_comp_options+=(globdots)
 
 # auto complete case insensitive
