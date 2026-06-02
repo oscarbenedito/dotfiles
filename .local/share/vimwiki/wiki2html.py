@@ -39,7 +39,7 @@ def get_file_metadata_and_text(file, wiki_path, categories):
     text = text[end:]
 
     # read title and remove from text
-    match = re.match('# (.+?)\s*\n', text)
+    match = re.match(r'# (.+?)\s*\n', text)
     if match is not None:
         metadata['title'] = match.group(1)
         text = text[match.end():]
@@ -47,7 +47,7 @@ def get_file_metadata_and_text(file, wiki_path, categories):
         metadata['title'] = metadata['path']
 
     # read description
-    match = re.match('\*([^* ].+?)\*\s*\n', text)
+    match = re.match(r'\*([^* ].+?)\*\s*\n', text)
     if match is not None:
         metadata['description'] = match.group(1)
 
@@ -97,13 +97,13 @@ def wiki_to_html(input_file, output_file, template_file, root_path, wiki_path, c
     params, text = get_file_metadata_and_text(input_file, wiki_path, categories)
 
     # format links for HTML
-    text = re.sub('\[([^]]+)\]\(([^)#]*)(?:#([^)]*))?\)', lambda m: href_to_html(m, wiki_path, root_path), text)
+    text = re.sub(r'\[([^]]+)\]\(([^)#]*)(?:#([^)]*))?\)', lambda m: href_to_html(m, wiki_path, root_path), text)
     # add support for TODOs
-    text = re.sub('^([ \t]*- )\[ \] ', lambda m : m.group(1) + '<img class="checkbox-0"> ', text, flags=re.MULTILINE)
-    text = re.sub('^([ \t]*- )\[\.\] ', lambda m : m.group(1) + '<img class="checkbox-1"> ', text, flags=re.MULTILINE)
-    text = re.sub('^([ \t]*- )\[o\] ', lambda m : m.group(1) + '<img class="checkbox-2"> ', text, flags=re.MULTILINE)
-    text = re.sub('^([ \t]*- )\[O\] ', lambda m : m.group(1) + '<img class="checkbox-3"> ', text, flags=re.MULTILINE)
-    text = re.sub('^([ \t]*- )\[X\] ', lambda m : m.group(1) + '<img class="checkbox-4"> ', text, flags=re.MULTILINE)
+    text = re.sub(r'^([ \t]*- )\[ \] ', lambda m : m.group(1) + '<img class="checkbox-0"> ', text, flags=re.MULTILINE)
+    text = re.sub(r'^([ \t]*- )\[\.\] ', lambda m : m.group(1) + '<img class="checkbox-1"> ', text, flags=re.MULTILINE)
+    text = re.sub(r'^([ \t]*- )\[o\] ', lambda m : m.group(1) + '<img class="checkbox-2"> ', text, flags=re.MULTILINE)
+    text = re.sub(r'^([ \t]*- )\[O\] ', lambda m : m.group(1) + '<img class="checkbox-3"> ', text, flags=re.MULTILINE)
+    text = re.sub(r'^([ \t]*- )\[X\] ', lambda m : m.group(1) + '<img class="checkbox-4"> ', text, flags=re.MULTILINE)
 
     params['metadata'] = ''
     if params['category'] != categories[0]:

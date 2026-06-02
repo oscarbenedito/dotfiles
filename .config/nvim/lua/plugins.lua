@@ -1,15 +1,14 @@
-local ret = require("paq") {
-    "sheerun/vim-polyglot",           -- languages syntax
-    "tpope/vim-fugitive",             -- git wrapper
-    "tpope/vim-surround",             -- add surrounding as objects
-        "tpope/vim-repeat",           -- dependency of vim-surround
-    "tpope/vim-commentary",           -- easily comment code
-    "tpope/vim-eunuch",               -- helpers for UNIX shell commands
-    "nvim-telescope/telescope.nvim",  -- fuzzy finding
-        "nvim-lua/plenary.nvim",      -- dependency of telescope
-    "vimwiki/vimwiki",                -- create a wiki with vim!
-    { url="https://dev.sanctum.geek.nz/code/vim-redact-pass.git", shallow=false }, -- disable leaky options when editing passwords with pass
-}
+vim.pack.add({
+    "https://github.com/sheerun/vim-polyglot",           -- languages syntax
+    "https://github.com/tpope/vim-fugitive",             -- git wrapper
+    "https://github.com/tpope/vim-surround",             -- add surrounding as objects
+        "https://github.com/tpope/vim-repeat",           -- dependency of vim-surround
+    "https://github.com/tpope/vim-commentary",           -- easily comment code
+    "https://github.com/tpope/vim-eunuch",               -- helpers for UNIX shell commands
+    "https://github.com/nvim-telescope/telescope.nvim",  -- fuzzy finding
+        "https://github.com/nvim-lua/plenary.nvim",      -- dependency of telescope
+    "https://github.com/vimwiki/vimwiki",                -- create a wiki with vim!
+}, { load = true })
 
 -- don't run the package configs if we are doing the initial bootstrap
 if vim.g.headless_bootstrap then
@@ -17,9 +16,14 @@ if vim.g.headless_bootstrap then
 end
 
 
+vim.api.nvim_create_user_command('PackUpdate', function()
+    vim.pack.update()
+end, {})
+
+
 do -- vim-commentary
     vim.cmd [[
-        augroup paq_vimcommentary
+        augroup plugin_vimcommentary
             autocmd!
             autocmd FileType apache,crontab setlocal commentstring=#\ %s
         augroup END
@@ -65,6 +69,3 @@ do -- vimwiki
         ["custom_wiki2html_args"] = "toc.md " .. vw_categories_str -- first argument is TOC file, then all the categories
     }}
 end
-
-
-return ret

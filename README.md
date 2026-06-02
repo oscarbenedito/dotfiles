@@ -83,7 +83,7 @@ Enable PulseAudio and syncthing, download neovim plugins:
 ```
 systemctl --user enable pulseaudio.service
 sudo systemctl enable "syncthing@$USER.service"
-nvim --headless -u NONE -c 'lua require("bootstrap-paq").run()'
+nvim --headless '+qa'
 ```
 
 Finally, don't forget to put your wallpaper under
@@ -91,7 +91,7 @@ Finally, don't forget to put your wallpaper under
 
 ## License
 
-Copyright (C) 2019-2022 Oscar Benedito
+Copyright (C) 2019-2026 Oscar Benedito
 
 This repository is licensed under the CC0 1.0 Universal license and therefore is
 part of the public domain. To the extent possible under law, the person who

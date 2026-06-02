@@ -69,7 +69,7 @@ augroup END
 " filetype specific config
 augroup vimrc
     autocmd FileType markdown,vimwiki,mail,tex,text set formatoptions+=t  " break lines when longer than textwidth
-    autocmd FileType markdown,vimwiki,html set tabstop=2 shiftwidth=2
+    autocmd FileType markdown,vimwiki,html,tex set tabstop=2 shiftwidth=2
     autocmd FileType html set textwidth=100 colorcolumn=101
     autocmd FileType mail set textwidth=72 colorcolumn=73
     autocmd FileType c set noexpandtab
