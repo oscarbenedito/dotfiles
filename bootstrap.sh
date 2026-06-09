@@ -48,6 +48,10 @@ gitdotfiles update-index --skip-worktree "$HOME/README.md" "$HOME/COPYING" "$HOM
 cd "$HOME"
 rm -rf "$tempdir"
 
+echo "Installing nvim pluggins..."
+nvim --headless '+qa'
+echo
+
 if [ -d "$backupdest" ]; then
     echo
     echo "Some files from the repository were already created in this machine, they have"
